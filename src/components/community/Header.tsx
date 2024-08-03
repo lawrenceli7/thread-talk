@@ -1,4 +1,5 @@
 import { Community } from "@/atoms/communitiesAtom";
+import useCommunityData from "@/hooks/useCommunityData";
 import { Box, Button, Flex, Icon, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import { FaSquareThreads } from "react-icons/fa6";
@@ -8,7 +9,11 @@ type HeaderProps = {
 };
 
 const Header: React.FC<HeaderProps> = ({ communityData }) => {
-  const isJoined = false;
+  const { communityStateValue, onJoinOrLeaveCommunity, isLoading } =
+    useCommunityData();
+  const isJoined = !!communityStateValue.mySnippets.find(
+    (item) => item.communityId === communityData.id
+  );
 
   return (
     <Flex direction="column" width="100%" height="146px">
@@ -42,7 +47,8 @@ const Header: React.FC<HeaderProps> = ({ communityData }) => {
               height="30px"
               pr={6}
               pl={6}
-              onClick={() => {}}
+              onClick={() => onJoinOrLeaveCommunity(communityData, isJoined)}
+              isLoading={isLoading}
             >
               {isJoined ? "Joined" : "Join"}
             </Button>
