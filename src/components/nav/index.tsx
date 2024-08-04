@@ -21,9 +21,9 @@ const Nav: React.FC = () => {
         width={{ base: "40px", md: "auto" }}
         mr={{ base: 0, md: 2 }}
       >
-        <Image src="./images/logo.svg" alt="Logo" height="30px" />
+        <Image src="/images/logo.svg" alt="Logo" height="30px" />
         <Image
-          src="./images/logo-text.png"
+          src="/images/logo-text.png"
           alt="Logo Text"
           height="46px"
           display={{ base: "none", md: "unset" }}
