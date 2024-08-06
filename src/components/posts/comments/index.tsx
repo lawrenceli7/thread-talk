@@ -8,6 +8,7 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
+import { AnyRecord } from "dns";
 import { User } from "firebase/auth";
 import {
   collection,
@@ -42,6 +43,7 @@ const Comments: React.FC<CommentsProps> = ({
   const [fetchLoading, setFetchLoading] = useState(true);
   const [createLoading, setCreateLoading] = useState(false);
   const setPostState = useSetRecoilState(postState);
+  const [loadingDeleteId, setLoadingDeleteId] = useState("");
 
   const onCreateComment = async () => {
     setCreateLoading(true);
@@ -87,7 +89,36 @@ const Comments: React.FC<CommentsProps> = ({
     setCreateLoading(false);
   };
 
-  const onDeleteComment = async (comment: any) => {};
+  const onDeleteComment = async (comment: Comment) => {
+    setLoadingDeleteId(comment.id);
+
+    try {
+      const batch = writeBatch(firestore);
+
+      const commentDocRef = doc(firestore, "comments", comment.id);
+      batch.delete(commentDocRef);
+
+      const postDocRef = doc(firestore, "posts", selectedPost?.id!);
+      batch.update(postDocRef, {
+        numberOfComments: increment(-1),
+      });
+
+      await batch.commit();
+
+      setPostState((prev) => ({
+        ...prev,
+        selectedPost: {
+          ...prev.selectedPost,
+          numberOfComments: prev.selectedPost?.numberOfComments! - 1,
+        } as Post,
+      }));
+
+      setComments((prev) => prev.filter((item) => item.id !== comment.id));
+    } catch (error: any) {
+      console.log("Error deleting comment", error.message);
+    }
+    setLoadingDeleteId("");
+  };
 
   const getPostComments = async () => {
     try {
@@ -170,7 +201,7 @@ const Comments: React.FC<CommentsProps> = ({
                     key={comment.id}
                     comment={comment}
                     onDeleteComment={onDeleteComment}
-                    loadingDelete={false}
+                    loadingDelete={loadingDeleteId === comment.id}
                     userId={user.uid}
                   />
                 ))}
