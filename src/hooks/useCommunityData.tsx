@@ -30,7 +30,7 @@ const useCommunityData = () => {
 
       const newSnippet: CommunitySnippet = {
         communityId: communityData.id,
-        imageUrl: communityData.imageUrl || "",
+        imageURL: communityData.imageURL || "",
       };
 
       batch.set(
@@ -127,6 +127,10 @@ const useCommunityData = () => {
 
   useEffect(() => {
     if (!user) {
+      setCommunityStateValue((prev) => ({
+        ...prev,
+        mySnippets: [],
+      }));
       return;
     }
 
