@@ -1,7 +1,11 @@
 import React from "react";
 import Navbar from "../nav";
 
-const Layout: React.FC = ({ children }: React.PropsWithChildren<{}>) => {
+interface LayoutProps {
+  children: React.ReactElement | React.ReactElement[];
+}
+
+const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
       <Navbar />

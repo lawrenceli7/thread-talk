@@ -2,7 +2,8 @@ import { Flex } from "@chakra-ui/react";
 import React from "react";
 
 type PageContentProps = {
-  children?: React.ReactNode;
+  children: React.ReactElement[] | React.ReactElement;
+  maxWidth?: string;
 };
 
 const PageContent: React.FC<PageContentProps> = ({ children }) => {
