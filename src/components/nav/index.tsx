@@ -1,12 +1,12 @@
+import { defaultMenuItem } from "@/atoms/directoryMenuAtom";
 import { auth } from "@/firebase/clientApp";
+import useDirectory from "@/hooks/useDirectory";
 import { Flex, Image } from "@chakra-ui/react";
 import React, { useDebugValue } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import SearchInput from "./SearchInput";
 import RightContent from "./content";
 import Directory from "./directory";
-import useDirectory from "@/hooks/useDirectory";
-import { defaultMenuItem } from "@/atoms/directoryMenuAtom";
 
 const Nav: React.FC = () => {
   const [user, loading, error] = useAuthState(auth);
@@ -14,10 +14,10 @@ const Nav: React.FC = () => {
 
   return (
     <Flex
-      bg="white"
       height="44px"
       padding="6px 12px"
       justify={{ md: "space-between" }}
+      bg="white"
     >
       <Flex
         align="center"
