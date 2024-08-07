@@ -16,8 +16,8 @@ const Premium: React.FC = () => {
       <Flex mb={2}>
         <Icon as={GiCheckedShield} fontSize={26} color="brand.100" mt={2} />
         <Stack spacing={1} fontSize="9pt" pl={2}>
-          <Text fontWeight={600}>Reddit Premium</Text>
-          <Text>The best Reddit experience, with monthly Coins</Text>
+          <Text fontWeight={600}>ThreadTalk Premium</Text>
+          <Text>The best ThreadTalk experience.</Text>
         </Stack>
       </Flex>
       <Button height="30px" bg="brand.100">
