@@ -1,6 +1,7 @@
 import { Button, Flex, Icon, Stack, Text } from "@chakra-ui/react";
 import React from "react";
-import { GiCheckedShield } from "react-icons/gi";
+import { FaCrown } from "react-icons/fa";
+import { GiAchievement } from "react-icons/gi";
 
 const Premium: React.FC = () => {
   return (
@@ -14,16 +15,22 @@ const Premium: React.FC = () => {
       borderColor="gray.300"
     >
       <Flex mb={2}>
-        <Icon as={GiCheckedShield} fontSize={26} color="brand.100" mt={2} />
+        <Icon as={FaCrown} fontSize={26} color="gold" mt={2} />
         <Stack spacing={1} fontSize="9pt" pl={2}>
           <Text fontWeight={600}>ThreadTalk Premium</Text>
           <Text>The best ThreadTalk experience.</Text>
         </Stack>
       </Flex>
-      <Button height="30px" bg="brand.100">
-        Try Now
+      <Button
+        leftIcon={<Icon as={GiAchievement} />}
+        height="30px"
+        bg="gold"
+        color="white"
+      >
+        Go Premium
       </Button>
     </Flex>
   );
 };
+
 export default Premium;

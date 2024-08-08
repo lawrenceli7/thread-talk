@@ -14,7 +14,7 @@ import {
   writeBatch,
 } from "firebase/firestore";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRecoilState, useSetRecoilState } from "recoil";
 
@@ -122,8 +122,6 @@ const useCommunityData = () => {
         mySnippets: snippets as CommunitySnippet[],
         snippetsFetched: true,
       }));
-
-      console.log("snippets", snippets);
     } catch (error: any) {
       console.log("getMySnippets error", error);
     }

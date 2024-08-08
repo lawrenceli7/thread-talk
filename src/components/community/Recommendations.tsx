@@ -15,7 +15,8 @@ import {
 import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { FaSquareThreads } from "react-icons/fa6";
+import { AiOutlineStar } from "react-icons/ai";
+import { FaUserFriends } from "react-icons/fa";
 
 const Recommendations: React.FC = () => {
   const [communities, setCommunities] = useState<Community[]>([]);
@@ -117,7 +118,7 @@ const Recommendations: React.FC = () => {
                           />
                         ) : (
                           <Icon
-                            as={FaSquareThreads}
+                            as={FaUserFriends}
                             fontSize={30}
                             color="brand.100"
                             mr={2}
@@ -146,7 +147,11 @@ const Recommendations: React.FC = () => {
               );
             })}
             <Box p="10px 20px">
-              <Button height="30px" width="100%">
+              <Button
+                leftIcon={<Icon as={AiOutlineStar} />}
+                height="30px"
+                width="100%"
+              >
                 View All
               </Button>
             </Box>
@@ -156,4 +161,5 @@ const Recommendations: React.FC = () => {
     </Flex>
   );
 };
+
 export default Recommendations;

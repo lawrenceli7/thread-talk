@@ -2,7 +2,7 @@ import { defaultMenuItem } from "@/atoms/directoryMenuAtom";
 import { auth } from "@/firebase/clientApp";
 import useDirectory from "@/hooks/useDirectory";
 import { Flex, Image } from "@chakra-ui/react";
-import React, { useDebugValue } from "react";
+import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import SearchInput from "./SearchInput";
 import RightContent from "./content";

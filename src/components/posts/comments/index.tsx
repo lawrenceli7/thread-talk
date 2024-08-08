@@ -8,7 +8,6 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { AnyRecord } from "dns";
 import { User } from "firebase/auth";
 import {
   collection,
