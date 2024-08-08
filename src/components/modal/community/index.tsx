@@ -137,21 +137,14 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
               <Text fontSize={11} color="gray.500">
                 Community names including capitalization cannot be changed.
               </Text>
-              <Text
-                position="relative"
-                top="28px"
-                left="10px"
-                width="20px"
-                color="gray.400"
-              >
-                r/
-              </Text>
               <Input
                 position="relative"
                 value={communityName}
                 size="sm"
-                pl="22px"
+                pl="5px"
                 onChange={handleChange}
+                placeholder="thread/"
+                mb={1}
               />
               <Text
                 color={characterRemaining === 0 ? "red" : "gray.500"}
