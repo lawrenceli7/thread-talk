@@ -30,7 +30,13 @@ const Nav: React.FC = () => {
         <Image
           src="/images/logo-text.png"
           alt="Logo Text"
-          height="46px"
+          height="25px"
+          display={{ base: "none", md: "unset" }}
+        />
+        <Image
+          src="/images/logo-text.jpg"
+          alt="Logo Text"
+          height="25px"
           display={{ base: "none", md: "unset" }}
         />
       </Flex>

@@ -22,7 +22,15 @@ const OAuthButtons: React.FC = () => {
         />
         Continue with Google
       </Button>
-      <Button variant="oauth">Some other providers</Button>
+      <Button variant="oauth">
+        <Image
+          src="/images/github.png"
+          alt="Github Logo"
+          height="20px"
+          mr={4}
+        />
+        Continue with Github
+      </Button>
       {error && (
         <Text textAlign="center" fontSize="10pt" color="red" mt={2}>
           {error.toString()}
