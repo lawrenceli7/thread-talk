@@ -2,29 +2,38 @@ import { defaultMenuItem } from "@/atoms/directoryMenuAtom";
 import { auth } from "@/firebase/clientApp";
 import useDirectory from "@/hooks/useDirectory";
 import { Flex, Image } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import SearchInput from "./SearchInput";
 import RightContent from "./content";
 import Directory from "./directory";
 
+const MotionFlex = motion(Flex);
+
 const Nav: React.FC = () => {
   const [user, loading, error] = useAuthState(auth);
   const { onSelectMenuItem } = useDirectory();
 
   return (
-    <Flex
+    <MotionFlex
       height="44px"
       padding="6px 12px"
       justify={{ md: "space-between" }}
       bg="white"
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
     >
-      <Flex
+      <MotionFlex
         align="center"
         width={{ base: "40px", md: "auto" }}
         mr={{ base: 0, md: 2 }}
         onClick={() => onSelectMenuItem(defaultMenuItem)}
         cursor="pointer"
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3 }}
       >
         <Image src="/images/logo.svg" alt="Logo" height="30px" />
         <Image
@@ -39,11 +48,12 @@ const Nav: React.FC = () => {
           height="25px"
           display={{ base: "none", md: "unset" }}
         />
-      </Flex>
+      </MotionFlex>
       {user && <Directory />}
       <SearchInput user={user} />
       <RightContent user={user} />
-    </Flex>
+    </MotionFlex>
   );
 };
+
 export default Nav;
