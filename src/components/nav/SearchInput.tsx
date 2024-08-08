@@ -1,15 +1,27 @@
 import { SearchIcon } from "@chakra-ui/icons";
 import { Flex, Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { User } from "firebase/auth";
-import React from "react";
+import { motion } from "framer-motion";
+import React, { useState } from "react";
 
 type SearchInputProps = {
   user?: User | null;
 };
 
+const MotionFlex = motion(Flex);
+
 const SearchInput: React.FC<SearchInputProps> = ({ user }) => {
+  const [isFocused, setIsFocused] = useState(false);
+
   return (
-    <Flex flexGrow={1} mr={2} align="center" maxWidth={user ? "auto" : "600px"}>
+    <MotionFlex
+      flexGrow={1}
+      mr={2}
+      align="center"
+      maxWidth={user ? "auto" : "600px"}
+      animate={{ scale: isFocused ? 1.02 : 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <InputGroup>
         <InputLeftElement pointerEvents="none">
           <SearchIcon color="gray.400" mb={1} />
@@ -30,9 +42,12 @@ const SearchInput: React.FC<SearchInputProps> = ({ user }) => {
           }}
           height="34px"
           bg="gray.50"
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
         />
       </InputGroup>
-    </Flex>
+    </MotionFlex>
   );
 };
+
 export default SearchInput;
