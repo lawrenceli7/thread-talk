@@ -1,6 +1,8 @@
 import { Button, Flex, Icon, Stack, Text } from "@chakra-ui/react";
 import React from "react";
-import { FaSquareThreads } from "react-icons/fa6";
+import { AiOutlineTeam } from "react-icons/ai";
+import { FaHome } from "react-icons/fa";
+import { IoCreateOutline } from "react-icons/io5";
 
 const PersonalHome: React.FC = () => {
   return (
@@ -26,15 +28,21 @@ const PersonalHome: React.FC = () => {
       ></Flex>
       <Flex direction="column" p="12px">
         <Flex align="center" mb={2}>
-          <Icon as={FaSquareThreads} fontSize={50} color="brand.100" mr={2} />
+          <Icon as={FaHome} fontSize={50} color="brand.100" mr={2} />
           <Text fontWeight={600}>Home</Text>
         </Flex>
         <Stack spacing={3}>
           <Text fontSize="9pt">
             Your personal ThreadTalk front page, built for you.
           </Text>
-          <Button height="30px">Create Post</Button>
-          <Button variant="outline" height="30px">
+          <Button leftIcon={<Icon as={IoCreateOutline} />} height="30px">
+            Create Post
+          </Button>
+          <Button
+            variant="outline"
+            leftIcon={<Icon as={AiOutlineTeam} />}
+            height="30px"
+          >
             Create Community
           </Button>
         </Stack>

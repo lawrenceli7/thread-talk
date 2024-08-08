@@ -6,6 +6,7 @@ import {
   Icon,
   Image,
   Skeleton,
+  Spacer,
   Spinner,
   Stack,
   Text,
@@ -16,6 +17,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { BsChat, BsDot } from "react-icons/bs";
+import { CiTimer } from "react-icons/ci";
 import { FaSquareThreads } from "react-icons/fa6";
 import {
   IoArrowDownCircleOutline,
@@ -155,8 +157,10 @@ const PostItem: React.FC<PostItemProps> = ({
                 <Icon as={BsDot} color="gray.500" fontSize={8} />
               </>
             )}
+            <Text>Posted by u/{post.creatorDisplayName}</Text>
+            <Spacer />
+            <Icon as={CiTimer} color="gray.500" fontSize={12} mr={1} />
             <Text>
-              Posted by u/{post.creatorDisplayName}{" "}
               {moment(new Date(post.createdAt?.seconds * 1000)).fromNow()}
             </Text>
           </Stack>

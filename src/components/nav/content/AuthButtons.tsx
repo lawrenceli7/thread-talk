@@ -1,6 +1,7 @@
 import { authModalState } from "@/atoms/authModalAtom";
-import { Button } from "@chakra-ui/react";
+import { Button, Icon } from "@chakra-ui/react";
 import React from "react";
+import { LuUserCheck2, LuUserX2 } from "react-icons/lu";
 import { useSetRecoilState } from "recoil";
 
 const AuthButtons: React.FC = () => {
@@ -15,6 +16,7 @@ const AuthButtons: React.FC = () => {
         width={{ base: "70px", md: "110px" }}
         mr={2}
         onClick={() => setAuthModalState({ open: true, view: "login" })}
+        leftIcon={<Icon as={LuUserCheck2} />}
       >
         Log In
       </Button>
@@ -24,6 +26,7 @@ const AuthButtons: React.FC = () => {
         width={{ base: "70px", md: "110px" }}
         mr={2}
         onClick={() => setAuthModalState({ open: true, view: "signup" })}
+        leftIcon={<Icon as={LuUserX2} />}
       >
         Sign Up
       </Button>
