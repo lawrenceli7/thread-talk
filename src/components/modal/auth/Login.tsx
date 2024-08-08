@@ -6,9 +6,7 @@ import React, { useState } from "react";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useSetRecoilState } from "recoil";
 
-type LoginProps = {};
-
-const Login: React.FC<LoginProps> = () => {
+const Login: React.FC = () => {
   const setAuthModalState = useSetRecoilState(authModalState);
   const [loginForm, setLoginForm] = useState({ email: "", password: "" });
   const [signInWithEmailAndPassword, user, loading, error] =

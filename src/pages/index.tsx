@@ -1,4 +1,3 @@
-import { communityState } from "@/atoms/communitiesAtom";
 import { Post, PostVote } from "@/atoms/postsAtom";
 import CreatePostLink from "@/components/community/CreatePostLink";
 import PersonalHome from "@/components/community/PersonalHome";
@@ -21,7 +20,6 @@ import {
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useRecoilValue } from "recoil";
 
 export default function Home() {
   const [user, loadingUser] = useAuthState(auth);

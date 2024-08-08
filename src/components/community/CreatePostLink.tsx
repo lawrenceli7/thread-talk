@@ -10,9 +10,7 @@ import { FaSquareThreads } from "react-icons/fa6";
 import { IoImageOutline } from "react-icons/io5";
 import { useSetRecoilState } from "recoil";
 
-type CreatePostProps = {};
-
-const CreatePostLink: React.FC<CreatePostProps> = () => {
+const CreatePostLink: React.FC = () => {
   const router = useRouter();
   const [user] = useAuthState(auth);
   const setAuthModalState = useSetRecoilState(authModalState);

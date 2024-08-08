@@ -31,7 +31,7 @@ const PersonalHome: React.FC = () => {
         </Flex>
         <Stack spacing={3}>
           <Text fontSize="9pt">
-            Your personal ThreadTalk frontpage, built for you.
+            Your personal ThreadTalk front page, built for you.
           </Text>
           <Button height="30px">Create Post</Button>
           <Button variant="outline" height="30px">

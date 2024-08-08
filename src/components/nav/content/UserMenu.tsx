@@ -1,5 +1,4 @@
 import { authModalState } from "@/atoms/authModalAtom";
-import { communityState } from "@/atoms/communitiesAtom";
 import { auth } from "@/firebase/clientApp";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
@@ -19,7 +18,7 @@ import { FaSquareThreads } from "react-icons/fa6";
 import { IoSparkles } from "react-icons/io5";
 import { MdOutlineLogin } from "react-icons/md";
 import { VscAccount } from "react-icons/vsc";
-import { useResetRecoilState, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 
 type UserMenuProps = {
   user?: User | null;
@@ -62,7 +61,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
                   </Text>
                   <Flex>
                     <Icon as={IoSparkles} color="blue.300" mr={1} />
-                    {/* <Text color="gray.400">1 karma</Text> */}
+                    <Text color="gray.400">user</Text>
                   </Flex>
                 </Flex>
               </>

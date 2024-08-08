@@ -4,7 +4,7 @@ import {
   directoryMenuState,
 } from "@/atoms/directoryMenuAtom";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { FaSquareThreads } from "react-icons/fa6";
 import { useRecoilState, useRecoilValue } from "recoil";
 
