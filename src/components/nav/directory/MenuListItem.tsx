@@ -19,7 +19,6 @@ const MenuListItem: React.FC<MenuListItemProps> = ({
   imageURL,
 }) => {
   const { onSelectMenuItem } = useDirectory();
-
   return (
     <MenuItem
       width="100%"
@@ -36,7 +35,7 @@ const MenuListItem: React.FC<MenuListItemProps> = ({
             borderRadius="full"
             boxSize="18px"
             mr={2}
-            alt="ImageURL"
+            alt="Image"
           />
         ) : (
           <Icon as={icon} fontSize={20} mr={2} color={iconColor} />

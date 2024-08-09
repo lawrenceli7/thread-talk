@@ -2,14 +2,14 @@ import { Community } from "@/atoms/communitiesAtom";
 import useCommunityData from "@/hooks/useCommunityData";
 import { Box, Button, Flex, Icon, Image, Text } from "@chakra-ui/react";
 import React from "react";
-import { FaSquareThreads } from "react-icons/fa6";
+import { FaReddit } from "react-icons/fa";
 
 type HeaderProps = {
   communityData: Community;
 };
 
 const Header: React.FC<HeaderProps> = ({ communityData }) => {
-  const { communityStateValue, onJoinOrLeaveCommunity, isLoading } =
+  const { communityStateValue, onJoinOrLeaveCommunity, loading } =
     useCommunityData();
   const isJoined = !!communityStateValue.mySnippets.find(
     (item) => item.communityId === communityData.id
@@ -22,10 +22,10 @@ const Header: React.FC<HeaderProps> = ({ communityData }) => {
         <Flex width="95%" maxWidth="860px">
           {communityStateValue.currentCommunity?.imageURL ? (
             <Image
-              alt="Updated Image"
-              src={communityStateValue.currentCommunity.imageURL}
               borderRadius="full"
               boxSize="66px"
+              src={communityStateValue.currentCommunity.imageURL}
+              alt="Image"
               position="relative"
               top={-3}
               color="blue.500"
@@ -33,13 +33,13 @@ const Header: React.FC<HeaderProps> = ({ communityData }) => {
             />
           ) : (
             <Icon
-              as={FaSquareThreads}
+              as={FaReddit}
               fontSize={64}
               position="relative"
               top={-3}
               color="blue.500"
               border="4px solid white"
-              borderRadius="50%"
+              borderRadius="full"
             />
           )}
           <Flex padding="10px 16px">
@@ -56,8 +56,8 @@ const Header: React.FC<HeaderProps> = ({ communityData }) => {
               height="30px"
               pr={6}
               pl={6}
+              isLoading={loading}
               onClick={() => onJoinOrLeaveCommunity(communityData, isJoined)}
-              isLoading={isLoading}
             >
               {isJoined ? "Joined" : "Join"}
             </Button>

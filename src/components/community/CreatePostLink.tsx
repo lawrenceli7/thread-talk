@@ -5,9 +5,9 @@ import { Flex, Icon, Input } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { AiOutlinePicture } from "react-icons/ai";
 import { BsLink45Deg } from "react-icons/bs";
-import { FaPenFancy } from "react-icons/fa";
+import { FaReddit } from "react-icons/fa";
+import { IoImageOutline } from "react-icons/io5";
 import { useSetRecoilState } from "recoil";
 
 const CreatePostLink: React.FC = () => {
@@ -21,11 +21,10 @@ const CreatePostLink: React.FC = () => {
       setAuthModalState({ open: true, view: "login" });
       return;
     }
-
     const { communityId } = router.query;
 
     if (communityId) {
-      router.push(`/r/${communityId}/Submit`);
+      router.push(`/r/${communityId}/submit`);
       return;
     }
 
@@ -44,7 +43,7 @@ const CreatePostLink: React.FC = () => {
       p={2}
       mb={4}
     >
-      <Icon as={FaPenFancy} fontSize={30} color="gray.300" mr={4} />
+      <Icon as={FaReddit} fontSize={36} color="gray.300" mr={4} />
       <Input
         placeholder="Create Post"
         fontSize="10pt"
@@ -68,7 +67,7 @@ const CreatePostLink: React.FC = () => {
         onClick={onClick}
       />
       <Icon
-        as={AiOutlinePicture}
+        as={IoImageOutline}
         fontSize={24}
         mr={4}
         color="gray.400"

@@ -13,12 +13,10 @@ import {
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import { BiPoll } from "react-icons/bi";
-import { BsLink45Deg, BsMic } from "react-icons/bs";
 import { IoDocumentText, IoImageOutline } from "react-icons/io5";
-import TabItems from "./TabItems";
 import ImageUpload from "./form/ImageUpload";
 import TextInputs from "./form/TextInputs";
+import TabItems from "./TabItem";
 
 type NewPostFormProps = {
   user: User;
@@ -34,18 +32,6 @@ const formTabs: TabItem[] = [
     title: "Images & Video",
     icon: IoImageOutline,
   },
-  {
-    title: "Link",
-    icon: BsLink45Deg,
-  },
-  {
-    title: "Poll",
-    icon: BiPoll,
-  },
-  {
-    title: "Talk",
-    icon: BsMic,
-  },
 ];
 
 export type TabItem = {
@@ -57,12 +43,15 @@ const NewPostForm: React.FC<NewPostFormProps> = ({
   user,
   communityImageURL,
 }) => {
-  const [selectedTab, setSelectedTab] = useState(formTabs[0].title);
-  const [textInputs, setTextInputs] = useState({ title: "", body: "" });
-  const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const [error, setError] = useState(false);
+  const [selectedTab, setSelectedTab] = useState(formTabs[0].title);
+  const [textInputs, setTextInputs] = useState({
+    title: "",
+    body: "",
+  });
   const { selectedFile, setSelectedFile, onSelectFile } = useSelectFile();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleCreatePost = async () => {
     const { communityId } = router.query;
@@ -77,11 +66,9 @@ const NewPostForm: React.FC<NewPostFormProps> = ({
       numberOfComments: 0,
       voteStatus: 0,
       createdAt: serverTimestamp() as Timestamp,
-      id: "",
     };
 
     setLoading(true);
-
     try {
       const postDocRef = await addDoc(collection(firestore, "posts"), newPost);
 
@@ -148,7 +135,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({
       {error && (
         <Alert status="error">
           <AlertIcon />
-          <Text mr={2}>Error creating post!</Text>
+          <Text mr={2}>Error creating post</Text>
         </Alert>
       )}
     </Flex>

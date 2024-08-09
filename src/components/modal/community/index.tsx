@@ -34,22 +34,20 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
   open,
   handleClose,
 }) => {
+  const [user] = useAuthState(auth);
   const [communityName, setCommunityName] = useState("");
-  const [characterRemaining, setCharacterRemaining] = useState(21);
+  const [charsRemaining, setCharsRemaining] = useState(21);
   const [communityType, setCommunityType] = useState("public");
   const [error, setError] = useState("");
-  const [user] = useAuthState(auth);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { toggleMenuOpen } = useDirectory();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.value.length > 21) {
-      return;
-    }
+    if (event.target.value.length > 21) return;
 
     setCommunityName(event.target.value);
-    setCharacterRemaining(21 - event.target.value.length);
+    setCharsRemaining(21 - event.target.value.length);
   };
 
   const onCommunityTypeChange = (
@@ -59,37 +57,29 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
   };
 
   const handleCreateCommunity = async () => {
-    if (error) {
-      setError("");
-    }
+    if (error) setError("");
 
     const format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-
     if (format.test(communityName) || communityName.length < 3) {
       setError(
-        "Community names must be between 3-21 characters, and can only contain letters, numbers, or underscores."
+        "Community names must be between 3-21 characters, and can only contain letters, numbers, or underscores"
       );
       return;
     }
 
     setLoading(true);
-
     try {
       const communityDocRef = doc(firestore, "communities", communityName);
-
       await runTransaction(firestore, async (transaction) => {
         const communityDoc = await transaction.get(communityDocRef);
-
         if (communityDoc.exists()) {
-          throw new Error(
-            "This community name is already taken. Try another one."
-          );
+          throw new Error(`Sorry, r/${communityName} is taken. Try another.`);
         }
 
         transaction.set(communityDocRef, {
           creatorId: user?.uid,
           createdAt: serverTimestamp(),
-          numberofMembers: 1,
+          numberOfMembers: 1,
           privacyType: communityType,
         });
 
@@ -106,11 +96,9 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
       toggleMenuOpen();
       router.push(`r/${communityName}`);
     } catch (error: any) {
-      console.error("Error creating community: ", error);
-      console.log("handleCreateCommunity -> error", error);
+      console.log("handleCreateCommunity error", error);
       setError(error.message);
     }
-
     setLoading(false);
   };
 
@@ -125,7 +113,7 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
             fontSize={15}
             padding={3}
           >
-            Create a Community
+            Create a community
           </ModalHeader>
           <Box pl={3} pr={3}>
             <Divider />
@@ -137,20 +125,27 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
               <Text fontSize={11} color="gray.500">
                 Community names including capitalization cannot be changed.
               </Text>
+              <Text
+                position="relative"
+                top="28px"
+                left="10px"
+                width="20px"
+                color="gray.400"
+              >
+                r/
+              </Text>
               <Input
                 position="relative"
                 value={communityName}
                 size="sm"
-                pl="5px"
+                pl="22px"
                 onChange={handleChange}
-                placeholder="thread/"
-                mb={1}
               />
               <Text
-                color={characterRemaining === 0 ? "red" : "gray.500"}
                 fontSize="9pt"
+                color={charsRemaining === 0 ? "red" : "gray.500"}
               >
-                {characterRemaining} Character remaining
+                {charsRemaining} Characters remaining
               </Text>
               <Text fontSize="9pt" color="red" pt={1}>
                 {error}

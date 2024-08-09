@@ -18,7 +18,7 @@ import moment from "moment";
 import Link from "next/link";
 import React, { useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { FaSquareThreads } from "react-icons/fa6";
+import { FaReddit } from "react-icons/fa";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { RiCakeLine } from "react-icons/ri";
 import { useSetRecoilState } from "recoil";
@@ -37,7 +37,6 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
   const onUpdateImage = async () => {
     if (!selectedFile) return;
     setUploadingImage(true);
-
     try {
       const imageRef = ref(storage, `communities/${communityData.id}/image`);
       await uploadString(imageRef, selectedFile, "data_url");
@@ -53,10 +52,9 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
           imageURL: downloadURL,
         } as Community,
       }));
-    } catch (error: any) {
-      console.log("updateImage error", error.message);
+    } catch (error) {
+      console.log("onUpdateImage error", error);
     }
-
     setUploadingImage(false);
   };
 
@@ -68,7 +66,7 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
         bg="blue.400"
         color="white"
         p={3}
-        borderRadius="4px 4px 0px 6px"
+        borderRadius="4px 4px 0px 0px"
       >
         <Text fontSize="10pt" fontWeight={700}>
           About Community
@@ -79,7 +77,7 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
         <Stack>
           <Flex width="100%" p={2} fontSize="10pt" fontWeight={700}>
             <Flex direction="column" flexGrow={1}>
-              <Text>{communityData.numberOfMembers?.toLocaleString()}</Text>
+              <Text>{communityData.numberOfMembers.toLocaleString()}</Text>
               <Text>Members</Text>
             </Flex>
             <Flex direction="column" flexGrow={1}>
@@ -100,12 +98,12 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
               <Text>
                 Created{" "}
                 {moment(
-                  new Date(communityData.createdAt!.seconds * 1000)
+                  new Date(communityData.createdAt.seconds * 1000)
                 ).format("MMM DD, YYYY")}
               </Text>
             )}
           </Flex>
-          <Link href={`/r/${communityData.id}/Submit`}>
+          <Link href={`/r/${communityData.id}/submit`}>
             <Button mt={3} height="30px" width="100%">
               Create Post
             </Button>
@@ -126,18 +124,18 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
                   </Text>
                   {communityData.imageURL || selectedFile ? (
                     <Image
+                      src={selectedFile || communityData.imageURL}
                       borderRadius="full"
                       boxSize="40px"
-                      src={selectedFile || communityData?.imageURL}
                       alt="Community Image"
                     />
                   ) : (
                     <Icon
-                      as={FaSquareThreads}
+                      as={FaReddit}
                       fontSize={40}
-                      color="blue.400"
+                      color="brand.100"
                       mr={2}
-                    ></Icon>
+                    />
                   )}
                 </Flex>
                 {selectedFile &&
@@ -155,7 +153,7 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
                   hidden
                   ref={selectedFileRef}
                   onChange={onSelectFile}
-                ></input>
+                />
               </Stack>
             </>
           )}

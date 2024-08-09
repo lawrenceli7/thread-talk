@@ -9,20 +9,20 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import PostItem from "./PostItem";
 import PostLoader from "./PostLoader";
 
-type PostProps = {
+type PostsProps = {
   communityData: Community;
 };
 
-const Posts: React.FC<PostProps> = ({ communityData }) => {
+const Posts: React.FC<PostsProps> = ({ communityData }) => {
+  const [user] = useAuthState(auth);
   const [loading, setLoading] = useState(false);
   const {
     postStateValue,
     setPostStateValue,
+    onVote,
     onDeletePost,
     onSelectPost,
-    onVote,
   } = usePosts();
-  const [user] = useAuthState(auth);
 
   const getPosts = async () => {
     try {
@@ -33,13 +33,17 @@ const Posts: React.FC<PostProps> = ({ communityData }) => {
         where("communityId", "==", communityData.id),
         orderBy("createdAt", "desc")
       );
-
       const postDocs = await getDocs(postsQuery);
-      const posts = postDocs.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 
-      setPostStateValue((prev) => ({ ...prev, posts: posts as Post[] }));
+      const posts = postDocs.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      setPostStateValue((prev) => ({
+        ...prev,
+        posts: posts as Post[],
+      }));
+
+      console.log("posts", posts);
     } catch (error: any) {
-      console.error("getPosts error", error.message);
+      console.log("getPosts error", error.message);
     }
     setLoading(false);
   };
@@ -56,6 +60,7 @@ const Posts: React.FC<PostProps> = ({ communityData }) => {
         <Stack>
           {postStateValue.posts.map((item) => (
             <PostItem
+              key={item.id}
               post={item}
               userIsCreator={user?.uid === item.creatorId}
               userVoteValue={
@@ -63,9 +68,8 @@ const Posts: React.FC<PostProps> = ({ communityData }) => {
                   ?.voteValue
               }
               onVote={onVote}
-              onDelete={onDeletePost}
               onSelectPost={onSelectPost}
-              key={item.id}
+              onDeletePost={onDeletePost}
             />
           ))}
         </Stack>

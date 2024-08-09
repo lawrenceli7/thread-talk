@@ -16,9 +16,10 @@ const useSelectFile = () => {
       }
     };
   };
+
   return {
-    setSelectedFile,
     selectedFile,
+    setSelectedFile,
     onSelectFile,
   };
 };

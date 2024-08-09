@@ -15,8 +15,7 @@ import {
 import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { AiOutlineStar } from "react-icons/ai";
-import { FaUserFriends } from "react-icons/fa";
+import { FaReddit } from "react-icons/fa";
 
 const Recommendations: React.FC = () => {
   const [communities, setCommunities] = useState<Community[]>([]);
@@ -25,23 +24,20 @@ const Recommendations: React.FC = () => {
 
   const getCommunityRecommendations = async () => {
     setLoading(true);
-
     try {
       const communityQuery = query(
         collection(firestore, "communities"),
         orderBy("numberOfMembers", "desc"),
         limit(5)
       );
-
       const communityDocs = await getDocs(communityQuery);
       const communities = communityDocs.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-
       setCommunities(communities as Community[]);
-    } catch (error: any) {
-      console.error("Error getting recommendations", error);
+    } catch (error) {
+      console.log("getCommunityRecommendations error", error);
     }
     setLoading(false);
   };
@@ -115,16 +111,23 @@ const Recommendations: React.FC = () => {
                             borderRadius="full"
                             boxSize="28px"
                             mr={2}
+                            alt="Image"
                           />
                         ) : (
                           <Icon
-                            as={FaUserFriends}
+                            as={FaReddit}
                             fontSize={30}
                             color="brand.100"
                             mr={2}
                           />
                         )}
-                        <span className="whitespace-nowrap overflow-hidden text-ellipsis">
+                        <span
+                          style={{
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                          }}
+                        >
                           {`r/${item.id}`}
                         </span>
                       </Flex>
@@ -146,20 +149,10 @@ const Recommendations: React.FC = () => {
                 </Link>
               );
             })}
-            <Box p="10px 20px">
-              <Button
-                leftIcon={<Icon as={AiOutlineStar} />}
-                height="30px"
-                width="100%"
-              >
-                View All
-              </Button>
-            </Box>
           </>
         )}
       </Flex>
     </Flex>
   );
 };
-
 export default Recommendations;
