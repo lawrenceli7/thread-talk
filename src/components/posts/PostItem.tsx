@@ -6,7 +6,6 @@ import {
   Icon,
   Image,
   Skeleton,
-  Spacer,
   Spinner,
   Stack,
   Text,
@@ -17,8 +16,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { BsChat, BsDot } from "react-icons/bs";
-import { CiTimer } from "react-icons/ci";
-import { FaSquareThreads } from "react-icons/fa6";
+import { FaReddit } from "react-icons/fa";
 import {
   IoArrowDownCircleOutline,
   IoArrowDownCircleSharp,
@@ -38,7 +36,7 @@ type PostItemProps = {
     vote: number,
     communityId: string
   ) => void;
-  onDelete: (post: Post) => Promise<boolean>;
+  onDeletePost: (post: Post) => Promise<boolean>;
   onSelectPost?: (post: Post) => void;
   homePage?: boolean;
 };
@@ -48,29 +46,30 @@ const PostItem: React.FC<PostItemProps> = ({
   userIsCreator,
   userVoteValue,
   onVote,
-  onDelete,
+  onDeletePost,
   onSelectPost,
   homePage,
 }) => {
   const [loadingImage, setLoadingImage] = useState(true);
-  const [error, setError] = useState(false);
   const [loadingDelete, setLoadingDelete] = useState(false);
-  const singlePostPage = !onSelectPost;
   const router = useRouter();
+  const singlePostPage = !onSelectPost;
+
+  const [error, setError] = useState(false);
 
   const handleDelete = async (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     event.stopPropagation();
     setLoadingDelete(true);
-
     try {
-      const success = await onDelete(post);
+      const success = await onDeletePost(post);
 
       if (!success) {
         throw new Error("Failed to delete post");
       }
 
+      console.log("Post was successfully deleted");
       if (singlePostPage) {
         router.push(`/r/${post.communityId}`);
       }
@@ -87,16 +86,16 @@ const PostItem: React.FC<PostItemProps> = ({
       borderColor={singlePostPage ? "white" : "gray.300"}
       borderRadius={singlePostPage ? "4px 4px 0px 0px" : "4px"}
       _hover={{ borderColor: singlePostPage ? "none" : "gray.500" }}
-      cursor={singlePostPage ? "unset" : "pointer"}
+      cursor={singlePostPage ? "unset" : "pointer "}
       onClick={() => onSelectPost && onSelectPost(post)}
     >
       <Flex
         direction="column"
         align="center"
+        bg={singlePostPage ? "none" : "gray.100"}
         p={2}
         width="40px"
         borderRadius={singlePostPage ? "0" : "3px 0px 0px 3px"}
-        bg={singlePostPage ? "none" : "gray.100"}
       >
         <Icon
           as={
@@ -134,18 +133,13 @@ const PostItem: React.FC<PostItemProps> = ({
                 {post.communityImageURL ? (
                   <Image
                     src={post.communityImageURL}
-                    alt="Image"
                     borderRadius="full"
                     boxSize="18px"
                     mr={2}
+                    alt="Image"
                   />
                 ) : (
-                  <Icon
-                    as={FaSquareThreads}
-                    fontSize="18pt"
-                    mr={1}
-                    color="blue.500"
-                  />
+                  <Icon as={FaReddit} fontSize="18pt" mr={1} color="blue.500" />
                 )}
                 <Link href={`r/${post.communityId}`}>
                   <Text
@@ -157,14 +151,12 @@ const PostItem: React.FC<PostItemProps> = ({
                 <Icon as={BsDot} color="gray.500" fontSize={8} />
               </>
             )}
-            <Text>Posted by u/{post.creatorDisplayName}</Text>
-            <Spacer />
-            <Icon as={CiTimer} color="gray.500" fontSize={12} mr={1} />
             <Text>
+              Posted by u/{post.creatorDisplayName}{" "}
               {moment(new Date(post.createdAt?.seconds * 1000)).fromNow()}
             </Text>
           </Stack>
-          <Text fontWeight={600} fontSize="12pt">
+          <Text fontSize="12pt" fontWeight={600}>
             {post.title}
           </Text>
           <Text fontSize="10pt">{post.body}</Text>
@@ -175,10 +167,10 @@ const PostItem: React.FC<PostItemProps> = ({
               )}
               <Image
                 src={post.imageURL}
-                alt="Post Image"
                 maxHeight="460px"
-                onLoad={() => setLoadingImage(false)}
+                alt="Post Image"
                 display={loadingImage ? "none" : "unset"}
+                onLoad={() => setLoadingImage(false)}
               />
             </Flex>
           )}

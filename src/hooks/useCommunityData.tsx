@@ -19,13 +19,51 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useRecoilState, useSetRecoilState } from "recoil";
 
 const useCommunityData = () => {
+  const [user] = useAuthState(auth);
+  const router = useRouter();
   const [communityStateValue, setCommunityStateValue] =
     useRecoilState(communityState);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [user] = useAuthState(auth);
   const setAuthModalState = useSetRecoilState(authModalState);
-  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const onJoinOrLeaveCommunity = (
+    communityData: Community,
+    isJoined: boolean
+  ) => {
+    if (!user) {
+      setAuthModalState({ open: true, view: "login" });
+      return;
+    }
+
+    setLoading(true);
+    if (isJoined) {
+      leaveCommunity(communityData.id);
+      return;
+    }
+    joinCommunity(communityData);
+  };
+
+  const getMySnippets = async () => {
+    setLoading(true);
+    try {
+      const snippetDocs = await getDocs(
+        collection(firestore, `users/${user?.uid}/communitySnippets`)
+      );
+
+      const snippets = snippetDocs.docs.map((doc) => ({ ...doc.data() }));
+
+      setCommunityStateValue((prev) => ({
+        ...prev,
+        mySnippets: snippets as CommunitySnippet[],
+        snippetsFetched: true,
+      }));
+    } catch (error: any) {
+      console.log("getMySnippets error", error);
+      setError(error.message);
+    }
+    setLoading(false);
+  };
 
   const joinCommunity = async (communityData: Community) => {
     try {
@@ -36,7 +74,6 @@ const useCommunityData = () => {
         imageURL: communityData.imageURL || "",
         isModerator: user?.uid === communityData.creatorId,
       };
-
       batch.set(
         doc(
           firestore,
@@ -60,7 +97,7 @@ const useCommunityData = () => {
       console.log("joinCommunity error", error);
       setError(error.message);
     }
-    setIsLoading(false);
+    setLoading(false);
   };
 
   const leaveCommunity = async (communityId: string) => {
@@ -84,48 +121,10 @@ const useCommunityData = () => {
         ),
       }));
     } catch (error: any) {
-      console.log("leaveCommunity error", error);
+      console.log("leaveCommunity error", error.message);
       setError(error.message);
     }
-    setIsLoading(false);
-  };
-
-  const onJoinOrLeaveCommunity = (
-    communityData: Community,
-    isJoined: boolean
-  ) => {
-    if (!user) {
-      setAuthModalState({ open: true, view: "login" });
-      return;
-    }
-
-    setIsLoading(true);
-    if (isJoined) {
-      leaveCommunity(communityData.id);
-      return;
-    }
-
-    joinCommunity(communityData);
-  };
-
-  const getMySnippets = async () => {
-    setIsLoading(true);
-
-    try {
-      const snippetDocs = await getDocs(
-        collection(firestore, `users/${user?.uid}/communitySnippets`)
-      );
-
-      const snippets = snippetDocs.docs.map((doc) => ({ ...doc.data() }));
-      setCommunityStateValue((prev) => ({
-        ...prev,
-        mySnippets: snippets as CommunitySnippet[],
-        snippetsFetched: true,
-      }));
-    } catch (error: any) {
-      console.log("getMySnippets error", error);
-    }
-    setIsLoading(false);
+    setLoading(false);
   };
 
   const getCommunityData = async (communityId: string) => {
@@ -140,8 +139,8 @@ const useCommunityData = () => {
           ...communityDoc.data(),
         } as Community,
       }));
-    } catch (error: any) {
-      console.log("getCommunityData error", error);
+    } catch (error) {
+      console.log("getCommunityData", error);
     }
   };
 
@@ -154,7 +153,6 @@ const useCommunityData = () => {
       }));
       return;
     }
-
     getMySnippets();
   }, [user]);
 
@@ -169,7 +167,7 @@ const useCommunityData = () => {
   return {
     communityStateValue,
     onJoinOrLeaveCommunity,
-    isLoading,
+    loading,
   };
 };
 export default useCommunityData;

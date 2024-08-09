@@ -35,16 +35,16 @@ const Directory: React.FC = () => {
             {directoryState.selectedMenuItem.imageURL ? (
               <Image
                 src={directoryState.selectedMenuItem.imageURL}
-                alt="Navbar ImageURL"
                 borderRadius="full"
                 boxSize="24px"
                 mr={2}
+                alt="Image"
               />
             ) : (
               <Icon
-                as={directoryState.selectedMenuItem.icon}
                 fontSize={24}
                 mr={{ base: 1, md: 2 }}
+                as={directoryState.selectedMenuItem.icon}
                 color={directoryState.selectedMenuItem.iconColor}
               />
             )}

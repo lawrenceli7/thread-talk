@@ -5,7 +5,7 @@ export interface Community {
   id: string;
   creatorId: string;
   numberOfMembers: number;
-  privacyType: "public" | "restircted" | "private";
+  privacyType: "public" | "restricted" | "private";
   createdAt?: Timestamp;
   imageURL?: string;
 }
@@ -28,6 +28,6 @@ const defaultCommunityState: CommunityState = {
 };
 
 export const communityState = atom<CommunityState>({
-  key: "communityState",
+  key: "communitiesState",
   default: defaultCommunityState,
 });

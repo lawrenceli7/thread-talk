@@ -18,55 +18,54 @@ import {
   query,
   where,
 } from "firebase/firestore";
+import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-export default function Home() {
+const Home: NextPage = () => {
   const [user, loadingUser] = useAuthState(auth);
-  const { communityStateValue } = useCommunityData();
   const [loading, setLoading] = useState(false);
   const {
-    setPostStateValue,
     postStateValue,
+    setPostStateValue,
     onSelectPost,
     onDeletePost,
     onVote,
   } = usePosts();
+  const { communityStateValue } = useCommunityData();
 
   const buildUserHomeFeed = async () => {
     setLoading(true);
-
     try {
       if (communityStateValue.mySnippets.length) {
         const myCommunityIds = communityStateValue.mySnippets.map(
           (snippet) => snippet.communityId
         );
-
         const postQuery = query(
           collection(firestore, "posts"),
           where("communityId", "in", myCommunityIds),
           limit(10)
         );
-
         const postDocs = await getDocs(postQuery);
         const posts = postDocs.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
-
-        setPostStateValue((prev) => ({ ...prev, posts: posts as Post[] }));
+        setPostStateValue((prev) => ({
+          ...prev,
+          posts: posts as Post[],
+        }));
       } else {
         buildNoUserHomeFeed();
       }
-    } catch (error: any) {
-      console.error("Error building user home feed: ", error);
+    } catch (error) {
+      console.log("buildUserHomeFeed error", error);
     }
     setLoading(false);
   };
 
   const buildNoUserHomeFeed = async () => {
     setLoading(true);
-
     try {
       const postQuery = query(
         collection(firestore, "posts"),
@@ -76,10 +75,12 @@ export default function Home() {
 
       const postDocs = await getDocs(postQuery);
       const posts = postDocs.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-
-      setPostStateValue((prev) => ({ ...prev, posts: posts as Post[] }));
-    } catch (error: any) {
-      console.error("Error building no user home feed: ", error);
+      setPostStateValue((prev) => ({
+        ...prev,
+        posts: posts as Post[],
+      }));
+    } catch (error) {
+      console.log("buildNoUserHomeFeed error", error);
     }
     setLoading(false);
   };
@@ -101,27 +102,21 @@ export default function Home() {
         ...prev,
         postVotes: postVotes as PostVote[],
       }));
-    } catch (error: any) {
-      console.error("Error getting user post votes: ", error);
+    } catch (error) {
+      console.log("getUserPostVotes error", error);
     }
   };
 
   useEffect(() => {
-    if (communityStateValue.snippetsFetched) {
-      buildUserHomeFeed();
-    }
+    if (communityStateValue.snippetsFetched) buildUserHomeFeed();
   }, [communityStateValue.snippetsFetched]);
 
   useEffect(() => {
-    if (!user && !loadingUser) {
-      buildNoUserHomeFeed();
-    }
+    if (!user && !loadingUser) buildNoUserHomeFeed();
   }, [user, loadingUser]);
 
   useEffect(() => {
-    if (user && postStateValue.posts.length) {
-      getUserPostVotes();
-    }
+    if (user && postStateValue.posts.length) getUserPostVotes();
 
     return () => {
       setPostStateValue((prev) => ({
@@ -144,7 +139,7 @@ export default function Home() {
                 key={post.id}
                 post={post}
                 onSelectPost={onSelectPost}
-                onDelete={onDeletePost}
+                onDeletePost={onDeletePost}
                 onVote={onVote}
                 userVoteValue={
                   postStateValue.postVotes.find(
@@ -158,11 +153,13 @@ export default function Home() {
           </Stack>
         )}
       </>
-      <Stack>
+      <Stack spacing={5}>
         <Recommendations />
         <Premium />
         <PersonalHome />
       </Stack>
     </PageContent>
   );
-}
+};
+
+export default Home;

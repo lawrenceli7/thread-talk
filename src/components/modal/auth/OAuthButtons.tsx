@@ -1,15 +1,24 @@
-import { auth } from "@/firebase/clientApp";
+import { auth, firestore } from "@/firebase/clientApp";
 import { Button, Flex, Image, Text } from "@chakra-ui/react";
-import React from "react";
-import {
-  useSignInWithGithub,
-  useSignInWithGoogle,
-} from "react-firebase-hooks/auth";
+import { User } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import React, { useEffect } from "react";
+import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 
 const OAuthButtons: React.FC = () => {
-  const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
-  const [signInWithGithub, isUser, isLoading, isError] =
-    useSignInWithGithub(auth);
+  const [signInWithGoogle, userCred, loading, error] =
+    useSignInWithGoogle(auth);
+
+  const createUserDocument = async (user: User) => {
+    const userDocRef = doc(firestore, "users", user.uid);
+    await setDoc(userDocRef, JSON.parse(JSON.stringify(user)));
+  };
+
+  useEffect(() => {
+    if (userCred) {
+      createUserDocument(userCred.user);
+    }
+  }, [userCred]);
 
   return (
     <Flex direction="column" width="100%" mb={4}>
@@ -19,32 +28,11 @@ const OAuthButtons: React.FC = () => {
         isLoading={loading}
         onClick={() => signInWithGoogle()}
       >
-        <Image
-          src="/images/google.png"
-          alt="Google Logo"
-          height="20px"
-          mr={4}
-        />
+        <Image src="/images/google.png" height="20px" mr={4} alt="Image" />
         Continue with Google
       </Button>
-      <Button
-        variant="oauth"
-        isLoading={isLoading}
-        onClick={() => signInWithGithub()}
-      >
-        <Image
-          src="/images/github.png"
-          alt="Github Logo"
-          height="20px"
-          mr={4}
-        />
-        Continue with Github
-      </Button>
-      {error && (
-        <Text textAlign="center" fontSize="10pt" color="red" mt={2}>
-          {error.toString()}
-        </Text>
-      )}
+      <Button variant="oauth">Some Other Provider</Button>
+      {error && <Text>{error.message}</Text>}
     </Flex>
   );
 };

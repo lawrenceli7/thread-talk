@@ -1,10 +1,10 @@
 import { communityState } from "@/atoms/communitiesAtom";
-import CreateCommunityModal from "@/components/modal/community";
 import { Box, Flex, Icon, MenuItem, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { FaSquareThreads } from "react-icons/fa6";
+import { FaReddit } from "react-icons/fa";
 import { GrAdd } from "react-icons/gr";
 import { useRecoilValue } from "recoil";
+import CreateCommunityModal from "../../modal/community";
 import MenuListItem from "./MenuListItem";
 
 const Communities: React.FC = () => {
@@ -23,7 +23,7 @@ const Communities: React.FC = () => {
           .map((snippet) => (
             <MenuListItem
               key={snippet.communityId}
-              icon={FaSquareThreads}
+              icon={FaReddit}
               displayText={`r/${snippet.communityId}`}
               link={`/r/${snippet.communityId}`}
               iconColor="brand.100"
@@ -42,14 +42,14 @@ const Communities: React.FC = () => {
           onClick={() => setOpen(true)}
         >
           <Flex align="center">
-            <Icon as={GrAdd} fontSize={20} mr={2} />
+            <Icon fontSize={20} mr={2} as={GrAdd} />
             Create Community
           </Flex>
         </MenuItem>
         {mySnippets.map((snippet) => (
           <MenuListItem
             key={snippet.communityId}
-            icon={FaSquareThreads}
+            icon={FaReddit}
             displayText={`r/${snippet.communityId}`}
             link={`/r/${snippet.communityId}`}
             iconColor="blue.500"

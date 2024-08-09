@@ -41,12 +41,11 @@ const Comments: React.FC<CommentsProps> = ({
   const [comments, setComments] = useState<Comment[]>([]);
   const [fetchLoading, setFetchLoading] = useState(true);
   const [createLoading, setCreateLoading] = useState(false);
-  const setPostState = useSetRecoilState(postState);
   const [loadingDeleteId, setLoadingDeleteId] = useState("");
+  const setPostState = useSetRecoilState(postState);
 
   const onCreateComment = async () => {
     setCreateLoading(true);
-
     try {
       const batch = writeBatch(firestore);
 
@@ -68,13 +67,14 @@ const Comments: React.FC<CommentsProps> = ({
       newComment.createdAt = { seconds: Date.now() / 1000 } as Timestamp;
 
       const postDocRef = doc(firestore, "posts", selectedPost?.id!);
-      batch.update(postDocRef, { numberOfComments: increment(1) });
+      batch.update(postDocRef, {
+        numberOfComments: increment(1),
+      });
 
       await batch.commit();
 
       setCommentText("");
       setComments((prev) => [newComment, ...prev]);
-
       setPostState((prev) => ({
         ...prev,
         selectedPost: {
@@ -82,15 +82,14 @@ const Comments: React.FC<CommentsProps> = ({
           numberOfComments: prev.selectedPost?.numberOfComments! + 1,
         } as Post,
       }));
-    } catch (error: any) {
-      console.log("Error creating comment", error.message);
+    } catch (error) {
+      console.log("onCreateComment error", error);
     }
     setCreateLoading(false);
   };
 
   const onDeleteComment = async (comment: Comment) => {
     setLoadingDeleteId(comment.id);
-
     try {
       const batch = writeBatch(firestore);
 
@@ -113,8 +112,8 @@ const Comments: React.FC<CommentsProps> = ({
       }));
 
       setComments((prev) => prev.filter((item) => item.id !== comment.id));
-    } catch (error: any) {
-      console.log("Error deleting comment", error.message);
+    } catch (error) {
+      console.log("onDeleteComment error", error);
     }
     setLoadingDeleteId("");
   };
@@ -126,25 +125,20 @@ const Comments: React.FC<CommentsProps> = ({
         where("postId", "==", selectedPost?.id),
         orderBy("createdAt", "desc")
       );
-
       const commentDocs = await getDocs(commentsQuery);
       const comments = commentDocs.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-
       setComments(comments as Comment[]);
-    } catch (error: any) {
-      console.log("Error fetching comments", error.message);
+    } catch (error) {
+      console.log("getPostComments error", error);
     }
     setFetchLoading(false);
   };
 
   useEffect(() => {
-    if (!selectedPost) {
-      return;
-    }
-
+    if (!selectedPost) return;
     getPostComments();
   }, [selectedPost]);
 

@@ -13,9 +13,9 @@ import React, { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 const PostPage: React.FC = () => {
+  const [user] = useAuthState(auth);
   const { postStateValue, setPostStateValue, onDeletePost, onVote } =
     usePosts();
-  const [user] = useAuthState(auth);
   const router = useRouter();
   const { communityStateValue } = useCommunityData();
 
@@ -23,13 +23,12 @@ const PostPage: React.FC = () => {
     try {
       const postDocRef = doc(firestore, "posts", postId);
       const postDoc = await getDoc(postDocRef);
-
       setPostStateValue((prev) => ({
         ...prev,
         selectedPost: { id: postDoc.id, ...postDoc.data() } as Post,
       }));
-    } catch (error: any) {
-      console.log("Error fetching post", error.message);
+    } catch (error) {
+      console.log("fetchPost error", error);
     }
   };
 
@@ -42,38 +41,33 @@ const PostPage: React.FC = () => {
   }, [router.query, postStateValue.selectedPost]);
 
   return (
-    <>
-      <PageContent>
-        <>
-          {postStateValue.selectedPost && (
-            <PostItem
-              post={postStateValue.selectedPost}
-              onVote={onVote}
-              onDelete={onDeletePost}
-              userVoteValue={
-                postStateValue.postVotes.find(
-                  (item) => item.postId === postStateValue.selectedPost?.id
-                )?.voteValue
-              }
-              userIsCreator={
-                user?.uid === postStateValue.selectedPost?.creatorId
-              }
-            />
-          )}
-          <Comments
-            user={user as User}
-            selectedPost={postStateValue.selectedPost}
-            communityId={postStateValue.selectedPost?.communityId as string}
+    <PageContent>
+      <>
+        {postStateValue.selectedPost && (
+          <PostItem
+            post={postStateValue.selectedPost}
+            onVote={onVote}
+            onDeletePost={onDeletePost}
+            userVoteValue={
+              postStateValue.postVotes.find(
+                (item) => item.postId === postStateValue.selectedPost?.id
+              )?.voteValue
+            }
+            userIsCreator={user?.uid === postStateValue.selectedPost?.creatorId}
           />
-        </>
-
-        <>
-          {communityStateValue.currentCommunity && (
-            <About communityData={communityStateValue.currentCommunity} />
-          )}
-        </>
-      </PageContent>
-    </>
+        )}
+        <Comments
+          user={user as User}
+          selectedPost={postStateValue.selectedPost}
+          communityId={postStateValue.selectedPost?.communityId as string}
+        />
+      </>
+      <>
+        {communityStateValue.currentCommunity && (
+          <About communityData={communityStateValue.currentCommunity} />
+        )}
+      </>
+    </PageContent>
   );
 };
 export default PostPage;

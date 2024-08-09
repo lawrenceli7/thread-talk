@@ -18,11 +18,11 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 const usePosts = () => {
-  const [postStateValue, setPostStateValue] = useRecoilState(postState);
   const [user] = useAuthState(auth);
+  const router = useRouter();
+  const [postStateValue, setPostStateValue] = useRecoilState(postState);
   const currentCommunity = useRecoilValue(communityState).currentCommunity;
   const setAuthModalState = useSetRecoilState(authModalState);
-  const router = useRouter();
 
   const onVote = async (
     event: React.MouseEvent<SVGElement, MouseEvent>,
@@ -122,7 +122,7 @@ const usePosts = () => {
       batch.update(postRef, { voteStatus: voteStatus + voteChange });
 
       await batch.commit();
-    } catch (error: any) {
+    } catch (error) {
       console.log("onVote error", error);
     }
   };
@@ -149,7 +149,6 @@ const usePosts = () => {
         ...prev,
         posts: prev.posts.filter((item) => item.id !== post.id),
       }));
-
       return true;
     } catch (error) {
       return false;
@@ -167,7 +166,6 @@ const usePosts = () => {
       id: doc.id,
       ...doc.data(),
     }));
-
     setPostStateValue((prev) => ({
       ...prev,
       postVotes: postVotes as PostVote[],
@@ -175,10 +173,7 @@ const usePosts = () => {
   };
 
   useEffect(() => {
-    if (!user || !currentCommunity?.id) {
-      return;
-    }
-
+    if (!user || !currentCommunity?.id) return;
     getCommunityPostVotes(currentCommunity?.id);
   }, [user, currentCommunity]);
 

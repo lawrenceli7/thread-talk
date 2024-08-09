@@ -1,8 +1,8 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import Navbar from "../nav";
 
 interface LayoutProps {
-  children: React.ReactElement | React.ReactElement[];
+  children: ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {

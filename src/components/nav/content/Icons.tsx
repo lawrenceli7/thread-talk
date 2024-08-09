@@ -1,5 +1,4 @@
-import { Flex, Icon } from "@chakra-ui/react";
-import React from "react";
+import { Box, Flex, Icon } from "@chakra-ui/react";
 import { BsArrowUpRightCircle, BsChatDots } from "react-icons/bs";
 import { GrAdd } from "react-icons/gr";
 import {
@@ -14,7 +13,7 @@ const Icons: React.FC = () => {
       <Flex
         display={{ base: "none", md: "flex" }}
         align="center"
-        borderRight="1 px solid"
+        borderRight="1px solid"
         borderColor="gray.200"
       >
         <Flex
@@ -70,13 +69,13 @@ const Icons: React.FC = () => {
           <Icon as={IoNotificationsOutline} fontSize={20} />
         </Flex>
         <Flex
+          display={{ base: "none", md: "flex" }}
           mr={1.5}
           ml={1.5}
           padding={1}
           cursor="pointer"
           borderRadius={4}
           _hover={{ bg: "gray.200" }}
-          display={{ base: "none", md: "flex" }}
         >
           <Icon as={GrAdd} fontSize={20} />
         </Flex>

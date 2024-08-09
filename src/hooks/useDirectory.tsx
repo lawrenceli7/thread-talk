@@ -1,27 +1,27 @@
 import { communityState } from "@/atoms/communitiesAtom";
 import {
+  defaultMenuItem,
   DirectoryMenuItem,
   directoryMenuState,
 } from "@/atoms/directoryMenuAtom";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { FaSquareThreads } from "react-icons/fa6";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { FaReddit } from "react-icons/fa";
+import { useRecoilState } from "recoil";
 
 const useDirectory = () => {
   const [directoryState, setDirectoryState] =
     useRecoilState(directoryMenuState);
   const router = useRouter();
-  const communityStateValue = useRecoilValue(communityState);
+  const [communityStateValue, setCommunityStateValue] =
+    useRecoilState(communityState);
 
   const onSelectMenuItem = (menuItem: DirectoryMenuItem) => {
     setDirectoryState((prev) => ({
       ...prev,
       selectedMenuItem: menuItem,
     }));
-
     router.push(menuItem.link);
-
     if (directoryState.isOpen) {
       toggleMenuOpen();
     }
@@ -44,12 +44,28 @@ const useDirectory = () => {
           displayText: `r/${currentCommunity.id}`,
           link: `/r/${currentCommunity.id}`,
           imageURL: currentCommunity.imageURL,
-          icon: FaSquareThreads,
+          icon: FaReddit,
           iconColor: "blue.500",
         },
       }));
+      return;
     }
+    setDirectoryState((prev) => ({
+      ...prev,
+      selectedMenuItem: defaultMenuItem,
+    }));
   }, [communityStateValue.currentCommunity]);
+
+  useEffect(() => {
+    const { communityId } = router.query;
+
+    if (!communityId) {
+      setCommunityStateValue((prev) => ({
+        ...prev,
+        currentCommunity: undefined,
+      }));
+    }
+  }, [router.query]);
 
   return { directoryState, toggleMenuOpen, onSelectMenuItem };
 };

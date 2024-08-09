@@ -1,10 +1,34 @@
+import { authModalState } from "@/atoms/authModalAtom";
+import { auth } from "@/firebase/clientApp";
+import useDirectory from "@/hooks/useDirectory";
 import { Button, Flex, Icon, Stack, Text } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import React from "react";
-import { AiOutlineTeam } from "react-icons/ai";
-import { FaHome } from "react-icons/fa";
-import { IoCreateOutline } from "react-icons/io5";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { FaReddit } from "react-icons/fa";
+import { useSetRecoilState } from "recoil";
 
 const PersonalHome: React.FC = () => {
+  const router = useRouter();
+  const [user] = useAuthState(auth);
+  const setAuthModalState = useSetRecoilState(authModalState);
+  const { toggleMenuOpen } = useDirectory();
+
+  const onClick = () => {
+    if (!user) {
+      setAuthModalState({ open: true, view: "login" });
+      return;
+    }
+    const { communityId } = router.query;
+
+    if (communityId) {
+      router.push(`/r/${communityId}/submit`);
+      return;
+    }
+
+    toggleMenuOpen();
+  };
+
   return (
     <Flex
       direction="column"
@@ -28,21 +52,17 @@ const PersonalHome: React.FC = () => {
       ></Flex>
       <Flex direction="column" p="12px">
         <Flex align="center" mb={2}>
-          <Icon as={FaHome} fontSize={50} color="brand.100" mr={2} />
+          <Icon as={FaReddit} fontSize={50} color="brand.100" mr={2} />
           <Text fontWeight={600}>Home</Text>
         </Flex>
         <Stack spacing={3}>
           <Text fontSize="9pt">
-            Your personal ThreadTalk front page, built for you.
+            Your personal Reddit front page, built for you.
           </Text>
-          <Button leftIcon={<Icon as={IoCreateOutline} />} height="30px">
+          <Button height="30px" onClick={onClick}>
             Create Post
           </Button>
-          <Button
-            variant="outline"
-            leftIcon={<Icon as={AiOutlineTeam} />}
-            height="30px"
-          >
+          <Button variant="outline" height="30px">
             Create Community
           </Button>
         </Stack>

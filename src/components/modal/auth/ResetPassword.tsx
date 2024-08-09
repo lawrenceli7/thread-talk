@@ -3,8 +3,7 @@ import { auth } from "@/firebase/clientApp";
 import { Button, Flex, Icon, Input, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useSendPasswordResetEmail } from "react-firebase-hooks/auth";
-import { BsDot } from "react-icons/bs";
-import { RiLockPasswordFill } from "react-icons/ri";
+import { BsDot, BsReddit } from "react-icons/bs";
 import { useSetRecoilState } from "recoil";
 
 const ResetPassword: React.FC = () => {
@@ -22,7 +21,7 @@ const ResetPassword: React.FC = () => {
   };
   return (
     <Flex direction="column" alignItems="center" width="100%">
-      <Icon as={RiLockPasswordFill} color="blue.500" fontSize={40} mb={2} />
+      <Icon as={BsReddit} color="brand.100" fontSize={40} mb={2} />
       <Text fontWeight={700} mb={2}>
         Reset your password
       </Text>
@@ -31,8 +30,8 @@ const ResetPassword: React.FC = () => {
       ) : (
         <>
           <Text fontSize="sm" textAlign="center" mb={2}>
-            Enter the email associated with your account and we will send you a
-            reset link.
+            {`Enter the email associated with your account and we'll send you a
+            reset link.`}
           </Text>
           <form onSubmit={onSubmit} style={{ width: "100%" }}>
             <Input

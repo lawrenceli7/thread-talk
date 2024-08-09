@@ -1,8 +1,7 @@
-import AuthButtons from "@/components/nav/content/AuthButtons";
 import { Button, Flex, Text, Textarea } from "@chakra-ui/react";
 import { User } from "firebase/auth";
-import { comment } from "postcss";
 import React from "react";
+import AuthButtons from "../../nav/content/AuthButtons";
 
 type CommentInputProps = {
   commentText: string;
@@ -56,7 +55,7 @@ const CommentInput: React.FC<CommentInputProps> = ({
           >
             <Button
               height="26px"
-              disabled={!comment.length}
+              disabled={!commentText.length}
               isLoading={createLoading}
               onClick={() => onCreateComment(commentText)}
             >

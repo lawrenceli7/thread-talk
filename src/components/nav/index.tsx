@@ -2,58 +2,47 @@ import { defaultMenuItem } from "@/atoms/directoryMenuAtom";
 import { auth } from "@/firebase/clientApp";
 import useDirectory from "@/hooks/useDirectory";
 import { Flex, Image } from "@chakra-ui/react";
-import { motion } from "framer-motion";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import SearchInput from "./SearchInput";
 import RightContent from "./content";
 import Directory from "./directory";
+import SearchInput from "./SearchInput";
 
-const MotionFlex = motion(Flex);
-
-const Nav: React.FC = () => {
+const Navbar: React.FC = () => {
   const [user, loading, error] = useAuthState(auth);
   const { onSelectMenuItem } = useDirectory();
-
   return (
-    <MotionFlex
+    <Flex
+      bg="white"
       height="44px"
       padding="6px 12px"
       justify={{ md: "space-between" }}
-      bg="white"
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
     >
-      <MotionFlex
+      <Flex
         align="center"
         width={{ base: "40px", md: "auto" }}
         mr={{ base: 0, md: 2 }}
-        onClick={() => onSelectMenuItem(defaultMenuItem)}
         cursor="pointer"
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.3 }}
+        onClick={() => onSelectMenuItem(defaultMenuItem)}
       >
-        <Image src="/images/logo.svg" alt="Logo" height="30px" />
+        <Image src="/images/logo.svg" height="30px" alt="Image" />
         <Image
           src="/images/logo-text.png"
-          alt="Logo Text"
-          height="25px"
+          height="30px"
           display={{ base: "none", md: "unset" }}
+          alt="Image"
         />
         <Image
           src="/images/logo-text.jpg"
-          alt="Logo Text"
-          height="25px"
+          height="30px"
           display={{ base: "none", md: "unset" }}
+          alt="Image"
         />
-      </MotionFlex>
+      </Flex>
       {user && <Directory />}
       <SearchInput user={user} />
       <RightContent user={user} />
-    </MotionFlex>
+    </Flex>
   );
 };
-
-export default Nav;
+export default Navbar;

@@ -2,6 +2,7 @@ import { authModalState } from "@/atoms/authModalAtom";
 import { auth } from "@/firebase/clientApp";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
+  Button,
   Flex,
   Icon,
   Menu,
@@ -14,7 +15,7 @@ import {
 import { signOut, User } from "firebase/auth";
 import React from "react";
 import { CgProfile } from "react-icons/cg";
-import { FaSquareThreads } from "react-icons/fa6";
+import { FaRedditSquare } from "react-icons/fa";
 import { IoSparkles } from "react-icons/io5";
 import { MdOutlineLogin } from "react-icons/md";
 import { VscAccount } from "react-icons/vsc";
@@ -44,10 +45,10 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
             {user ? (
               <>
                 <Icon
-                  as={FaSquareThreads}
                   fontSize={24}
                   mr={1}
                   color="gray.300"
+                  as={FaRedditSquare}
                 />
                 <Flex
                   direction="column"
@@ -60,13 +61,13 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
                     {user?.displayName || user.email?.split("@")[0]}
                   </Text>
                   <Flex>
-                    <Icon as={IoSparkles} color="blue.300" mr={1} />
+                    <Icon as={IoSparkles} color="blue.500" mr={1} />
                     <Text color="gray.400">user</Text>
                   </Flex>
                 </Flex>
               </>
             ) : (
-              <Icon as={VscAccount} fontSize={24} color="gray.400" mr={1} />
+              <Icon fontSize={24} color="gray.400" mr={1} as={VscAccount} />
             )}
           </Flex>
           <ChevronDownIcon />
@@ -81,7 +82,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
               _hover={{ bg: "blue.500", color: "white" }}
             >
               <Flex align="center">
-                <Icon as={CgProfile} fontSize={20} mr={2} />
+                <Icon fontSize={20} mr={2} as={CgProfile} />
                 Profile
               </Flex>
             </MenuItem>
@@ -93,7 +94,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
               onClick={logout}
             >
               <Flex align="center">
-                <Icon as={MdOutlineLogin} fontSize={20} mr={2} />
+                <Icon fontSize={20} mr={2} as={MdOutlineLogin} />
                 Log Out
               </Flex>
             </MenuItem>
@@ -107,7 +108,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
               onClick={() => setAuthModalState({ open: true, view: "login" })}
             >
               <Flex align="center">
-                <Icon as={MdOutlineLogin} fontSize={20} mr={2} />
+                <Icon fontSize={20} mr={2} as={MdOutlineLogin} />
                 Log In / Sign Up
               </Flex>
             </MenuItem>

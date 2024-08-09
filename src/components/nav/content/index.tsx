@@ -1,7 +1,7 @@
 import { Flex } from "@chakra-ui/react";
 import { User } from "firebase/auth";
 import React from "react";
-import AutoModal from "../../modal/auth";
+import AuthModal from "../../modal/auth";
 import AuthButtons from "./AuthButtons";
 import Icons from "./Icons";
 import UserMenu from "./UserMenu";
@@ -13,7 +13,7 @@ type RightContentProps = {
 const RightContent: React.FC<RightContentProps> = ({ user }) => {
   return (
     <>
-      <AutoModal />
+      <AuthModal />
       <Flex justify="center" align="center">
         {user ? <Icons /> : <AuthButtons />}
         <UserMenu user={user} />
