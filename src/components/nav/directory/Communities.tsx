@@ -1,7 +1,7 @@
 import { communityState } from "@/atoms/communitiesAtom";
 import { Box, Flex, Icon, MenuItem, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { FaReddit } from "react-icons/fa";
+import { FaSquareThreads } from "react-icons/fa6";
 import { GrAdd } from "react-icons/gr";
 import { useRecoilValue } from "recoil";
 import CreateCommunityModal from "../../modal/community";
@@ -23,8 +23,8 @@ const Communities: React.FC = () => {
           .map((snippet) => (
             <MenuListItem
               key={snippet.communityId}
-              icon={FaReddit}
-              displayText={`r/${snippet.communityId}`}
+              icon={FaSquareThreads}
+              displayText={`thread/${snippet.communityId}`}
               link={`/r/${snippet.communityId}`}
               iconColor="brand.100"
               imageURL={snippet.imageURL}
@@ -49,8 +49,8 @@ const Communities: React.FC = () => {
         {mySnippets.map((snippet) => (
           <MenuListItem
             key={snippet.communityId}
-            icon={FaReddit}
-            displayText={`r/${snippet.communityId}`}
+            icon={FaSquareThreads}
+            displayText={`thread/${snippet.communityId}`}
             link={`/r/${snippet.communityId}`}
             iconColor="blue.500"
             imageURL={snippet.imageURL}

@@ -6,7 +6,7 @@ import {
 } from "@/atoms/directoryMenuAtom";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { FaReddit } from "react-icons/fa";
+import { FaSquareThreads } from "react-icons/fa6";
 import { useRecoilState } from "recoil";
 
 const useDirectory = () => {
@@ -41,10 +41,10 @@ const useDirectory = () => {
       setDirectoryState((prev) => ({
         ...prev,
         selectedMenuItem: {
-          displayText: `r/${currentCommunity.id}`,
+          displayText: `thread/${currentCommunity.id}`,
           link: `/r/${currentCommunity.id}`,
           imageURL: currentCommunity.imageURL,
-          icon: FaReddit,
+          icon: FaSquareThreads,
           iconColor: "blue.500",
         },
       }));

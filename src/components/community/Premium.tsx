@@ -1,7 +1,8 @@
 import { authModalState } from "@/atoms/authModalAtom";
 import { Button, Flex, Icon, Stack, Text } from "@chakra-ui/react";
 import React from "react";
-import { GiCheckedShield } from "react-icons/gi";
+import { FaCrown } from "react-icons/fa";
+import { GiAchievement } from "react-icons/gi";
 import { useSetRecoilState } from "recoil";
 
 const Premium: React.FC = () => {
@@ -18,17 +19,18 @@ const Premium: React.FC = () => {
       borderColor="gray.300"
     >
       <Flex mb={2}>
-        <Icon as={GiCheckedShield} fontSize={26} color="brand.100" mt={2} />
+        <Icon as={FaCrown} fontSize={26} color="gold" mt={2} />
         <Stack spacing={1} fontSize="9pt" pl={2}>
-          <Text fontWeight={600}>ThreadTalks</Text>
+          <Text fontWeight={600}>ThreadTalk</Text>
           <Text>The best thread experience.</Text>
         </Stack>
       </Flex>
       <Button
         height="30px"
         onClick={() => setAuthModalState({ open: true, view: "login" })}
+        leftIcon={<GiAchievement />}
       >
-        Try Now
+        Try Now!
       </Button>
     </Flex>
   );

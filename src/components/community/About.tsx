@@ -18,9 +18,13 @@ import moment from "moment";
 import Link from "next/link";
 import React, { useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { FaReddit } from "react-icons/fa";
+import { CiImageOn } from "react-icons/ci";
+import { FaUserCog, FaUsers } from "react-icons/fa";
+import { FaRegPenToSquare, FaSquareThreads } from "react-icons/fa6";
+import { GoDotFill } from "react-icons/go";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
-import { RiCakeLine } from "react-icons/ri";
+import { IoCreateOutline } from "react-icons/io5";
+import { MdCheck } from "react-icons/md";
 import { useSetRecoilState } from "recoil";
 
 type AboutProps = {
@@ -78,11 +82,17 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
           <Flex width="100%" p={2} fontSize="10pt" fontWeight={700}>
             <Flex direction="column" flexGrow={1}>
               <Text>{communityData.numberOfMembers.toLocaleString()}</Text>
-              <Text>Members</Text>
+              <Flex align="center">
+                <Text mr={1}>Members</Text>
+                <Icon as={FaUsers} />
+              </Flex>
             </Flex>
             <Flex direction="column" flexGrow={1}>
               <Text>N/A</Text>
-              <Text>Online</Text>
+              <Flex align="center">
+                <Text mr={1}>Online</Text>
+                <Icon as={GoDotFill} color="green" />
+              </Flex>
             </Flex>
           </Flex>
           <Divider />
@@ -93,7 +103,7 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
             fontWeight={500}
             fontSize="10pt"
           >
-            <Icon as={RiCakeLine} fontSize={18} mr={2} />
+            <Icon as={IoCreateOutline} fontSize={18} mr={2} />
             {communityData.createdAt && (
               <Text>
                 Created{" "}
@@ -104,7 +114,12 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
             )}
           </Flex>
           <Link href={`/r/${communityData.id}/submit`}>
-            <Button mt={3} height="30px" width="100%">
+            <Button
+              mt={3}
+              height="30px"
+              width="100%"
+              leftIcon={<FaRegPenToSquare />}
+            >
               Create Post
             </Button>
           </Link>
@@ -112,16 +127,25 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
             <>
               <Divider />
               <Stack spacing={1} fontSize="10pt">
-                <Text fontWeight={600}>Admin</Text>
-                <Flex align="center" justify="space-between">
-                  <Text
-                    color="blue.500"
-                    cursor="pointer"
-                    _hover={{ textDecoration: "underline" }}
-                    onClick={() => selectedFileRef.current?.click()}
-                  >
-                    Change Image
+                <Flex align="center">
+                  <Text fontWeight={600} mr={1}>
+                    Admin
                   </Text>
+                  <Icon as={FaUserCog} fontSize={16} />
+                </Flex>
+                <Flex align="center" justify="space-between">
+                  <Flex align="center">
+                    <Text
+                      color="blue.500"
+                      cursor="pointer"
+                      _hover={{ textDecoration: "underline" }}
+                      onClick={() => selectedFileRef.current?.click()}
+                      mr={1}
+                    >
+                      Change Image
+                    </Text>
+                    <Icon as={CiImageOn} fontSize={16} color="blue.500" />
+                  </Flex>
                   {communityData.imageURL || selectedFile ? (
                     <Image
                       src={selectedFile || communityData.imageURL}
@@ -131,9 +155,9 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
                     />
                   ) : (
                     <Icon
-                      as={FaReddit}
+                      as={FaSquareThreads}
                       fontSize={40}
-                      color="brand.100"
+                      color="blue.500"
                       mr={2}
                     />
                   )}
@@ -142,9 +166,12 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
                   (uploadingImage ? (
                     <Spinner />
                   ) : (
-                    <Text cursor="pointer" onClick={onUpdateImage}>
-                      Save Changes
-                    </Text>
+                    <Flex align="center">
+                      <Text cursor="pointer" onClick={onUpdateImage} mr={1}>
+                        Save Changes
+                      </Text>
+                      <Icon as={MdCheck} />
+                    </Flex>
                   ))}
                 <input
                   id="file-upload"

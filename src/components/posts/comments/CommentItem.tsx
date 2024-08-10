@@ -1,12 +1,19 @@
-import { Box, Flex, Icon, Spinner, Stack, Text } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Flex,
+  Icon,
+  Spacer,
+  Spinner,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
 import { Timestamp } from "firebase/firestore";
 import moment from "moment";
 import React from "react";
-import { FaReddit } from "react-icons/fa";
-import {
-  IoArrowDownCircleOutline,
-  IoArrowUpCircleOutline,
-} from "react-icons/io5";
+import { AiOutlineUser } from "react-icons/ai";
+import { CiTimer } from "react-icons/ci";
+import { GrDislike, GrLike } from "react-icons/gr";
 
 export type Comment = {
   id: string;
@@ -35,11 +42,21 @@ const CommentItem: React.FC<CommentItemProps> = ({
   return (
     <Flex>
       <Box mr={2}>
-        <Icon as={FaReddit} fontSize={30} color="gray.300" />
+        <Avatar
+          icon={<AiOutlineUser fontSize={30} color="gray.300" />}
+          size="sm"
+        />
       </Box>
       <Stack spacing={1}>
-        <Stack direction="row" align="center" fontSize="8pt">
+        <Stack
+          direction="row"
+          align="center"
+          fontSize="8pt"
+          justify="space-between"
+        >
           <Text fontWeight={700}>{comment.creatorDisplayText}</Text>
+          <Spacer />
+          <Icon as={CiTimer} />
           <Text color="gray.600">
             {moment(new Date(comment.createdAt.seconds * 1000)).fromNow()}
           </Text>
@@ -47,8 +64,8 @@ const CommentItem: React.FC<CommentItemProps> = ({
         </Stack>
         <Text fontSize="10pt">{comment.text}</Text>
         <Stack direction="row" align="center" cursor="pointer" color="gray.500">
-          <Icon as={IoArrowUpCircleOutline} />
-          <Icon as={IoArrowDownCircleOutline} />
+          <Icon as={GrLike} />
+          <Icon as={GrDislike} />
           {userId === comment.creatorId && (
             <>
               <Text fontSize="9pt" _hover={{ color: "blue.500" }}>

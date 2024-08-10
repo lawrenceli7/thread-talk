@@ -6,6 +6,7 @@ import {
   Icon,
   Image,
   Skeleton,
+  Spacer,
   Spinner,
   Stack,
   Text,
@@ -15,16 +16,11 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
+import { BiDislike, BiLike, BiSolidDislike, BiSolidLike } from "react-icons/bi";
 import { BsChat, BsDot } from "react-icons/bs";
-import { FaReddit } from "react-icons/fa";
-import {
-  IoArrowDownCircleOutline,
-  IoArrowDownCircleSharp,
-  IoArrowRedoOutline,
-  IoArrowUpCircleOutline,
-  IoArrowUpCircleSharp,
-  IoBookmarkOutline,
-} from "react-icons/io5";
+import { CiTimer } from "react-icons/ci";
+import { FaSquareThreads } from "react-icons/fa6";
+import { IoArrowRedoOutline, IoBookmarkOutline } from "react-icons/io5";
 
 type PostItemProps = {
   post: Post;
@@ -98,22 +94,16 @@ const PostItem: React.FC<PostItemProps> = ({
         borderRadius={singlePostPage ? "0" : "3px 0px 0px 3px"}
       >
         <Icon
-          as={
-            userVoteValue === 1 ? IoArrowUpCircleSharp : IoArrowUpCircleOutline
-          }
-          color={userVoteValue === 1 ? "brand.100" : "gray.400"}
+          as={userVoteValue === 1 ? BiSolidLike : BiLike}
+          color={userVoteValue === 1 ? "#4379ff" : "gray.400"}
           fontSize={22}
           onClick={(event) => onVote(event, post, 1, post.communityId)}
           cursor="pointer"
         />
         <Text fontSize="9pt">{post.voteStatus}</Text>
         <Icon
-          as={
-            userVoteValue === -1
-              ? IoArrowDownCircleSharp
-              : IoArrowDownCircleOutline
-          }
-          color={userVoteValue === -1 ? "#4379ff" : "gray.400"}
+          as={userVoteValue === -1 ? BiSolidDislike : BiDislike}
+          color={userVoteValue === -1 ? "brand.100" : "gray.400"}
           fontSize={22}
           onClick={(event) => onVote(event, post, -1, post.communityId)}
           cursor="pointer"
@@ -139,20 +129,27 @@ const PostItem: React.FC<PostItemProps> = ({
                     alt="Image"
                   />
                 ) : (
-                  <Icon as={FaReddit} fontSize="18pt" mr={1} color="blue.500" />
+                  <Icon
+                    as={FaSquareThreads}
+                    fontSize="18pt"
+                    mr={1}
+                    color="blue.500"
+                  />
                 )}
                 <Link href={`r/${post.communityId}`}>
                   <Text
                     fontWeight={700}
                     _hover={{ textDecoration: "underline" }}
                     onClick={(event) => event.stopPropagation()}
-                  >{`r/${post.communityId}`}</Text>
+                  >{`thread/${post.communityId}`}</Text>
                 </Link>
                 <Icon as={BsDot} color="gray.500" fontSize={8} />
               </>
             )}
+            <Text>Posted by user/{post.creatorDisplayName}</Text>
+            <Spacer />
+            <Icon as={CiTimer} mr={1} />
             <Text>
-              Posted by u/{post.creatorDisplayName}{" "}
               {moment(new Date(post.createdAt?.seconds * 1000)).fromNow()}
             </Text>
           </Stack>
@@ -186,7 +183,7 @@ const PostItem: React.FC<PostItemProps> = ({
             <Icon as={BsChat} mr={2} />
             <Text fontSize="9pt">{post.numberOfComments}</Text>
           </Flex>
-          <Flex
+          {/* <Flex
             align="center"
             p="8px 10px"
             borderRadius={4}
@@ -205,7 +202,7 @@ const PostItem: React.FC<PostItemProps> = ({
           >
             <Icon as={IoBookmarkOutline} mr={2} />
             <Text fontSize="9pt">Save</Text>
-          </Flex>
+          </Flex> */}
           {userIsCreator && (
             <Flex
               align="center"
