@@ -15,7 +15,7 @@ const SearchInput: React.FC<SearchInputProps> = ({ user }) => {
           <SearchIcon color="gray.400" mb={1} />
         </InputLeftElement>
         <Input
-          placeholder="Search Threads"
+          placeholder="Search Threads..."
           fontSize="10pt"
           _placeholder={{ color: "gray.500" }}
           _hover={{

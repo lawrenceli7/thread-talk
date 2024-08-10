@@ -15,7 +15,7 @@ import {
 import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { FaReddit } from "react-icons/fa";
+import { FaUserFriends } from "react-icons/fa";
 
 const Recommendations: React.FC = () => {
   const [communities, setCommunities] = useState<Community[]>([]);
@@ -115,7 +115,7 @@ const Recommendations: React.FC = () => {
                           />
                         ) : (
                           <Icon
-                            as={FaReddit}
+                            as={FaUserFriends}
                             fontSize={30}
                             color="brand.100"
                             mr={2}
@@ -128,7 +128,7 @@ const Recommendations: React.FC = () => {
                             textOverflow: "ellipsis",
                           }}
                         >
-                          {`r/${item.id}`}
+                          {`thread/${item.id}`}
                         </span>
                       </Flex>
                     </Flex>

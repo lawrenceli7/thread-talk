@@ -1,11 +1,20 @@
 import { authModalState } from "@/atoms/authModalAtom";
 import { auth, firestore } from "@/firebase/clientApp";
 import { FIREBASE_ERRORS } from "@/firebase/errors";
-import { Button, Flex, Input, Text } from "@chakra-ui/react";
+import {
+  Button,
+  Flex,
+  Icon,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  Text,
+} from "@chakra-ui/react";
 import { User } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { FaEnvelope, FaLock, FaSignInAlt } from "react-icons/fa";
 import { useSetRecoilState } from "recoil";
 
 const SignUp: React.FC = () => {
@@ -50,73 +59,88 @@ const SignUp: React.FC = () => {
   }, [userCred]);
 
   return (
-    <form onSubmit={onSubmit}>
-      <Input
-        required
-        name="email"
-        placeholder="email"
-        type="email"
-        mb={2}
-        onChange={onChange}
-        fontSize="10pt"
-        _placeholder={{ color: "gray.500" }}
-        _hover={{
-          bg: "white",
-          border: "1px solid",
-          borderColor: "blue.500",
-        }}
-        _focus={{
-          outline: "none",
-          bg: "white",
-          border: "1px solid",
-          borderColor: "blue.500",
-        }}
-        bg="gray.50"
-      />
-      <Input
-        required
-        name="password"
-        onChange={onChange}
-        placeholder="password"
-        type="password"
-        mb={2}
-        fontSize="10pt"
-        _placeholder={{ color: "gray.500" }}
-        _hover={{
-          bg: "white",
-          border: "1px solid",
-          borderColor: "blue.500",
-        }}
-        _focus={{
-          outline: "none",
-          bg: "white",
-          border: "1px solid",
-          borderColor: "blue.500",
-        }}
-        bg="gray.50"
-      />
-      <Input
-        required
-        name="confirmPassword"
-        onChange={onChange}
-        placeholder="confirm password"
-        type="password"
-        mb={2}
-        fontSize="10pt"
-        _placeholder={{ color: "gray.500" }}
-        _hover={{
-          bg: "white",
-          border: "1px solid",
-          borderColor: "blue.500",
-        }}
-        _focus={{
-          outline: "none",
-          bg: "white",
-          border: "1px solid",
-          borderColor: "blue.500",
-        }}
-        bg="gray.50"
-      />
+    <form onSubmit={onSubmit} className="w-full">
+      <InputGroup>
+        <InputLeftElement pointerEvents="none">
+          <Icon as={FaEnvelope} color="gray.500" />
+        </InputLeftElement>
+        <Input
+          required
+          name="email"
+          placeholder="Email"
+          type="email"
+          mb={2}
+          onChange={onChange}
+          fontSize="10pt"
+          _placeholder={{ color: "gray.500" }}
+          _hover={{
+            bg: "white",
+            border: "1px solid",
+            borderColor: "blue.500",
+          }}
+          _focus={{
+            outline: "none",
+            bg: "white",
+            border: "1px solid",
+            borderColor: "blue.500",
+          }}
+          bg="gray.50"
+        />
+      </InputGroup>
+      <InputGroup>
+        <InputLeftElement pointerEvents="none">
+          <Icon as={FaLock} color="gray.500" />
+        </InputLeftElement>
+        <Input
+          required
+          name="password"
+          onChange={onChange}
+          placeholder="Password"
+          type="password"
+          mb={2}
+          fontSize="10pt"
+          _placeholder={{ color: "gray.500" }}
+          _hover={{
+            bg: "white",
+            border: "1px solid",
+            borderColor: "blue.500",
+          }}
+          _focus={{
+            outline: "none",
+            bg: "white",
+            border: "1px solid",
+            borderColor: "blue.500",
+          }}
+          bg="gray.50"
+        />
+      </InputGroup>
+      <InputGroup>
+        <InputLeftElement>
+          <Icon as={FaLock} color="gray.500" />
+        </InputLeftElement>
+        <Input
+          required
+          name="confirmPassword"
+          onChange={onChange}
+          placeholder="Confirm Password"
+          type="password"
+          mb={2}
+          fontSize="10pt"
+          _placeholder={{ color: "gray.500" }}
+          _hover={{
+            bg: "white",
+            border: "1px solid",
+            borderColor: "blue.500",
+          }}
+          _focus={{
+            outline: "none",
+            bg: "white",
+            border: "1px solid",
+            borderColor: "blue.500",
+          }}
+          bg="gray.50"
+        />
+      </InputGroup>
       <Text textAlign="center" color="red" fontSize="10pt">
         {error ||
           FIREBASE_ERRORS[userError?.message as keyof typeof FIREBASE_ERRORS]}
@@ -128,6 +152,7 @@ const SignUp: React.FC = () => {
         mb={2}
         type="submit"
         isLoading={loading}
+        leftIcon={<FaSignInAlt />}
       >
         Sign Up
       </Button>

@@ -1,6 +1,7 @@
 import { Button, Flex, Text, Textarea } from "@chakra-ui/react";
 import { User } from "firebase/auth";
 import React from "react";
+import { HiOutlinePaperAirplane } from "react-icons/hi2";
 import AuthButtons from "../../nav/content/AuthButtons";
 
 type CommentInputProps = {
@@ -23,7 +24,7 @@ const CommentInput: React.FC<CommentInputProps> = ({
       {user ? (
         <>
           <Text mb={1}>
-            Comment as{" "}
+            Commenting as{" "}
             <span style={{ color: "#3182CE" }}>
               {user?.email?.split("@")[0]}
             </span>
@@ -58,6 +59,7 @@ const CommentInput: React.FC<CommentInputProps> = ({
               disabled={!commentText.length}
               isLoading={createLoading}
               onClick={() => onCreateComment(commentText)}
+              rightIcon={<HiOutlinePaperAirplane />}
             >
               Comment
             </Button>

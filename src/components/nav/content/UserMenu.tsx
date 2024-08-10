@@ -2,7 +2,7 @@ import { authModalState } from "@/atoms/authModalAtom";
 import { auth } from "@/firebase/clientApp";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
-  Button,
+  Avatar,
   Flex,
   Icon,
   Menu,
@@ -14,11 +14,9 @@ import {
 } from "@chakra-ui/react";
 import { signOut, User } from "firebase/auth";
 import React from "react";
-import { CgProfile } from "react-icons/cg";
-import { FaRedditSquare } from "react-icons/fa";
+import { FaRegUserCircle } from "react-icons/fa";
 import { IoSparkles } from "react-icons/io5";
 import { MdOutlineLogin } from "react-icons/md";
-import { VscAccount } from "react-icons/vsc";
 import { useSetRecoilState } from "recoil";
 
 type UserMenuProps = {
@@ -44,12 +42,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
           <Flex align="center">
             {user ? (
               <>
-                <Icon
-                  fontSize={24}
-                  mr={1}
-                  color="gray.300"
-                  as={FaRedditSquare}
-                />
+                <Avatar fontSize={24} mr={1} color="gray.300" size="xs" />
                 <Flex
                   direction="column"
                   display={{ base: "none", lg: "flex" }}
@@ -67,7 +60,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
                 </Flex>
               </>
             ) : (
-              <Icon fontSize={24} color="gray.400" mr={1} as={VscAccount} />
+              <Avatar fontSize={24} color="gray.400" mr={1} size="sm" />
             )}
           </Flex>
           <ChevronDownIcon />
@@ -82,7 +75,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
               _hover={{ bg: "blue.500", color: "white" }}
             >
               <Flex align="center">
-                <Icon fontSize={20} mr={2} as={CgProfile} />
+                <Icon fontSize={20} mr={2} as={FaRegUserCircle} />
                 Profile
               </Flex>
             </MenuItem>

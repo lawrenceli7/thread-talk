@@ -1,5 +1,5 @@
 import { IconType } from "react-icons";
-import { TiHome } from "react-icons/ti";
+import { ImHome } from "react-icons/im";
 import { atom } from "recoil";
 
 export type DirectoryMenuItem = {
@@ -18,7 +18,7 @@ interface DirectoryMenuState {
 export const defaultMenuItem: DirectoryMenuItem = {
   displayText: "Home",
   link: "/",
-  icon: TiHome,
+  icon: ImHome,
   iconColor: "black",
 };
 

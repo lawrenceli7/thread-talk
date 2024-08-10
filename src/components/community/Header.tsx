@@ -2,7 +2,7 @@ import { Community } from "@/atoms/communitiesAtom";
 import useCommunityData from "@/hooks/useCommunityData";
 import { Box, Button, Flex, Icon, Image, Text } from "@chakra-ui/react";
 import React from "react";
-import { FaReddit } from "react-icons/fa";
+import { FaSquareThreads } from "react-icons/fa6";
 
 type HeaderProps = {
   communityData: Community;
@@ -33,7 +33,7 @@ const Header: React.FC<HeaderProps> = ({ communityData }) => {
             />
           ) : (
             <Icon
-              as={FaReddit}
+              as={FaSquareThreads}
               fontSize={64}
               position="relative"
               top={-3}
@@ -48,7 +48,7 @@ const Header: React.FC<HeaderProps> = ({ communityData }) => {
                 {communityData.id}
               </Text>
               <Text fontWeight={600} fontSize="10pt" color="gray.400">
-                r/{communityData.id}
+                thread/{communityData.id}
               </Text>
             </Flex>
             <Button

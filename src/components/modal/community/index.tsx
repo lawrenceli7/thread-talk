@@ -73,7 +73,9 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
       await runTransaction(firestore, async (transaction) => {
         const communityDoc = await transaction.get(communityDocRef);
         if (communityDoc.exists()) {
-          throw new Error(`Sorry, r/${communityName} is taken. Try another.`);
+          throw new Error(
+            `Sorry, thread/${communityName} is taken. Try another.`
+          );
         }
 
         transaction.set(communityDocRef, {
@@ -125,21 +127,13 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
               <Text fontSize={11} color="gray.500">
                 Community names including capitalization cannot be changed.
               </Text>
-              <Text
-                position="relative"
-                top="28px"
-                left="10px"
-                width="20px"
-                color="gray.400"
-              >
-                r/
-              </Text>
               <Input
                 position="relative"
                 value={communityName}
                 size="sm"
-                pl="22px"
+                pl="5px"
                 onChange={handleChange}
+                placeholder="thread/CommunityName"
               />
               <Text
                 fontSize="9pt"
