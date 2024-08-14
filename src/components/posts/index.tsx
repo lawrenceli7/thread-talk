@@ -6,6 +6,7 @@ import { Stack } from "@chakra-ui/react";
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import toast from "react-hot-toast";
 import PostItem from "./PostItem";
 import PostLoader from "./PostLoader";
 
@@ -33,17 +34,18 @@ const Posts: React.FC<PostsProps> = ({ communityData }) => {
         where("communityId", "==", communityData.id),
         orderBy("createdAt", "desc")
       );
-      const postDocs = await getDocs(postsQuery);
 
+      const postDocs = await getDocs(postsQuery);
       const posts = postDocs.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+
       setPostStateValue((prev) => ({
         ...prev,
         posts: posts as Post[],
       }));
-
-      console.log("posts", posts);
     } catch (error: any) {
       console.log("getPosts error", error.message);
+      console.log(error.message);
+      toast.error(error.message);
     }
     setLoading(false);
   };

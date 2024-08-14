@@ -15,12 +15,12 @@ import moment from "moment";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { AiOutlineDelete } from "react-icons/ai";
 import { BiDislike, BiLike, BiSolidDislike, BiSolidLike } from "react-icons/bi";
 import { BsChat, BsDot } from "react-icons/bs";
 import { CiTimer } from "react-icons/ci";
 import { FaSquareThreads } from "react-icons/fa6";
-import { IoArrowRedoOutline, IoBookmarkOutline } from "react-icons/io5";
 
 type PostItemProps = {
   post: Post;
@@ -50,7 +50,6 @@ const PostItem: React.FC<PostItemProps> = ({
   const [loadingDelete, setLoadingDelete] = useState(false);
   const router = useRouter();
   const singlePostPage = !onSelectPost;
-
   const [error, setError] = useState(false);
 
   const handleDelete = async (
@@ -58,6 +57,7 @@ const PostItem: React.FC<PostItemProps> = ({
   ) => {
     event.stopPropagation();
     setLoadingDelete(true);
+
     try {
       const success = await onDeletePost(post);
 
@@ -65,11 +65,12 @@ const PostItem: React.FC<PostItemProps> = ({
         throw new Error("Failed to delete post");
       }
 
-      console.log("Post was successfully deleted");
       if (singlePostPage) {
         router.push(`/r/${post.communityId}`);
       }
     } catch (error: any) {
+      console.log(error.message);
+      toast.error(error.message);
       setError(error.message);
     }
     setLoadingDelete(false);
@@ -183,26 +184,6 @@ const PostItem: React.FC<PostItemProps> = ({
             <Icon as={BsChat} mr={2} />
             <Text fontSize="9pt">{post.numberOfComments}</Text>
           </Flex>
-          {/* <Flex
-            align="center"
-            p="8px 10px"
-            borderRadius={4}
-            _hover={{ bg: "gray.200" }}
-            cursor="pointer"
-          >
-            <Icon as={IoArrowRedoOutline} mr={2} />
-            <Text fontSize="9pt">Share</Text>
-          </Flex>
-          <Flex
-            align="center"
-            p="8px 10px"
-            borderRadius={4}
-            _hover={{ bg: "gray.200" }}
-            cursor="pointer"
-          >
-            <Icon as={IoBookmarkOutline} mr={2} />
-            <Text fontSize="9pt">Save</Text>
-          </Flex> */}
           {userIsCreator && (
             <Flex
               align="center"

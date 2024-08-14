@@ -21,6 +21,7 @@ import {
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import toast from "react-hot-toast";
 
 const Home: NextPage = () => {
   const [user, loadingUser] = useAuthState(auth);
@@ -36,21 +37,26 @@ const Home: NextPage = () => {
 
   const buildUserHomeFeed = async () => {
     setLoading(true);
+
     try {
       if (communityStateValue.mySnippets.length) {
         const myCommunityIds = communityStateValue.mySnippets.map(
           (snippet) => snippet.communityId
         );
+
         const postQuery = query(
           collection(firestore, "posts"),
           where("communityId", "in", myCommunityIds),
           limit(10)
         );
+
         const postDocs = await getDocs(postQuery);
+
         const posts = postDocs.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
+
         setPostStateValue((prev) => ({
           ...prev,
           posts: posts as Post[],
@@ -58,14 +64,17 @@ const Home: NextPage = () => {
       } else {
         buildNoUserHomeFeed();
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log("buildUserHomeFeed error", error);
+      console.log(error.message);
+      toast.error(error.message);
     }
     setLoading(false);
   };
 
   const buildNoUserHomeFeed = async () => {
     setLoading(true);
+
     try {
       const postQuery = query(
         collection(firestore, "posts"),
@@ -74,13 +83,16 @@ const Home: NextPage = () => {
       );
 
       const postDocs = await getDocs(postQuery);
+
       const posts = postDocs.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
       setPostStateValue((prev) => ({
         ...prev,
         posts: posts as Post[],
       }));
-    } catch (error) {
+    } catch (error: any) {
       console.log("buildNoUserHomeFeed error", error);
+      console.log(error.message);
+      toast.error(error.message);
     }
     setLoading(false);
   };
@@ -88,11 +100,14 @@ const Home: NextPage = () => {
   const getUserPostVotes = async () => {
     try {
       const postIds = postStateValue.posts.map((post) => post.id);
+
       const postVotesQuery = query(
         collection(firestore, `users/${user?.uid}/postVotes`),
         where("postId", "in", postIds)
       );
+
       const postVoteDocs = await getDocs(postVotesQuery);
+
       const postVotes = postVoteDocs.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
@@ -102,8 +117,10 @@ const Home: NextPage = () => {
         ...prev,
         postVotes: postVotes as PostVote[],
       }));
-    } catch (error) {
+    } catch (error: any) {
       console.log("getUserPostVotes error", error);
+      console.log(error.message);
+      toast.error(error.message);
     }
   };
 

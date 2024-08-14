@@ -11,6 +11,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import toast from "react-hot-toast";
 
 const PostPage: React.FC = () => {
   const [user] = useAuthState(auth);
@@ -23,12 +24,15 @@ const PostPage: React.FC = () => {
     try {
       const postDocRef = doc(firestore, "posts", postId);
       const postDoc = await getDoc(postDocRef);
+
       setPostStateValue((prev) => ({
         ...prev,
         selectedPost: { id: postDoc.id, ...postDoc.data() } as Post,
       }));
-    } catch (error) {
+    } catch (error: any) {
       console.log("fetchPost error", error);
+      console.log(error.message);
+      toast.error(error.message);
     }
   };
 

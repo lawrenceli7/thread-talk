@@ -18,6 +18,7 @@ import moment from "moment";
 import Link from "next/link";
 import React, { useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import toast from "react-hot-toast";
 import { CiImageOn } from "react-icons/ci";
 import { FaUserCog, FaUsers } from "react-icons/fa";
 import { FaRegPenToSquare, FaSquareThreads } from "react-icons/fa6";
@@ -41,10 +42,14 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
   const onUpdateImage = async () => {
     if (!selectedFile) return;
     setUploadingImage(true);
+
     try {
       const imageRef = ref(storage, `communities/${communityData.id}/image`);
+
       await uploadString(imageRef, selectedFile, "data_url");
+
       const downloadURL = await getDownloadURL(imageRef);
+
       await updateDoc(doc(firestore, "communities", communityData.id), {
         imageURL: downloadURL,
       });
@@ -56,8 +61,10 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
           imageURL: downloadURL,
         } as Community,
       }));
-    } catch (error) {
+    } catch (error: any) {
       console.log("onUpdateImage error", error);
+      console.error(error.message);
+      toast.error(error.message);
     }
     setUploadingImage(false);
   };

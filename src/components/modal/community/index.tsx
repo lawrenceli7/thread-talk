@@ -22,6 +22,7 @@ import { doc, runTransaction, serverTimestamp } from "firebase/firestore";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import toast from "react-hot-toast";
 import { BsFillEyeFill, BsFillPersonFill } from "react-icons/bs";
 import { HiLockClosed } from "react-icons/hi";
 
@@ -60,6 +61,7 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
     if (error) setError("");
 
     const format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+
     if (format.test(communityName) || communityName.length < 3) {
       setError(
         "Community names must be between 3-21 characters, and can only contain letters, numbers, or underscores"
@@ -68,8 +70,10 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
     }
 
     setLoading(true);
+
     try {
       const communityDocRef = doc(firestore, "communities", communityName);
+
       await runTransaction(firestore, async (transaction) => {
         const communityDoc = await transaction.get(communityDocRef);
         if (communityDoc.exists()) {
@@ -100,6 +104,8 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
     } catch (error: any) {
       console.log("handleCreateCommunity error", error);
       setError(error.message);
+      console.log(error.message);
+      toast.error(error.message);
     }
     setLoading(false);
   };

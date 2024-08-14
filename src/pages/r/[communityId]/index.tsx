@@ -9,6 +9,7 @@ import { firestore } from "@/firebase/clientApp";
 import { doc, getDoc } from "firebase/firestore";
 import { GetServerSidePropsContext } from "next";
 import React, { useEffect } from "react";
+import toast from "react-hot-toast";
 import { useSetRecoilState } from "recoil";
 import safeJsonStringify from "safe-json-stringify";
 
@@ -53,6 +54,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       "communities",
       context.query.communityId as string
     );
+
     const communityDoc = await getDoc(communityDocRef);
 
     return {
@@ -64,8 +66,10 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
           : "",
       },
     };
-  } catch (error) {
+  } catch (error: any) {
     console.log("getServerSideProps error", error);
+    console.log(error.message);
+    toast.error(error.message);
   }
 }
 

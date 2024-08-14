@@ -11,6 +11,7 @@ import SearchInput from "./SearchInput";
 const Navbar: React.FC = () => {
   const [user, loading, error] = useAuthState(auth);
   const { onSelectMenuItem } = useDirectory();
+
   return (
     <Flex
       bg="white"
