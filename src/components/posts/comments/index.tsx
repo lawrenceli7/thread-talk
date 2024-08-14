@@ -22,6 +22,7 @@ import {
   writeBatch,
 } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useSetRecoilState } from "recoil";
 import CommentInput from "./CommentInput";
 import CommentItem, { Comment } from "./CommentItem";
@@ -46,6 +47,7 @@ const Comments: React.FC<CommentsProps> = ({
 
   const onCreateComment = async () => {
     setCreateLoading(true);
+
     try {
       const batch = writeBatch(firestore);
 
@@ -75,6 +77,7 @@ const Comments: React.FC<CommentsProps> = ({
 
       setCommentText("");
       setComments((prev) => [newComment, ...prev]);
+
       setPostState((prev) => ({
         ...prev,
         selectedPost: {
@@ -82,14 +85,17 @@ const Comments: React.FC<CommentsProps> = ({
           numberOfComments: prev.selectedPost?.numberOfComments! + 1,
         } as Post,
       }));
-    } catch (error) {
+    } catch (error: any) {
       console.log("onCreateComment error", error);
+      console.log(error.message);
+      toast.error(error.message);
     }
     setCreateLoading(false);
   };
 
   const onDeleteComment = async (comment: Comment) => {
     setLoadingDeleteId(comment.id);
+
     try {
       const batch = writeBatch(firestore);
 
@@ -112,8 +118,10 @@ const Comments: React.FC<CommentsProps> = ({
       }));
 
       setComments((prev) => prev.filter((item) => item.id !== comment.id));
-    } catch (error) {
+    } catch (error: any) {
       console.log("onDeleteComment error", error);
+      console.log(error.message);
+      toast.error(error.message);
     }
     setLoadingDeleteId("");
   };
@@ -125,14 +133,19 @@ const Comments: React.FC<CommentsProps> = ({
         where("postId", "==", selectedPost?.id),
         orderBy("createdAt", "desc")
       );
+
       const commentDocs = await getDocs(commentsQuery);
+
       const comments = commentDocs.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
+
       setComments(comments as Comment[]);
-    } catch (error) {
+    } catch (error: any) {
       console.log("getPostComments error", error);
+      console.log(error.message);
+      toast.error(error.message);
     }
     setFetchLoading(false);
   };

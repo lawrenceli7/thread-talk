@@ -13,6 +13,7 @@ import {
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { IoDocumentText, IoImageOutline } from "react-icons/io5";
 import ImageUpload from "./form/ImageUpload";
 import TextInputs from "./form/TextInputs";
@@ -69,6 +70,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({
     };
 
     setLoading(true);
+
     try {
       const postDocRef = await addDoc(collection(firestore, "posts"), newPost);
 
@@ -85,6 +87,8 @@ const NewPostForm: React.FC<NewPostFormProps> = ({
       router.back();
     } catch (error: any) {
       console.log("handleCreatePost error", error.message);
+      console.log(error.message);
+      toast.error(error.message);
       setError(true);
     }
     setLoading(false);

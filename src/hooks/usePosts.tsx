@@ -15,6 +15,7 @@ import { deleteObject, ref } from "firebase/storage";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import toast from "react-hot-toast";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 const usePosts = () => {
@@ -39,11 +40,13 @@ const usePosts = () => {
 
     try {
       const { voteStatus } = post;
+
       const existingVote = postStateValue.postVotes.find(
         (vote) => vote.postId === post.id
       );
 
       const batch = writeBatch(firestore);
+
       const updatedPost = { ...post };
       const updatedPosts = [...postStateValue.posts];
       let updatedPostVotes = [...postStateValue.postVotes];
@@ -105,6 +108,7 @@ const usePosts = () => {
         (item) => item.id === post.id
       );
       updatedPosts[postIdx] = updatedPost;
+
       setPostStateValue((prev) => ({
         ...prev,
         posts: updatedPosts,
@@ -122,8 +126,10 @@ const usePosts = () => {
       batch.update(postRef, { voteStatus: voteStatus + voteChange });
 
       await batch.commit();
-    } catch (error) {
+    } catch (error: any) {
       console.log("onVote error", error);
+      console.log(error.message);
+      toast.error(error.message);
     }
   };
 
@@ -150,7 +156,9 @@ const usePosts = () => {
         posts: prev.posts.filter((item) => item.id !== post.id),
       }));
       return true;
-    } catch (error) {
+    } catch (error: any) {
+      console.log(error.message);
+      toast.error(error.message);
       return false;
     }
   };
@@ -166,6 +174,7 @@ const usePosts = () => {
       id: doc.id,
       ...doc.data(),
     }));
+
     setPostStateValue((prev) => ({
       ...prev,
       postVotes: postVotes as PostVote[],

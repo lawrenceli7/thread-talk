@@ -16,6 +16,7 @@ import {
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import toast from "react-hot-toast";
 import { useRecoilState, useSetRecoilState } from "recoil";
 
 const useCommunityData = () => {
@@ -37,15 +38,18 @@ const useCommunityData = () => {
     }
 
     setLoading(true);
+
     if (isJoined) {
       leaveCommunity(communityData.id);
       return;
     }
+
     joinCommunity(communityData);
   };
 
   const getMySnippets = async () => {
     setLoading(true);
+
     try {
       const snippetDocs = await getDocs(
         collection(firestore, `users/${user?.uid}/communitySnippets`)
@@ -60,6 +64,8 @@ const useCommunityData = () => {
       }));
     } catch (error: any) {
       console.log("getMySnippets error", error);
+      console.log(error.message);
+      toast.error(error.message);
       setError(error.message);
     }
     setLoading(false);
@@ -74,6 +80,7 @@ const useCommunityData = () => {
         imageURL: communityData.imageURL || "",
         isModerator: user?.uid === communityData.creatorId,
       };
+
       batch.set(
         doc(
           firestore,
@@ -95,6 +102,8 @@ const useCommunityData = () => {
       }));
     } catch (error: any) {
       console.log("joinCommunity error", error);
+      console.log(error.message);
+      toast.error(error.message);
       setError(error.message);
     }
     setLoading(false);
@@ -122,6 +131,8 @@ const useCommunityData = () => {
       }));
     } catch (error: any) {
       console.log("leaveCommunity error", error.message);
+      console.log(error.message);
+      toast.error(error.message);
       setError(error.message);
     }
     setLoading(false);
@@ -139,8 +150,10 @@ const useCommunityData = () => {
           ...communityDoc.data(),
         } as Community,
       }));
-    } catch (error) {
+    } catch (error: any) {
       console.log("getCommunityData", error);
+      console.log(error.message);
+      toast.error(error.message);
     }
   };
 

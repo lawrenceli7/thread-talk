@@ -15,6 +15,7 @@ import {
 import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { FaUserFriends } from "react-icons/fa";
 
 const Recommendations: React.FC = () => {
@@ -24,20 +25,26 @@ const Recommendations: React.FC = () => {
 
   const getCommunityRecommendations = async () => {
     setLoading(true);
+
     try {
       const communityQuery = query(
         collection(firestore, "communities"),
         orderBy("numberOfMembers", "desc"),
         limit(5)
       );
+
       const communityDocs = await getDocs(communityQuery);
+
       const communities = communityDocs.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
+
       setCommunities(communities as Community[]);
-    } catch (error) {
+    } catch (error: any) {
       console.log("getCommunityRecommendations error", error);
+      console.log(error.message);
+      toast.loading(error.message);
     }
     setLoading(false);
   };
