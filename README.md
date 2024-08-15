@@ -19,7 +19,7 @@ NEXT_PUBLIC_FIREBASE_APP_ID="your-app-id"
 NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID="your-measurement-id"
 ```
 
-Then, run `npm run dev` to start the Express backend server.
+Then, run `npm run dev` to start the application.
 
 ## Features
 
