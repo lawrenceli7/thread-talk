@@ -1,40 +1,45 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ThreadTalk
 
-## Getting Started
+ThreadTalk is a dynamic full-stack social media platform that enables users to create and share threads. Users can engage with others' posts through likes, dislikes, and comments, while also maintaining full control over their content by deleting their threads and comments whenever they wish.
 
-First, run the development server:
+## Installation Guide
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### Root Directory
+Run `npm install` to install all dependencies.
+
+Create a `.env.local` file and add the following lines:
+
+```
+NEXT_PUBLIC_FIREBASE_API_KEY="your-api-key"
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN="your-auth-domain"
+NEXT_PUBLIC_FIREBASE_PROJECT_ID="your-project-id"
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET="your-storage-bucket"
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID="your-messaging-sender-id"
+NEXT_PUBLIC_FIREBASE_APP_ID="your-app-id"
+NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID="your-measurement-id"
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then, run `npm run dev` to start the Express backend server.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Features
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+1. **User Threads:** Create and share threads on the platform, allowing for open discussions and content sharing.
+   
+2. **Engagement:** Like, dislike, and comment on other users' threads, fostering interaction and community engagement.
+   
+3. **Content Control:** Full control over personal content with the ability to delete user-created threads and comments at any time.
+   
+4. **Responsive Design:** Fully optimized for both desktop and mobile devices, ensuring a seamless experience across all platforms.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Technologies & Frameworks Used
+- **Frontend:** Next.js, React.js, Typescript, TailwindCSS, Chakra UI
+- **Backend, Authentication, and Database:** Firebase
+- **Testing:** Vitest
+- **Hosting:** Frontend and Backend deployed on Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Directory Structure
 
-## Learn More
+- `root directory`: Holds all client-side and server-side code
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Deployed on Vercel
+- https://thread-talk-tau.vercel.app/
