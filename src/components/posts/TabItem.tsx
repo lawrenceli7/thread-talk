@@ -27,6 +27,7 @@ const TabItems: React.FC<TabItemProps> = ({
       borderBottomColor={selected ? "blue.500" : "gray.200"}
       borderRightColor="gray.200"
       onClick={() => setSelectedTab(item.title)}
+      className="dark:hover:bg-[#2a3236] dark:text-white"
     >
       <Flex align="center" height="20px" mr={2}>
         <Icon as={item.icon} />

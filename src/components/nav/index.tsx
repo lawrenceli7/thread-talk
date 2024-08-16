@@ -9,7 +9,7 @@ import Directory from "./directory";
 import SearchInput from "./SearchInput";
 
 const Navbar: React.FC = () => {
-  const [user, loading, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
   const { onSelectMenuItem } = useDirectory();
 
   return (
@@ -18,6 +18,7 @@ const Navbar: React.FC = () => {
       height="44px"
       padding="6px 12px"
       justify={{ md: "space-between" }}
+      className="dark:bg-[#0f1113] dark:border-b"
     >
       <Flex
         align="center"

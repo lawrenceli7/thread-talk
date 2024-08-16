@@ -19,7 +19,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   return (
     <Flex direction="column" justify="center" align="center" width="100%">
       {selectedFile ? (
-        <>
+        <div className="flex flex-col items-center">
           <Image
             src={selectedFile}
             maxWidth="400px"
@@ -38,7 +38,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
               Remove
             </Button>
           </Stack>
-        </>
+        </div>
       ) : (
         <Flex
           justify="center"
@@ -48,6 +48,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
           borderColor="gray.200"
           width="100%"
           borderRadius={4}
+          className="dark:bg-[#2a3236]"
         >
           <Button
             variant="outline"

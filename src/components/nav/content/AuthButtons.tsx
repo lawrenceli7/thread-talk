@@ -8,7 +8,7 @@ const AuthButtons: React.FC = () => {
   const setAuthModalState = useSetRecoilState(authModalState);
 
   return (
-    <>
+    <div className="flex">
       <Button
         variant="outline"
         height="28px"
@@ -30,7 +30,7 @@ const AuthButtons: React.FC = () => {
       >
         Sign Up
       </Button>
-    </>
+    </div>
   );
 };
 export default AuthButtons;

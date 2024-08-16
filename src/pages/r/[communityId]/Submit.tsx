@@ -13,9 +13,9 @@ const SubmitPostPage: React.FC = () => {
 
   return (
     <PageContent>
-      <>
+      <div>
         <Box p="14px 0px" borderBottom="1px solid" borderColor="white">
-          <Text>Create a post</Text>
+          <Text className="dark:text-white">Create a post</Text>
         </Box>
         {user && (
           <NewPostForm
@@ -23,12 +23,12 @@ const SubmitPostPage: React.FC = () => {
             communityImageURL={communityStateValue.currentCommunity?.imageURL}
           />
         )}
-      </>
-      <>
+      </div>
+      <div>
         {communityStateValue.currentCommunity && (
           <About communityData={communityStateValue.currentCommunity} />
         )}
-      </>
+      </div>
     </PageContent>
   );
 };

@@ -54,31 +54,40 @@ const CommentItem: React.FC<CommentItemProps> = ({
           fontSize="8pt"
           justify="space-between"
         >
-          <Text fontWeight={700}>{comment.creatorDisplayText}</Text>
+          <Text fontWeight={700} className="dark:text-white">
+            {comment.creatorDisplayText}
+          </Text>
           <Spacer />
-          <Icon as={CiTimer} />
-          <Text color="gray.600">
+          <Icon as={CiTimer} className="dark:text-gray-200" />
+          <Text color="gray.600" className="dark:text-gray-200">
             {moment(new Date(comment.createdAt.seconds * 1000)).fromNow()}
           </Text>
           {loadingDelete && <Spinner size="sm" />}
         </Stack>
-        <Text fontSize="10pt">{comment.text}</Text>
+        <Text fontSize="10pt" className="dark:text-gray-300">
+          {comment.text}
+        </Text>
         <Stack direction="row" align="center" cursor="pointer" color="gray.500">
-          <Icon as={GrLike} />
-          <Icon as={GrDislike} />
+          <Icon as={GrLike} className="dark:text-white" />
+          <Icon as={GrDislike} className="dark:text-white" />
           {userId === comment.creatorId && (
-            <>
-              <Text fontSize="9pt" _hover={{ color: "blue.500" }}>
+            <div className="flex gap-2">
+              <Text
+                fontSize="9pt"
+                _hover={{ color: "blue.500" }}
+                className="dark:text-white"
+              >
                 Edit
               </Text>
               <Text
                 fontSize="9pt"
                 _hover={{ color: "blue.500" }}
                 onClick={() => onDeleteComment(comment)}
+                className="dark:text-white"
               >
                 Delete
               </Text>
-            </>
+            </div>
           )}
         </Stack>
       </Stack>

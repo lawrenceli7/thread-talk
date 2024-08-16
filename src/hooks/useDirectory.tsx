@@ -54,6 +54,7 @@ const useDirectory = () => {
       ...prev,
       selectedMenuItem: defaultMenuItem,
     }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [communityStateValue.currentCommunity]);
 
   useEffect(() => {
@@ -65,6 +66,7 @@ const useDirectory = () => {
         currentCommunity: undefined,
       }));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.query]);
 
   return { directoryState, toggleMenuOpen, onSelectMenuItem };

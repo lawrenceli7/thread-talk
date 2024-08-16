@@ -25,6 +25,7 @@ const Directory: React.FC = () => {
         ml={{ base: 0, md: 2 }}
         _hover={{ outline: "1px solid", outlineColor: "gray.200" }}
         onClick={toggleMenuOpen}
+        className="dark:bg-[#2a3236] dark:hover:bg-blue-500"
       >
         <Flex
           align="center"
@@ -46,10 +47,15 @@ const Directory: React.FC = () => {
                 mr={{ base: 1, md: 2 }}
                 as={directoryState.selectedMenuItem.icon}
                 color={directoryState.selectedMenuItem.iconColor}
+                className="dark:text-white"
               />
             )}
             <Flex display={{ base: "none", lg: "flex" }}>
-              <Text fontWeight={600} fontSize="10pt">
+              <Text
+                fontWeight={600}
+                fontSize="10pt"
+                className="dark:text-white"
+              >
                 {directoryState.selectedMenuItem.displayText}
               </Text>
             </Flex>
@@ -57,7 +63,7 @@ const Directory: React.FC = () => {
           <ChevronDownIcon />
         </Flex>
       </MenuButton>
-      <MenuList>
+      <MenuList className="dark:bg-[#0f1113]">
         <Communities />
       </MenuList>
     </Menu>

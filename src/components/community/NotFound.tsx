@@ -9,6 +9,7 @@ const CommunityNotFound: React.FC = () => {
       justifyContent="center"
       alignItems="center"
       minHeight="60vh"
+      className="dark:text-white"
     >
       Sorry, that community does not exist or has been banned.
       <Link href="/">

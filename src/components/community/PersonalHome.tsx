@@ -34,7 +34,7 @@ const PersonalHome: React.FC = () => {
   };
 
   return (
-    <>
+    <div>
       <CreateCommunityModal open={open} handleClose={() => setOpen(false)} />
       <Flex
         direction="column"
@@ -44,6 +44,7 @@ const PersonalHome: React.FC = () => {
         border="1px solid"
         borderColor="gray.300"
         position="sticky"
+        className="dark:bg-black"
       >
         <Flex
           align="flex-end"
@@ -53,16 +54,17 @@ const PersonalHome: React.FC = () => {
           height="34px"
           borderRadius="4px 4px 0px 0px"
           fontWeight={600}
-          bgImage="url(/images/home.png)"
-          backgroundSize="cover"
+          className="dark:bg-[#2a3236]"
         ></Flex>
         <Flex direction="column" p="12px">
           <Flex align="center" mb={2}>
             <Icon as={FaHome} fontSize={50} color="blue.500" mr={2} />
-            <Text fontWeight={600}>Home</Text>
+            <Text fontWeight={600} className="dark:text-white">
+              Home
+            </Text>
           </Flex>
           <Stack spacing={3}>
-            <Text fontSize="9pt">
+            <Text fontSize="9pt" className="dark:text-white">
               Your personal Thread Talk front page, built just for you.
             </Text>
             <Button
@@ -85,7 +87,7 @@ const PersonalHome: React.FC = () => {
           </Stack>
         </Flex>
       </Flex>
-    </>
+    </div>
   );
 };
 export default PersonalHome;

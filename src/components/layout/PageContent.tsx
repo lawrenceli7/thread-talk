@@ -7,7 +7,7 @@ type PageContentProps = {
 
 const PageContent: React.FC<PageContentProps> = ({ children }) => {
   return (
-    <Flex justify="center" p="16px 0px">
+    <Flex justify="center" p="16px 0px" className="dark:bg-[#0f1113]">
       <Flex width="95%" justify="center" maxWidth="860px">
         <Flex
           direction="column"
