@@ -18,7 +18,12 @@ const Header: React.FC<HeaderProps> = ({ communityData }) => {
   return (
     <Flex direction="column" width="100%" height="146px">
       <Box height="50%" bg="blue.400" />
-      <Flex justify="center" bg="white" flexGrow={1}>
+      <Flex
+        justify="center"
+        bg="white"
+        flexGrow={1}
+        className="dark:bg-[#0f1113] dark:border-b"
+      >
         <Flex width="95%" maxWidth="860px">
           {communityStateValue.currentCommunity?.imageURL ? (
             <Image
@@ -44,7 +49,11 @@ const Header: React.FC<HeaderProps> = ({ communityData }) => {
           )}
           <Flex padding="10px 16px">
             <Flex direction="column" mr={6}>
-              <Text fontWeight={800} fontSize="16pt">
+              <Text
+                fontWeight={800}
+                fontSize="16pt"
+                className="dark:text-white"
+              >
                 {communityData.id}
               </Text>
               <Text fontWeight={600} fontSize="10pt" color="gray.400">

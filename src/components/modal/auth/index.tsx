@@ -30,47 +30,41 @@ const AuthModal: React.FC = () => {
 
   useEffect(() => {
     if (user) handleClose();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
   return (
-    <>
-      <Modal isOpen={modalState.open} onClose={handleClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader textAlign="center">
-            {modalState.view === "login" && "Login"}
-            {modalState.view === "signup" && "Sign Up"}
-            {modalState.view === "resetPassword" && "Reset Password"}
-          </ModalHeader>
-          <ModalCloseButton />
-          <ModalBody
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            justifyContent="center"
-            pb={6}
-          >
-            <Flex
-              direction="column"
-              align="center"
-              justify="center"
-              width="70%"
-            >
-              {modalState.view === "login" || modalState.view === "signup" ? (
-                <>
-                  <OAuthButtons />
-                  <Text color="gray.500" fontWeight={700}>
-                    OR
-                  </Text>
-                  <AuthInputs />
-                </>
-              ) : (
-                <ResetPassword />
-              )}
-            </Flex>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
-    </>
+    <Modal isOpen={modalState.open} onClose={handleClose}>
+      <ModalOverlay />
+      <ModalContent className="dark:bg-[#181c1f]">
+        <ModalHeader textAlign="center" className="dark:text-white">
+          {modalState.view === "login" && "Login"}
+          {modalState.view === "signup" && "Sign Up"}
+          {modalState.view === "resetPassword" && "Reset Password"}
+        </ModalHeader>
+        <ModalCloseButton />
+        <ModalBody
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          pb={6}
+        >
+          <Flex direction="column" align="center" justify="center" width="70%">
+            {modalState.view === "login" || modalState.view === "signup" ? (
+              <>
+                <OAuthButtons />
+                <Text color="gray.500" fontWeight={700}>
+                  OR
+                </Text>
+                <AuthInputs />
+              </>
+            ) : (
+              <ResetPassword />
+            )}
+          </Flex>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
   );
 };
 export default AuthModal;

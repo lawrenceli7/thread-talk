@@ -31,10 +31,10 @@ const TextInputs: React.FC<TextInputsProps> = ({
         _placeholder={{ color: "gray.500" }}
         _focus={{
           outline: "none",
-          bg: "white",
           border: "1px solid",
           borderColor: "black",
         }}
+        className="dark:bg-[#2a3236] dark:hover:bg-[#2a3236] dark:text-white"
       />
       <Textarea
         name="body"
@@ -47,10 +47,10 @@ const TextInputs: React.FC<TextInputsProps> = ({
         _placeholder={{ color: "gray.500" }}
         _focus={{
           outline: "none",
-          bg: "white",
           border: "1px solid",
           borderColor: "black",
         }}
+        className="dark:bg-[#2a3236] dark:hover:bg-[#2a3236] dark:text-white"
       />
       <Flex justify="flex-end">
         <Button

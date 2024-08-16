@@ -85,6 +85,7 @@ const PostItem: React.FC<PostItemProps> = ({
       _hover={{ borderColor: singlePostPage ? "none" : "gray.500" }}
       cursor={singlePostPage ? "unset" : "pointer "}
       onClick={() => onSelectPost && onSelectPost(post)}
+      className="dark:bg-black dark:border dark:border-black"
     >
       <Flex
         direction="column"
@@ -93,6 +94,7 @@ const PostItem: React.FC<PostItemProps> = ({
         p={2}
         width="40px"
         borderRadius={singlePostPage ? "0" : "3px 0px 0px 3px"}
+        className="dark:bg-[#2a3236]"
       >
         <Icon
           as={userVoteValue === 1 ? BiSolidLike : BiLike}
@@ -100,27 +102,33 @@ const PostItem: React.FC<PostItemProps> = ({
           fontSize={22}
           onClick={(event) => onVote(event, post, 1, post.communityId)}
           cursor="pointer"
+          className="dark:text-white"
         />
-        <Text fontSize="9pt">{post.voteStatus}</Text>
+        <Text fontSize="9pt" className="dark:text-white">
+          {post.voteStatus}
+        </Text>
         <Icon
           as={userVoteValue === -1 ? BiSolidDislike : BiDislike}
           color={userVoteValue === -1 ? "brand.100" : "gray.400"}
           fontSize={22}
           onClick={(event) => onVote(event, post, -1, post.communityId)}
           cursor="pointer"
+          className="dark:text-white"
         />
       </Flex>
       <Flex direction="column" width="100%">
         {error && (
           <Alert status="error">
             <AlertIcon />
-            <Text mr={2}>{error}</Text>
+            <Text mr={2} className="dark:text-white">
+              {error}
+            </Text>
           </Alert>
         )}
         <Stack spacing={1} p="10px">
           <Stack direction="row" spacing={0.6} align="center" fontSize="9pt">
             {homePage && (
-              <>
+              <div className="flex items-center">
                 {post.communityImageURL ? (
                   <Image
                     src={post.communityImageURL}
@@ -142,22 +150,32 @@ const PostItem: React.FC<PostItemProps> = ({
                     fontWeight={700}
                     _hover={{ textDecoration: "underline" }}
                     onClick={(event) => event.stopPropagation()}
+                    className="dark:text-white"
                   >{`thread/${post.communityId}`}</Text>
                 </Link>
-                <Icon as={BsDot} color="gray.500" fontSize={8} />
-              </>
+                <Icon
+                  as={BsDot}
+                  color="gray.500"
+                  fontSize={8}
+                  className="dark:text-white"
+                />
+              </div>
             )}
-            <Text>Posted by user/{post.creatorDisplayName}</Text>
+            <Text className="dark:text-white">
+              Posted by user/{post.creatorDisplayName}
+            </Text>
             <Spacer />
-            <Icon as={CiTimer} mr={1} />
-            <Text>
+            <Icon as={CiTimer} mr={1} className="dark:text-gray-200" />
+            <Text className="dark:text-gray-200">
               {moment(new Date(post.createdAt?.seconds * 1000)).fromNow()}
             </Text>
           </Stack>
-          <Text fontSize="12pt" fontWeight={600}>
+          <Text fontSize="12pt" fontWeight={600} className="dark:text-gray-300">
             {post.title}
           </Text>
-          <Text fontSize="10pt">{post.body}</Text>
+          <Text fontSize="10pt" className="dark:text-white">
+            {post.body}
+          </Text>
           {post.imageURL && (
             <Flex justify="center" align="center" p={2}>
               {loadingImage && (
@@ -180,9 +198,12 @@ const PostItem: React.FC<PostItemProps> = ({
             borderRadius={4}
             _hover={{ bg: "gray.200" }}
             cursor="pointer"
+            className="dark:hover:bg-[#2a3236]"
           >
-            <Icon as={BsChat} mr={2} />
-            <Text fontSize="9pt">{post.numberOfComments}</Text>
+            <Icon as={BsChat} mr={2} className="dark:text-white" />
+            <Text fontSize="9pt" className="dark:text-white">
+              {post.numberOfComments}
+            </Text>
           </Flex>
           {userIsCreator && (
             <Flex
@@ -192,14 +213,21 @@ const PostItem: React.FC<PostItemProps> = ({
               _hover={{ bg: "gray.200" }}
               cursor="pointer"
               onClick={handleDelete}
+              className="dark:hover:bg-[#2a3236]"
             >
               {loadingDelete ? (
                 <Spinner size="sm" />
               ) : (
-                <>
-                  <Icon as={AiOutlineDelete} mr={2} />
-                  <Text fontSize="9pt">Delete</Text>
-                </>
+                <div className="flex items-center">
+                  <Icon
+                    as={AiOutlineDelete}
+                    mr={2}
+                    className="dark:text-white"
+                  />
+                  <Text fontSize="9pt" className="dark:text-white">
+                    Delete
+                  </Text>
+                </div>
               )}
             </Flex>
           )}

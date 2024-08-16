@@ -42,11 +42,12 @@ const PostPage: React.FC = () => {
     if (pid && !postStateValue.selectedPost) {
       fetchPost(pid as string);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.query, postStateValue.selectedPost]);
 
   return (
     <PageContent>
-      <>
+      <div>
         {postStateValue.selectedPost && (
           <PostItem
             post={postStateValue.selectedPost}
@@ -65,12 +66,12 @@ const PostPage: React.FC = () => {
           selectedPost={postStateValue.selectedPost}
           communityId={postStateValue.selectedPost?.communityId as string}
         />
-      </>
-      <>
+      </div>
+      <div>
         {communityStateValue.currentCommunity && (
           <About communityData={communityStateValue.currentCommunity} />
         )}
-      </>
+      </div>
     </PageContent>
   );
 };

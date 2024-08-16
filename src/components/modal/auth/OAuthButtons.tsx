@@ -38,6 +38,7 @@ const OAuthButtons: React.FC = () => {
         mb={2}
         isLoading={loading}
         onClick={() => signInWithGoogle()}
+        className="dark:bg-white"
       >
         <Image src="/images/google.png" height="20px" mr={4} alt="Image" />
         Continue with Google
@@ -46,6 +47,7 @@ const OAuthButtons: React.FC = () => {
         variant="oauth"
         isLoading={isLoading}
         onClick={() => signInWithGithub()}
+        className="dark:bg-white"
       >
         <Image src="/images/github.png" height="20px" mr={4} alt="Image" />
         Continue with Github

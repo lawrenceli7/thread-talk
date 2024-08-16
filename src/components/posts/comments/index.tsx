@@ -2,6 +2,7 @@ import { Post, postState } from "@/atoms/postsAtom";
 import { firestore } from "@/firebase/clientApp";
 import {
   Box,
+  Divider,
   Flex,
   SkeletonCircle,
   SkeletonText,
@@ -153,10 +154,16 @@ const Comments: React.FC<CommentsProps> = ({
   useEffect(() => {
     if (!selectedPost) return;
     getPostComments();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedPost]);
 
   return (
-    <Box bg="white" borderRadius="0px 0px 4px 4px" p={2}>
+    <Box
+      bg="white"
+      borderRadius="0px 0px 4px 4px"
+      p={2}
+      className="dark:bg-black"
+    >
       <Flex
         direction="column"
         pl={10}
@@ -177,16 +184,16 @@ const Comments: React.FC<CommentsProps> = ({
       </Flex>
       <Stack spacing={6} p={2}>
         {fetchLoading ? (
-          <>
+          <div>
             {[0, 1, 2].map((item) => (
-              <Box key={item} padding="6" bg="white">
+              <Box key={item} padding="6" bg="white" className="dark:bg-black">
                 <SkeletonCircle size="10" />
                 <SkeletonText mt="4" noOfLines={2} spacing="4" />
               </Box>
             ))}
-          </>
+          </div>
         ) : (
-          <>
+          <div className="flex flex-col gap-6">
             {comments.length === 0 ? (
               <Flex
                 direction="column"
@@ -196,12 +203,17 @@ const Comments: React.FC<CommentsProps> = ({
                 borderColor="gray.100"
                 p={20}
               >
-                <Text fontWeight={700} opacity={0.3}>
+                <Text
+                  fontWeight={700}
+                  opacity={0.3}
+                  className="dark:text-white"
+                >
                   No Comments Yet
                 </Text>
               </Flex>
             ) : (
-              <>
+              <div className="flex flex-col gap-6">
+                <Divider />
                 {comments.map((comment) => (
                   <CommentItem
                     key={comment.id}
@@ -211,9 +223,9 @@ const Comments: React.FC<CommentsProps> = ({
                     userId={user?.uid}
                   />
                 ))}
-              </>
+              </div>
             )}
-          </>
+          </div>
         )}
       </Stack>
     </Box>

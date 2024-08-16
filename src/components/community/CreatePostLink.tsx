@@ -42,6 +42,7 @@ const CreatePostLink: React.FC = () => {
       borderColor="gray.300"
       p={2}
       mb={4}
+      className="dark:bg-black"
     >
       <Icon as={FaRegPenToSquare} fontSize={36} color="gray.300" mr={4} />
       <Input
@@ -55,7 +56,6 @@ const CreatePostLink: React.FC = () => {
         }}
         _focus={{
           outline: "none",
-          bg: "white",
           border: "1px solid",
           borderColor: "blue.500",
         }}
@@ -65,6 +65,7 @@ const CreatePostLink: React.FC = () => {
         borderRadius={4}
         mr={4}
         onClick={onClick}
+        className="dark:bg-[#2a3236] dark:hover:bg-[#2a3236]"
       />
       <Icon
         as={IoImageOutline}

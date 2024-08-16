@@ -1,5 +1,5 @@
 import { communityState } from "@/atoms/communitiesAtom";
-import { Box, Flex, Icon, MenuItem, Text } from "@chakra-ui/react";
+import { Box, Divider, Flex, Icon, MenuItem, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { FaSquareThreads } from "react-icons/fa6";
 import { GrAdd } from "react-icons/gr";
@@ -12,10 +12,17 @@ const Communities: React.FC = () => {
   const mySnippets = useRecoilValue(communityState).mySnippets;
 
   return (
-    <>
+    <div className="dark:bg-[#0f1113]">
       <CreateCommunityModal open={open} handleClose={() => setOpen(false)} />
-      <Box mt={3} mb={4}>
-        <Text pl={3} mb={1} fontSize="7pt" fontWeight={500} color="gray.500">
+      <Box mb={4} className="dark:bg-[#0f1113]">
+        <Text
+          pl={3}
+          mb={1}
+          fontSize="7pt"
+          fontWeight={500}
+          color="gray.500"
+          className="dark:text-gray-400"
+        >
           MODERATING
         </Text>
         {mySnippets
@@ -31,8 +38,16 @@ const Communities: React.FC = () => {
             />
           ))}
       </Box>
-      <Box mt={3} mb={4}>
-        <Text pl={3} mb={1} fontSize="7pt" fontWeight={500} color="gray.500">
+      <Divider />
+      <Box mt={3} className="dark:bg-[#0f1113]">
+        <Text
+          pl={3}
+          mb={1}
+          fontSize="7pt"
+          fontWeight={500}
+          color="gray.500"
+          className="dark:text-gray-400"
+        >
           MY COMMUNITIES
         </Text>
         <MenuItem
@@ -40,9 +55,10 @@ const Communities: React.FC = () => {
           fontSize="10pt"
           _hover={{ bg: "gray.100" }}
           onClick={() => setOpen(true)}
+          className="dark:bg-[#0f1113] dark:hover:bg-[#2a3236]"
         >
-          <Flex align="center">
-            <Icon fontSize={20} mr={2} as={GrAdd} />
+          <Flex align="center" className="dark:text-white">
+            <Icon fontSize={20} mr={2} as={GrAdd} className="dark:text-white" />
             Create Community
           </Flex>
         </MenuItem>
@@ -57,7 +73,7 @@ const Communities: React.FC = () => {
           />
         ))}
       </Box>
-    </>
+    </div>
   );
 };
 export default Communities;

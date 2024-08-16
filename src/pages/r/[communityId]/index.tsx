@@ -25,6 +25,7 @@ const CommunityPage: React.FC<CommunityPageProps> = ({ communityData }) => {
       ...prev,
       currentCommunity: communityData,
     }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [communityData]);
 
   if (!communityData) {
@@ -32,18 +33,18 @@ const CommunityPage: React.FC<CommunityPageProps> = ({ communityData }) => {
   }
 
   return (
-    <>
+    <div>
       <Header communityData={communityData} />
       <PageContent>
-        <>
+        <div>
           <CreatePostLink />
           <Posts communityData={communityData} />
-        </>
-        <>
+        </div>
+        <div>
           <About communityData={communityData} />
-        </>
+        </div>
       </PageContent>
-    </>
+    </div>
   );
 };
 

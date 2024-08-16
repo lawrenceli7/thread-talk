@@ -12,13 +12,13 @@ type RightContentProps = {
 
 const RightContent: React.FC<RightContentProps> = ({ user }) => {
   return (
-    <>
+    <div className="flex">
       <AuthModal />
       <Flex justify="center" align="center">
         {user ? <Icons /> : <AuthButtons />}
         <UserMenu user={user} />
       </Flex>
-    </>
+    </div>
   );
 };
 export default RightContent;

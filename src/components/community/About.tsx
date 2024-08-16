@@ -35,7 +35,7 @@ type AboutProps = {
 const About: React.FC<AboutProps> = ({ communityData }) => {
   const [user] = useAuthState(auth);
   const selectedFileRef = useRef<HTMLInputElement>(null);
-  const { selectedFile, setSelectedFile, onSelectFile } = useSelectFile();
+  const { selectedFile, onSelectFile } = useSelectFile();
   const [uploadingImage, setUploadingImage] = useState(false);
   const setCommunityStateValue = useSetRecoilState(communityState);
 
@@ -70,7 +70,7 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
   };
 
   return (
-    <Box position="sticky" top="14px">
+    <Box position="sticky" top="14px" className="dark:border rounded-md">
       <Flex
         justify="space-between"
         align="center"
@@ -84,21 +84,37 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
         </Text>
         <Icon as={HiOutlineDotsHorizontal} />
       </Flex>
-      <Flex direction="column" p={3} bg="white" borderRadius="0px 0px 4px 4px">
+      <Flex
+        direction="column"
+        p={3}
+        bg="white"
+        borderRadius="0px 0px 4px 4px"
+        className="dark:bg-black"
+      >
         <Stack>
           <Flex width="100%" p={2} fontSize="10pt" fontWeight={700}>
             <Flex direction="column" flexGrow={1}>
-              <Text>{communityData.numberOfMembers.toLocaleString()}</Text>
+              <Text className="dark:text-white">
+                {communityData.numberOfMembers.toLocaleString()}
+              </Text>
               <Flex align="center">
-                <Text mr={1}>Members</Text>
-                <Icon as={FaUsers} />
+                <Text mr={1} className="dark:text-white">
+                  Members
+                </Text>
+                <Icon as={FaUsers} className="dark:text-white" />
               </Flex>
             </Flex>
             <Flex direction="column" flexGrow={1}>
-              <Text>N/A</Text>
+              <Text className="dark:text-white">N/A</Text>
               <Flex align="center">
-                <Text mr={1}>Online</Text>
-                <Icon as={GoDotFill} color="green" />
+                <Text mr={1} className="dark:text-white">
+                  Online
+                </Text>
+                <Icon
+                  as={GoDotFill}
+                  color="green"
+                  className="dark:text-green"
+                />
               </Flex>
             </Flex>
           </Flex>
@@ -110,9 +126,14 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
             fontWeight={500}
             fontSize="10pt"
           >
-            <Icon as={IoCreateOutline} fontSize={18} mr={2} />
+            <Icon
+              as={IoCreateOutline}
+              fontSize={18}
+              mr={2}
+              className="dark:text-white"
+            />
             {communityData.createdAt && (
-              <Text>
+              <Text className="dark:text-white">
                 Created{" "}
                 {moment(
                   new Date(communityData.createdAt.seconds * 1000)
@@ -131,14 +152,18 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
             </Button>
           </Link>
           {user?.uid === communityData.creatorId && (
-            <>
+            <div>
               <Divider />
               <Stack spacing={1} fontSize="10pt">
                 <Flex align="center">
-                  <Text fontWeight={600} mr={1}>
+                  <Text fontWeight={600} mr={1} className="dark:text-white">
                     Admin
                   </Text>
-                  <Icon as={FaUserCog} fontSize={16} />
+                  <Icon
+                    as={FaUserCog}
+                    fontSize={16}
+                    className="dark:text-white"
+                  />
                 </Flex>
                 <Flex align="center" justify="space-between">
                   <Flex align="center">
@@ -189,7 +214,7 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
                   onChange={onSelectFile}
                 />
               </Stack>
-            </>
+            </div>
           )}
         </Stack>
       </Flex>

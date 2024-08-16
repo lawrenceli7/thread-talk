@@ -126,10 +126,12 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     if (communityStateValue.snippetsFetched) buildUserHomeFeed();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [communityStateValue.snippetsFetched]);
 
   useEffect(() => {
     if (!user && !loadingUser) buildNoUserHomeFeed();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, loadingUser]);
 
   useEffect(() => {
@@ -141,41 +143,44 @@ const Home: NextPage = () => {
         postVotes: [],
       }));
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, postStateValue.posts]);
 
   return (
-    <PageContent>
-      <>
-        <CreatePostLink />
-        {loading ? (
-          <PostLoader />
-        ) : (
-          <Stack>
-            {postStateValue.posts.map((post) => (
-              <PostItem
-                key={post.id}
-                post={post}
-                onSelectPost={onSelectPost}
-                onDeletePost={onDeletePost}
-                onVote={onVote}
-                userVoteValue={
-                  postStateValue.postVotes.find(
-                    (item) => item.postId === post.id
-                  )?.voteValue
-                }
-                userIsCreator={user?.uid === post.creatorId}
-                homePage
-              />
-            ))}
-          </Stack>
-        )}
-      </>
-      <Stack spacing={5}>
-        <Recommendations />
-        <Premium />
-        <PersonalHome />
-      </Stack>
-    </PageContent>
+    <div className="dark:bg-[#0f1113] h-screen">
+      <PageContent>
+        <div>
+          <CreatePostLink />
+          {loading ? (
+            <PostLoader />
+          ) : (
+            <Stack>
+              {postStateValue.posts.map((post) => (
+                <PostItem
+                  key={post.id}
+                  post={post}
+                  onSelectPost={onSelectPost}
+                  onDeletePost={onDeletePost}
+                  onVote={onVote}
+                  userVoteValue={
+                    postStateValue.postVotes.find(
+                      (item) => item.postId === post.id
+                    )?.voteValue
+                  }
+                  userIsCreator={user?.uid === post.creatorId}
+                  homePage
+                />
+              ))}
+            </Stack>
+          )}
+        </div>
+        <Stack spacing={5}>
+          <Recommendations />
+          <Premium />
+          <PersonalHome />
+        </Stack>
+      </PageContent>
+    </div>
   );
 };
 

@@ -59,11 +59,11 @@ const Login: React.FC = () => {
           }}
           _focus={{
             outline: "none",
-            bg: "white",
             border: "1px solid",
             borderColor: "blue.500",
           }}
           bg="gray.50"
+          className="dark:bg-[#2a3236] dark:hover:bg-[#2a3236]"
         />
       </InputGroup>
       <InputGroup>
@@ -86,11 +86,11 @@ const Login: React.FC = () => {
           }}
           _focus={{
             outline: "none",
-            bg: "white",
             border: "1px solid",
             borderColor: "blue.500",
           }}
           bg="gray.50"
+          className="dark:bg-[#2a3236] dark:hover:bg-[#2a3236]"
         />
       </InputGroup>
       <Text textAlign="center" color="red" fontSize="10pt">
@@ -108,7 +108,7 @@ const Login: React.FC = () => {
         Log In
       </Button>
       <Flex justifyContent="center" mb={2}>
-        <Text fontSize="9pt" mr={1}>
+        <Text fontSize="9pt" mr={1} className="dark:text-white">
           Forgot your password?
         </Text>
         <Text
@@ -126,7 +126,9 @@ const Login: React.FC = () => {
         </Text>
       </Flex>
       <Flex fontSize="9pt" justifyContent="center">
-        <Text mr={1}>New here?</Text>
+        <Text mr={1} className="dark:text-white">
+          New here?
+        </Text>
         <Text
           color="blue.500"
           fontWeight={700}

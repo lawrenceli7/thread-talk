@@ -60,6 +60,7 @@ const Recommendations: React.FC = () => {
       borderRadius={4}
       border="1px solid"
       borderColor="gray.300"
+      className="dark:bg-black"
     >
       <Flex
         align="flex-end"
@@ -68,10 +69,8 @@ const Recommendations: React.FC = () => {
         height="70px"
         borderRadius="4px 4px 0px 0px"
         fontWeight={700}
-        bgImage="url(/images/art.png)"
-        backgroundSize="cover"
-        bgGradient="linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75)),
-        url('images/art.png')"
+        bg="blue.500"
+        className="dark:bg-[#2a3236] dark:border"
       >
         Top Communities
       </Flex>
@@ -92,7 +91,7 @@ const Recommendations: React.FC = () => {
             </Flex>
           </Stack>
         ) : (
-          <>
+          <div>
             {communities.map((item, index) => {
               const isJoined = !!communityStateValue.mySnippets.find(
                 (snippet) => snippet.communityId === item.id
@@ -109,7 +108,7 @@ const Recommendations: React.FC = () => {
                   >
                     <Flex width="80%" align="center">
                       <Flex width="15%">
-                        <Text>{index + 1}</Text>
+                        <Text className="dark:text-white">{index + 1}</Text>
                       </Flex>
                       <Flex align="center" width="80%">
                         {item.imageURL ? (
@@ -124,18 +123,12 @@ const Recommendations: React.FC = () => {
                           <Icon
                             as={FaUserFriends}
                             fontSize={30}
-                            color="brand.100"
+                            color="blue.500"
                             mr={2}
                           />
                         )}
-                        <span
-                          style={{
-                            whiteSpace: "nowrap",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                          }}
-                        >
-                          {`thread/${item.id}`}
+                        <span className="dark:text-white whitespace-nowrap overflow-hidden text-ellipsis">
+                          {`${item.id}`}
                         </span>
                       </Flex>
                     </Flex>
@@ -156,7 +149,7 @@ const Recommendations: React.FC = () => {
                 </Link>
               );
             })}
-          </>
+          </div>
         )}
       </Flex>
     </Flex>
