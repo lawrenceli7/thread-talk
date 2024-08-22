@@ -33,18 +33,10 @@ const CreatePostLink: React.FC = () => {
 
   return (
     <Flex
-      justify="space-evenly"
-      align="center"
-      bg="white"
       height="56px"
-      borderRadius={4}
-      border="1px solid"
-      borderColor="gray.300"
-      p={2}
-      mb={4}
-      className="dark:bg-black"
+      className="dark:bg-black flex items-center justify-evenly bg-white p-2 mb-4 rounded border border-gray-300"
     >
-      <Icon as={FaRegPenToSquare} fontSize={36} color="gray.300" mr={4} />
+      <Icon as={FaRegPenToSquare} color="gray.300" className="mr-4 text-4xl" />
       <Input
         placeholder="Create Post..."
         fontSize="10pt"
@@ -59,22 +51,20 @@ const CreatePostLink: React.FC = () => {
           border: "1px solid",
           borderColor: "blue.500",
         }}
-        bg="gray.50"
-        borderColor="gray.200"
         height="36px"
-        borderRadius={4}
-        mr={4}
         onClick={onClick}
-        className="dark:bg-[#2a3236] dark:hover:bg-[#2a3236]"
+        className="dark:bg-[#2a3236] dark:hover:bg-[#2a3236] mr-4 bg-gray-50 rounded border-gray-200"
       />
       <Icon
         as={IoImageOutline}
-        fontSize={24}
-        mr={4}
         color="gray.400"
-        cursor="pointer"
+        className="cursor-pointer mr-4 text-2xl"
       />
-      <Icon as={BsLink45Deg} fontSize={24} color="gray.400" cursor="pointer" />
+      <Icon
+        as={BsLink45Deg}
+        color="gray.400"
+        className="text-2xl cursor-pointer"
+      />
     </Flex>
   );
 };

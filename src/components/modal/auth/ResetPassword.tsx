@@ -29,25 +29,25 @@ const ResetPassword: React.FC = () => {
     setSuccess(true);
   };
   return (
-    <Flex direction="column" alignItems="center" width="100%">
-      <Icon as={FaSquareThreads} color="brand.100" fontSize={40} mb={2} />
-      <Text fontWeight={700} mb={2} className="dark:text-white">
+    <Flex className="flex flex-col items-center w-full">
+      <Icon
+        as={FaSquareThreads}
+        color="brand.100"
+        fontSize={40}
+        className="mb-2"
+      />
+      <Text className="dark:text-white font-bold mb-2">
         Reset your password
       </Text>
       {success ? (
-        <Text mb={4}>Check your email.</Text>
+        <Text className="mb04">Check your email.</Text>
       ) : (
         <div>
-          <Text
-            fontSize="sm"
-            textAlign="center"
-            mb={2}
-            className="dark:text-white"
-          >
+          <Text fontSize="sm" className="dark:text-white text-center mb-2">
             {`Enter the email associated with your account and we'll send you a
             reset link.`}
           </Text>
-          <form onSubmit={onSubmit} style={{ width: "100%" }}>
+          <form onSubmit={onSubmit} className="w-full">
             <InputGroup>
               <InputLeftElement pointerEvents="none">
                 <Icon as={FaEnvelope} color="gray.500" />
@@ -57,7 +57,6 @@ const ResetPassword: React.FC = () => {
                 name="email"
                 placeholder="Email"
                 type="email"
-                mb={2}
                 onChange={(event) => setEmail(event.target.value)}
                 fontSize="10pt"
                 _placeholder={{ color: "gray.500" }}
@@ -71,20 +70,17 @@ const ResetPassword: React.FC = () => {
                   border: "1px solid",
                   borderColor: "blue.500",
                 }}
-                bg="gray.50"
-                className="dark:bg-[#2a3236] dark:hover:bg-[#2a3236]"
+                className="dark:bg-[#2a3236] dark:hover:bg-[#2a3236] mb-2 bg-gray-50"
               />
             </InputGroup>
-            <Text textAlign="center" fontSize="10pt" color="red">
+            <Text fontSize="10pt" className="text-center text-red-500">
               {error?.message}
             </Text>
             <Button
-              width="100%"
               height="36px"
-              mb={2}
-              mt={2}
               type="submit"
               isLoading={sending}
+              className="w-full mb-2 mt-2"
             >
               Reset Password
             </Button>
@@ -92,11 +88,8 @@ const ResetPassword: React.FC = () => {
         </div>
       )}
       <Flex
-        alignItems="center"
         fontSize="9pt"
-        color="blue.500"
-        fontWeight={700}
-        cursor="pointer"
+        className="flex items-center text-blue-500 font-bold cursor-pointer"
       >
         <Text
           onClick={() =>

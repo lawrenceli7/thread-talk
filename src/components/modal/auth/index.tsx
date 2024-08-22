@@ -42,20 +42,15 @@ const AuthModal: React.FC = () => {
           {modalState.view === "resetPassword" && "Reset Password"}
         </ModalHeader>
         <ModalCloseButton />
-        <ModalBody
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-          pb={6}
-        >
-          <Flex direction="column" align="center" justify="center" width="70%">
+        <ModalBody pb={6} className="flex flex-col justify-center items-center">
+          <Flex
+            width="70%"
+            className="flex flex-col items-center justify-center"
+          >
             {modalState.view === "login" || modalState.view === "signup" ? (
               <>
                 <OAuthButtons />
-                <Text color="gray.500" fontWeight={700}>
-                  OR
-                </Text>
+                <Text className="font-bold text-gray-500">OR</Text>
                 <AuthInputs />
               </>
             ) : (

@@ -54,38 +54,27 @@ const Recommendations: React.FC = () => {
   }, []);
 
   return (
-    <Flex
-      direction="column"
-      bg="white"
-      borderRadius={4}
-      border="1px solid"
-      borderColor="gray.300"
-      className="dark:bg-black"
-    >
+    <Flex className="dark:bg-black flex flex-col bg-white rounded border border-gray-300">
       <Flex
-        align="flex-end"
-        color="white"
         p="6px 10px"
         height="70px"
         borderRadius="4px 4px 0px 0px"
-        fontWeight={700}
-        bg="blue.500"
-        className="dark:bg-[#2a3236] dark:border"
+        className="dark:bg-[#2a3236] dark:border flex items-end text-white font-semibold bg-blue-500"
       >
         Top Communities
       </Flex>
-      <Flex direction="column">
+      <Flex className="flex flex-col">
         {loading ? (
-          <Stack mt={2} p={3}>
-            <Flex justify="space-between" align="center">
+          <Stack className="mt-2 p-3">
+            <Flex className="flex justify-between items-center">
               <SkeletonCircle size="10" />
               <Skeleton height="10px" width="70%" />
             </Flex>
-            <Flex justify="space-between" align="center">
+            <Flex className="flex justify-between items-center">
               <SkeletonCircle size="10" />
               <Skeleton height="10px" width="70%" />
             </Flex>
-            <Flex justify="space-between" align="center">
+            <Flex className="flex justify-between items-center">
               <SkeletonCircle size="10" />
               <Skeleton height="10px" width="70%" />
             </Flex>
@@ -99,32 +88,28 @@ const Recommendations: React.FC = () => {
               return (
                 <Link key={item.id} href={`/r/${item.id}`}>
                   <Flex
-                    position="relative"
-                    align="center"
                     fontSize="10pt"
-                    borderBottom="1px solid"
-                    borderColor="gray.200"
                     p="10px 12px"
+                    className="flex relative items-center border-b border-gray-200"
                   >
-                    <Flex width="80%" align="center">
+                    <Flex width="80%" className="flex items-center">
                       <Flex width="15%">
                         <Text className="dark:text-white">{index + 1}</Text>
                       </Flex>
-                      <Flex align="center" width="80%">
+                      <Flex width="80%" className="flex items-center">
                         {item.imageURL ? (
                           <Image
                             src={item.imageURL}
-                            borderRadius="full"
                             boxSize="28px"
-                            mr={2}
                             alt="Image"
+                            className="rounded-full mr-2"
                           />
                         ) : (
                           <Icon
                             as={FaUserFriends}
                             fontSize={30}
                             color="blue.500"
-                            mr={2}
+                            className="mr-2"
                           />
                         )}
                         <span className="dark:text-white whitespace-nowrap overflow-hidden text-ellipsis">
@@ -132,7 +117,7 @@ const Recommendations: React.FC = () => {
                         </span>
                       </Flex>
                     </Flex>
-                    <Box position="absolute" right="10px">
+                    <Box className="absolute right-2.5">
                       <Button
                         height="22px"
                         fontSize="8pt"

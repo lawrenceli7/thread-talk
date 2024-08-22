@@ -9,29 +9,17 @@ const Premium: React.FC = () => {
   const setAuthModalState = useSetRecoilState(authModalState);
 
   return (
-    <Flex
-      direction="column"
-      bg="white"
-      borderRadius={4}
-      cursor="pointer"
-      border="1px solid"
-      borderColor="gray.300"
-      className="dark:bg-black"
-    >
+    <Flex className="dark:bg-black flex flex-col bg-white rounded cursor-pointer border border-gray-300">
       <Flex
-        align="flex-end"
-        color="white"
         p="6px 10px"
-        bg="blue.500"
         height="34px"
         borderRadius="4px 4px 0px 0px"
-        fontWeight={600}
-        className="dark:bg-[#2a3236]"
+        className="dark:bg-[#2a3236] flex items-end text-white bg-blue-500 font-semibold"
       ></Flex>
-      <Flex direction="column" p="12px">
+      <Flex className="flex flex-col p-6">
         <Flex mb={2}>
-          <Icon as={FaCrown} fontSize={26} color="gold" mt={2} />
-          <Stack spacing={1} fontSize="9pt" pl={2}>
+          <Icon as={FaCrown} fontSize={26} color="gold" className="mt-2" />
+          <Stack spacing={1} fontSize="9pt" className="pl-2">
             <Text fontWeight={600} className="dark:text-white">
               ThreadTalk
             </Text>
