@@ -14,14 +14,10 @@ const Communities: React.FC = () => {
   return (
     <div className="dark:bg-[#0f1113]">
       <CreateCommunityModal open={open} handleClose={() => setOpen(false)} />
-      <Box mb={4} className="dark:bg-[#0f1113]">
+      <Box className="dark:bg-[#0f1113] mb-4">
         <Text
-          pl={3}
-          mb={1}
           fontSize="7pt"
-          fontWeight={500}
-          color="gray.500"
-          className="dark:text-gray-400"
+          className="dark:text-gray-400 font-medium mb-1 pl-3 text-gray-500"
         >
           MODERATING
         </Text>
@@ -39,26 +35,20 @@ const Communities: React.FC = () => {
           ))}
       </Box>
       <Divider />
-      <Box mt={3} className="dark:bg-[#0f1113]">
+      <Box className="dark:bg-[#0f1113] mt-3">
         <Text
-          pl={3}
-          mb={1}
           fontSize="7pt"
-          fontWeight={500}
-          color="gray.500"
-          className="dark:text-gray-400"
+          className="dark:text-gray-400 pl-3 mb-1 font-medium text-gray-500"
         >
           MY COMMUNITIES
         </Text>
         <MenuItem
-          width="100%"
           fontSize="10pt"
-          _hover={{ bg: "gray.100" }}
           onClick={() => setOpen(true)}
-          className="dark:bg-[#0f1113] dark:hover:bg-[#2a3236]"
+          className="dark:bg-[#0f1113] dark:hover:bg-[#2a3236] w-full hover:bg-gray-100"
         >
-          <Flex align="center" className="dark:text-white">
-            <Icon fontSize={20} mr={2} as={GrAdd} className="dark:text-white" />
+          <Flex className="dark:text-white flex items-center">
+            <Icon as={GrAdd} className="dark:text-white text-xl mr-2" />
             Create Community
           </Flex>
         </MenuItem>

@@ -14,18 +14,16 @@ const Navbar: React.FC = () => {
 
   return (
     <Flex
-      bg="white"
       height="44px"
       padding="6px 12px"
       justify={{ md: "space-between" }}
-      className="dark:bg-[#0f1113] dark:border-b"
+      className="dark:bg-[#0f1113] dark:border-b bg-white"
     >
       <Flex
-        align="center"
         width={{ base: "40px", md: "auto" }}
         mr={{ base: 0, md: 2 }}
-        cursor="pointer"
         onClick={() => onSelectMenuItem(defaultMenuItem)}
+        className="flex items-center cursor-pointer"
       >
         <Image src="/images/logo.svg" height="30px" alt="Image" />
         <Image

@@ -107,14 +107,8 @@ const NewPostForm: React.FC<NewPostFormProps> = ({
   };
 
   return (
-    <Flex
-      direction="column"
-      bg="white"
-      borderRadius={4}
-      mt={2}
-      className="dark:bg-black dark:border"
-    >
-      <Flex width="100%">
+    <Flex className="dark:bg-black dark:border flex flex-col bg-white rounded mt-2">
+      <Flex className="w-full">
         {formTabs.map((item) => (
           <TabItems
             key={item.title}
@@ -124,7 +118,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({
           />
         ))}
       </Flex>
-      <Flex p={4}>
+      <Flex className="p-4">
         {selectedTab === "Post" && (
           <TextInputs
             textInputs={textInputs}
@@ -145,9 +139,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({
       {error && (
         <Alert status="error">
           <AlertIcon />
-          <Text mr={2} className="dark:text-white">
-            Error creating post
-          </Text>
+          <Text className="dark:text-white mr-2">Error creating post</Text>
         </Alert>
       )}
     </Flex>

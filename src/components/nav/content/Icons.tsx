@@ -13,25 +13,17 @@ const Icons: React.FC = () => {
         <Flex
           display={{ base: "none", md: "flex" }}
           align="center"
-          borderRight="1px solid"
-          borderColor="gray.200"
+          className="border-r border-gray-200"
         ></Flex>
         <div>
           <Flex
             display={{ base: "none", md: "flex" }}
-            mr={1.5}
-            ml={1.5}
-            padding={1}
-            cursor="pointer"
-            borderRadius={4}
-            _hover={{ bg: "gray.200" }}
-            className="dark:bg-[#2a3236] hover:dark:bg-blue-500"
+            className="dark:bg-[#2a3236] hover:dark:bg-blue-500 hover:bg-gray-200 rounded cursor-pointer p-1 ml-1.5 mr-1.5"
           >
             <Icon
               as={GrAdd}
-              fontSize={20}
               onClick={() => setOpen(true)}
-              className="dark:text-white"
+              className="dark:text-white text-xl"
             />
           </Flex>
         </div>

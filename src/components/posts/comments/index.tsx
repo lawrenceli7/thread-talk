@@ -158,20 +158,8 @@ const Comments: React.FC<CommentsProps> = ({
   }, [selectedPost]);
 
   return (
-    <Box
-      bg="white"
-      borderRadius="0px 0px 4px 4px"
-      p={2}
-      className="dark:bg-black"
-    >
-      <Flex
-        direction="column"
-        pl={10}
-        pr={4}
-        mb={6}
-        fontSize="10pt"
-        width="100%"
-      >
+    <Box borderRadius="0px 0px 4px 4px" className="dark:bg-black bg-white p-2">
+      <Flex fontSize="10pt" className="flex flex-col pl-10 pr-4 mb-6 w-full">
         {!fetchLoading && (
           <CommentInput
             commentText={commentText}
@@ -182,32 +170,21 @@ const Comments: React.FC<CommentsProps> = ({
           />
         )}
       </Flex>
-      <Stack spacing={6} p={2}>
+      <Stack spacing={6} className="p-2">
         {fetchLoading ? (
           <div>
             {[0, 1, 2].map((item) => (
-              <Box key={item} padding="6" bg="white" className="dark:bg-black">
+              <Box key={item} className="dark:bg-black bg-white p-6">
                 <SkeletonCircle size="10" />
-                <SkeletonText mt="4" noOfLines={2} spacing="4" />
+                <SkeletonText noOfLines={2} spacing="4" className="mt-4" />
               </Box>
             ))}
           </div>
         ) : (
           <div className="flex flex-col gap-6">
             {comments.length === 0 ? (
-              <Flex
-                direction="column"
-                justify="center"
-                align="center"
-                borderTop="1px solid"
-                borderColor="gray.100"
-                p={20}
-              >
-                <Text
-                  fontWeight={700}
-                  opacity={0.3}
-                  className="dark:text-white"
-                >
+              <Flex className="flex flex-col justify-center items-center border-t border-gray-100 p-20">
+                <Text className="dark:text-white font-bold opacity-30">
                   No Comments Yet
                 </Text>
               </Flex>

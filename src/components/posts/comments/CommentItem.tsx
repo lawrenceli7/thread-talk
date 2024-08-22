@@ -41,9 +41,9 @@ const CommentItem: React.FC<CommentItemProps> = ({
 }) => {
   return (
     <Flex>
-      <Box mr={2}>
+      <Box className="mr-2">
         <Avatar
-          icon={<AiOutlineUser fontSize={30} color="gray.300" />}
+          icon={<AiOutlineUser className="text-gray-300 text-3xl" />}
           size="sm"
         />
       </Box>
@@ -54,12 +54,12 @@ const CommentItem: React.FC<CommentItemProps> = ({
           fontSize="8pt"
           justify="space-between"
         >
-          <Text fontWeight={700} className="dark:text-white">
+          <Text className="dark:text-white font-bold">
             {comment.creatorDisplayText}
           </Text>
           <Spacer />
           <Icon as={CiTimer} className="dark:text-gray-200" />
-          <Text color="gray.600" className="dark:text-gray-200">
+          <Text className="dark:text-gray-200 text-gray-600">
             {moment(new Date(comment.createdAt.seconds * 1000)).fromNow()}
           </Text>
           {loadingDelete && <Spinner size="sm" />}
@@ -67,23 +67,25 @@ const CommentItem: React.FC<CommentItemProps> = ({
         <Text fontSize="10pt" className="dark:text-gray-300">
           {comment.text}
         </Text>
-        <Stack direction="row" align="center" cursor="pointer" color="gray.500">
+        <Stack
+          direction="row"
+          align="center"
+          className="cursor-pointer text-gray-500"
+        >
           <Icon as={GrLike} className="dark:text-white" />
           <Icon as={GrDislike} className="dark:text-white" />
           {userId === comment.creatorId && (
             <div className="flex gap-2">
               <Text
                 fontSize="9pt"
-                _hover={{ color: "blue.500" }}
-                className="dark:text-white"
+                className="dark:text-white hover:text-blue-500"
               >
                 Edit
               </Text>
               <Text
                 fontSize="9pt"
-                _hover={{ color: "blue.500" }}
                 onClick={() => onDeleteComment(comment)}
-                className="dark:text-white"
+                className="dark:text-white hover:text-blue-500"
               >
                 Delete
               </Text>
