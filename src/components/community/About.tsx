@@ -70,67 +70,41 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
   };
 
   return (
-    <Box position="sticky" top="14px" className="dark:border rounded-md">
-      <Flex
-        justify="space-between"
-        align="center"
-        bg="blue.400"
-        color="white"
-        p={3}
-        borderRadius="4px 4px 0px 0px"
-      >
-        <Text fontSize="10pt" fontWeight={700}>
+    <Box className="dark:border rounded-md sticky top-3.5">
+      <Flex className="flex justify-between items-center bg-blue-400 text-white p-3 rounded">
+        <Text fontSize="10pt" className="font-bold">
           About Community
         </Text>
         <Icon as={HiOutlineDotsHorizontal} />
       </Flex>
-      <Flex
-        direction="column"
-        p={3}
-        bg="white"
-        borderRadius="0px 0px 4px 4px"
-        className="dark:bg-black"
-      >
+      <Flex className="dark:bg-black flex flex-col p-3 bg-white rounded">
         <Stack>
-          <Flex width="100%" p={2} fontSize="10pt" fontWeight={700}>
-            <Flex direction="column" flexGrow={1}>
+          <Flex fontSize="10pt" className="font-bold w-full p-2">
+            <Flex className="flex flex-col flex-grow">
               <Text className="dark:text-white">
                 {communityData.numberOfMembers.toLocaleString()}
               </Text>
-              <Flex align="center">
-                <Text mr={1} className="dark:text-white">
-                  Members
-                </Text>
+              <Flex className="flex items-center">
+                <Text className="dark:text-white mr-1">Members</Text>
                 <Icon as={FaUsers} className="dark:text-white" />
               </Flex>
             </Flex>
-            <Flex direction="column" flexGrow={1}>
+            <Flex className="flex flex-col flex-grow">
               <Text className="dark:text-white">N/A</Text>
-              <Flex align="center">
-                <Text mr={1} className="dark:text-white">
-                  Online
-                </Text>
-                <Icon
-                  as={GoDotFill}
-                  color="green"
-                  className="dark:text-green"
-                />
+              <Flex className="flex items-center">
+                <Text className="dark:text-white mr-1">Online</Text>
+                <Icon as={GoDotFill} color="green" />
               </Flex>
             </Flex>
           </Flex>
           <Divider />
           <Flex
-            align="center"
-            width="100%"
-            p={1}
-            fontWeight={500}
             fontSize="10pt"
+            className="font-medium flex items-center w-full p-1"
           >
             <Icon
               as={IoCreateOutline}
-              fontSize={18}
-              mr={2}
-              className="dark:text-white"
+              className="dark:text-white mr-2 text-lg"
             />
             {communityData.createdAt && (
               <Text className="dark:text-white">
@@ -142,12 +116,7 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
             )}
           </Flex>
           <Link href={`/r/${communityData.id}/submit`}>
-            <Button
-              mt={3}
-              height="30px"
-              width="100%"
-              leftIcon={<FaRegPenToSquare />}
-            >
+            <Button leftIcon={<FaRegPenToSquare />} className="h-1 w-full mt-3">
               Create Post
             </Button>
           </Link>
@@ -155,42 +124,40 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
             <div>
               <Divider />
               <Stack spacing={1} fontSize="10pt">
-                <Flex align="center">
-                  <Text fontWeight={600} mr={1} className="dark:text-white">
+                <Flex className="flex items-center mt-1">
+                  <Text className="dark:text-white font-semibold mr-1">
                     Admin
                   </Text>
-                  <Icon
-                    as={FaUserCog}
-                    fontSize={16}
-                    className="dark:text-white"
-                  />
+                  <Icon as={FaUserCog} className="dark:text-white text-base" />
                 </Flex>
-                <Flex align="center" justify="space-between">
-                  <Flex align="center">
+                <Flex className="flex items-center justify-between">
+                  <Flex className="flex items-center">
                     <Text
-                      color="blue.500"
-                      cursor="pointer"
-                      _hover={{ textDecoration: "underline" }}
                       onClick={() => selectedFileRef.current?.click()}
                       mr={1}
+                      className="mr-1 hover:underline cursor-pointer text-blue-500"
                     >
                       Change Image
                     </Text>
-                    <Icon as={CiImageOn} fontSize={16} color="blue.500" />
+                    <Icon
+                      as={CiImageOn}
+                      color="blue.500"
+                      className="text-base"
+                    />
                   </Flex>
                   {communityData.imageURL || selectedFile ? (
                     <Image
                       src={selectedFile || communityData.imageURL}
-                      borderRadius="full"
                       boxSize="40px"
                       alt="Community Image"
+                      className="rounded-full"
                     />
                   ) : (
                     <Icon
                       as={FaSquareThreads}
                       fontSize={40}
                       color="blue.500"
-                      mr={2}
+                      className="mr-2"
                     />
                   )}
                 </Flex>
@@ -198,8 +165,11 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
                   (uploadingImage ? (
                     <Spinner />
                   ) : (
-                    <Flex align="center">
-                      <Text cursor="pointer" onClick={onUpdateImage} mr={1}>
+                    <Flex className="flex items-center">
+                      <Text
+                        onClick={onUpdateImage}
+                        className="cursor-pointer mr-1"
+                      >
                         Save Changes
                       </Text>
                       <Icon as={MdCheck} />

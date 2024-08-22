@@ -36,32 +36,17 @@ const PersonalHome: React.FC = () => {
   return (
     <div>
       <CreateCommunityModal open={open} handleClose={() => setOpen(false)} />
-      <Flex
-        direction="column"
-        bg="white"
-        borderRadius={4}
-        cursor="pointer"
-        border="1px solid"
-        borderColor="gray.300"
-        position="sticky"
-        className="dark:bg-black"
-      >
+      <Flex className="dark:bg-black flex flex-col bg-white cursor-pointer rounded border border-gray-300 sticky">
         <Flex
-          align="flex-end"
-          color="white"
           p="6px 10px"
-          bg="blue.500"
           height="34px"
           borderRadius="4px 4px 0px 0px"
-          fontWeight={600}
-          className="dark:bg-[#2a3236]"
+          className="dark:bg-[#2a3236] flex items-end text-white bg-blue-500 font-semibold"
         ></Flex>
-        <Flex direction="column" p="12px">
-          <Flex align="center" mb={2}>
-            <Icon as={FaHome} fontSize={50} color="blue.500" mr={2} />
-            <Text fontWeight={600} className="dark:text-white">
-              Home
-            </Text>
+        <Flex className="flex flex-col p-6">
+          <Flex className="flex items-center mb-2">
+            <Icon as={FaHome} fontSize={50} color="blue.500" className="mr-2" />
+            <Text className="dark:text-white font-semibold">Home</Text>
           </Flex>
           <Stack spacing={3}>
             <Text fontSize="9pt" className="dark:text-white">

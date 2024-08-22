@@ -69,7 +69,6 @@ const SignUp: React.FC = () => {
           name="email"
           placeholder="Email"
           type="email"
-          mb={2}
           onChange={onChange}
           fontSize="10pt"
           _placeholder={{ color: "gray.500" }}
@@ -83,8 +82,7 @@ const SignUp: React.FC = () => {
             border: "1px solid",
             borderColor: "blue.500",
           }}
-          bg="gray.50"
-          className="dark:bg-[#2a3236] dark:hover:bg-[#2a3236]"
+          className="dark:bg-[#2a3236] dark:hover:bg-[#2a3236] mb-2 bg-gray-50"
         />
       </InputGroup>
       <InputGroup>
@@ -97,7 +95,6 @@ const SignUp: React.FC = () => {
           onChange={onChange}
           placeholder="Password"
           type="password"
-          mb={2}
           fontSize="10pt"
           _placeholder={{ color: "gray.500" }}
           _hover={{
@@ -110,8 +107,7 @@ const SignUp: React.FC = () => {
             border: "1px solid",
             borderColor: "blue.500",
           }}
-          bg="gray.50"
-          className="dark:bg-[#2a3236] dark:hover:bg-[#2a3236]"
+          className="dark:bg-[#2a3236] dark:hover:bg-[#2a3236] mb-2 bg-gray-50"
         />
       </InputGroup>
       <InputGroup>
@@ -124,7 +120,6 @@ const SignUp: React.FC = () => {
           onChange={onChange}
           placeholder="Confirm Password"
           type="password"
-          mb={2}
           fontSize="10pt"
           _placeholder={{ color: "gray.500" }}
           _hover={{
@@ -137,39 +132,32 @@ const SignUp: React.FC = () => {
             border: "1px solid",
             borderColor: "blue.500",
           }}
-          bg="gray.50"
-          className="dark:bg-[#2a3236] dark:hover:bg-[#2a3236]"
+          className="dark:bg-[#2a3236] dark:hover:bg-[#2a3236] mb-2 bg-gray-50"
         />
       </InputGroup>
-      <Text textAlign="center" color="red" fontSize="10pt">
+      <Text fontSize="10pt" className="text-center text-red-500">
         {error ||
           FIREBASE_ERRORS[userError?.message as keyof typeof FIREBASE_ERRORS]}
       </Text>
       <Button
-        width="100%"
         height="36px"
-        mt={2}
-        mb={2}
         type="submit"
         isLoading={loading}
         leftIcon={<FaSignInAlt />}
+        className="w-full mt-2 mb-2"
       >
         Sign Up
       </Button>
-      <Flex fontSize="9pt" justifyContent="center">
-        <Text mr={1} className="dark:text-white">
-          Already a user?
-        </Text>
+      <Flex fontSize="9pt" className="flex justify-center">
+        <Text className="dark:text-white mr-1">Already a user?</Text>
         <Text
-          color="blue.500"
-          fontWeight={700}
-          cursor="pointer"
           onClick={() =>
             setAuthModalState((prev) => ({
               ...prev,
               view: "login",
             }))
           }
+          className="text-blue-500 font-bold cursor-pointer"
         >
           LOG IN
         </Text>

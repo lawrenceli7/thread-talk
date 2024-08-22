@@ -32,15 +32,19 @@ const OAuthButtons: React.FC = () => {
   }, [isUser]);
 
   return (
-    <Flex direction="column" width="100%" mb={4}>
+    <Flex className="flex flex-col w-full mb-4">
       <Button
         variant="oauth"
-        mb={2}
         isLoading={loading}
         onClick={() => signInWithGoogle()}
-        className="dark:bg-white"
+        className="dark:bg-white mb-2"
       >
-        <Image src="/images/google.png" height="20px" mr={4} alt="Image" />
+        <Image
+          src="/images/google.png"
+          height="20px"
+          alt="Image"
+          className="mr-4"
+        />
         Continue with Google
       </Button>
       <Button
@@ -49,7 +53,12 @@ const OAuthButtons: React.FC = () => {
         onClick={() => signInWithGithub()}
         className="dark:bg-white"
       >
-        <Image src="/images/github.png" height="20px" mr={4} alt="Image" />
+        <Image
+          src="/images/github.png"
+          height="20px"
+          alt="Image"
+          className="mr-4"
+        />
         Continue with Github
       </Button>
       {error && <Text>{error.message}</Text>}
