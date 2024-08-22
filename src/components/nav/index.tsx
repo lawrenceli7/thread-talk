@@ -16,7 +16,7 @@ const Navbar: React.FC = () => {
     <Flex
       padding="6px 12px"
       justify={{ md: "space-between" }}
-      className="dark:bg-[#0f1113] dark:border-b bg-white h-11"
+      className="dark:bg-[#0f1113] dark:border-b bg-white h-16"
     >
       <Flex
         width={{ base: "40px", md: "auto" }}
