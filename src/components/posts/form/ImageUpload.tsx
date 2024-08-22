@@ -22,18 +22,17 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
         <div className="flex flex-col items-center">
           <Image
             src={selectedFile}
-            maxWidth="400px"
-            maxHeight="400px"
             alt="Image"
+            className="max-w-400 max-h-400"
           />
           <Stack direction="row" className="mt-4">
-            <Button height="28px" onClick={() => setSelectedTab("Post")}>
+            <Button onClick={() => setSelectedTab("Post")} className="h-7">
               Back to Post
             </Button>
             <Button
               variant="outline"
-              height="28px"
               onClick={() => setSelectedFile("")}
+              className="h-7"
             >
               Remove
             </Button>
@@ -43,8 +42,8 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
         <Flex className="dark:bg-[#2a3236] flex justify-center items-center p-20 border-dashed border-gray-200 w-full rounded">
           <Button
             variant="outline"
-            height="28px"
             onClick={() => selectedFileRef.current?.click()}
+            className="h-7"
           >
             Upload
           </Button>

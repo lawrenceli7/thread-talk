@@ -20,43 +20,30 @@ const TextInputs: React.FC<TextInputsProps> = ({
   loading,
 }) => {
   return (
-    <Stack spacing={3} width="100%">
+    <Stack spacing={3} className="w-full">
       <Input
         name="title"
         value={textInputs.title}
         onChange={onChange}
         fontSize="10pt"
         placeholder="Title"
-        _placeholder={{ color: "gray.500" }}
-        _focus={{
-          outline: "none",
-          border: "1px solid",
-          borderColor: "black",
-        }}
-        className="dark:bg-[#2a3236] dark:hover:bg-[#2a3236] dark:text-white rounded"
+        className="dark:bg-[#2a3236] dark:hover:bg-[#2a3236] dark:text-white rounded placeholder:text-gray-500 focus:outline-none focus:border focus:border-black"
       />
       <Textarea
         name="body"
         value={textInputs.body}
         onChange={onChange}
         fontSize="10pt"
-        height="100px"
         placeholder="Text (optional)"
-        _placeholder={{ color: "gray.500" }}
-        _focus={{
-          outline: "none",
-          border: "1px solid",
-          borderColor: "black",
-        }}
-        className="dark:bg-[#2a3236] dark:hover:bg-[#2a3236] dark:text-white rounded"
+        className="dark:bg-[#2a3236] dark:hover:bg-[#2a3236] dark:text-white rounded placeholder:text-gray-500 h-100 focus:outline-none focus:border focus:border-black"
       />
       <Flex className="flex justify-end">
         <Button
-          height="34px"
           padding="0px 30px"
           disabled={!textInputs.title}
           isLoading={loading}
           onClick={handleCreatePost}
+          className="h-34"
         >
           Post
         </Button>

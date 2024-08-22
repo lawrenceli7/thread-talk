@@ -11,22 +11,20 @@ const AuthButtons: React.FC = () => {
     <div className="flex">
       <Button
         variant="outline"
-        height="28px"
         display={{ base: "none", sm: "flex" }}
         width={{ base: "80px", md: "110px" }}
         onClick={() => setAuthModalState({ open: true, view: "login" })}
         leftIcon={<LuUserCheck2 />}
-        className="mr-2"
+        className="mr-2 h-7"
       >
         Log In
       </Button>
       <Button
-        height="28px"
         display={{ base: "none", sm: "flex" }}
         width={{ base: "80px", md: "110px" }}
         onClick={() => setAuthModalState({ open: true, view: "signup" })}
         leftIcon={<LuUserX2 />}
-        className="mr-2"
+        className="mr-2 h-7"
       >
         Sign Up
       </Button>

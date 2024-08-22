@@ -39,9 +39,7 @@ const PersonalHome: React.FC = () => {
       <Flex className="dark:bg-black flex flex-col bg-white cursor-pointer rounded border border-gray-300 sticky">
         <Flex
           p="6px 10px"
-          height="34px"
-          borderRadius="4px 4px 0px 0px"
-          className="dark:bg-[#2a3236] flex items-end text-white bg-blue-500 font-semibold"
+          className="dark:bg-[#2a3236] flex items-end text-white bg-blue-500 font-semibold h-34 rounded-sm"
         ></Flex>
         <Flex className="flex flex-col p-6">
           <Flex className="flex items-center mb-2">
@@ -53,18 +51,18 @@ const PersonalHome: React.FC = () => {
               Your personal Thread Talk front page, built just for you.
             </Text>
             <Button
-              height="30px"
               onClick={onClick}
               leftIcon={<IoCreateOutline />}
+              className="h-30"
             >
               Create Post
             </Button>
             {user && (
               <Button
                 variant="outline"
-                height="30px"
                 onClick={() => setOpen(true)}
                 leftIcon={<AiOutlineTeam />}
+                className="h-30"
               >
                 Create Community
               </Button>

@@ -116,12 +116,11 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
       <ModalContent className="dark:bg-[#181c1f]">
         <ModalHeader
           fontSize={15}
-          padding={3}
-          className="dark:text-white flex flex-col"
+          className="dark:text-white flex flex-col p-3"
         >
           Create a community
         </ModalHeader>
-        <Box pl={3} pr={3}>
+        <Box className="pl-3 pr-3">
           <Divider />
           <ModalCloseButton />
           <ModalBody padding="10px 0px" className="flex flex-col">
@@ -211,22 +210,14 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
             </Box>
           </ModalBody>
         </Box>
-        <ModalFooter
-          borderRadius="0px 0px 10px 10px"
-          className="dark:bg-[#2a3236] bg-gray-100"
-        >
-          <Button
-            variant="outline"
-            height="30px"
-            onClick={handleClose}
-            className="mr-3"
-          >
+        <ModalFooter className="dark:bg-[#2a3236] bg-gray-100 rounded-sm">
+          <Button variant="outline" onClick={handleClose} className="mr-3 h-30">
             Cancel
           </Button>
           <Button
-            height="30px"
             onClick={handleCreateCommunity}
             isLoading={loading}
+            className="h-30"
           >
             Create Community
           </Button>

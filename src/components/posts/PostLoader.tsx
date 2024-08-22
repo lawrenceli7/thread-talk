@@ -9,18 +9,18 @@ const PostLoader: React.FC = () => {
         boxShadow="lg"
         className="dark:bg-black bg-white rounded"
       >
-        <SkeletonText noOfLines={1} width="40%" spacing="4" className="mt-4" />
+        <SkeletonText noOfLines={1} spacing="4" className="mt-4 w-2/5" />
         <SkeletonText noOfLines={4} spacing="4" className="mt-4" />
-        <Skeleton height="200px" className="mt-4" />
+        <Skeleton className="mt-4 h-200" />
       </Box>
       <Box
         padding="10px 10px"
         boxShadow="lg"
         className="dark:bg-black bg-white rounded"
       >
-        <SkeletonText noOfLines={1} width="40%" spacing="4" className="mt-4" />
+        <SkeletonText noOfLines={1} spacing="4" className="mt-4 w-2/5" />
         <SkeletonText noOfLines={4} spacing="4" className="mt-4" />
-        <Skeleton height="200px" className="mt-4" />
+        <Skeleton className="mt-4 h-200" />
       </Box>
     </Stack>
   );

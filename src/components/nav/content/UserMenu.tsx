@@ -36,8 +36,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
     <Menu>
       <MenuButton
         padding="2px 6px"
-        _hover={{ outline: "1px solid", outlineColor: "gray.200" }}
-        className="dark:bg-[#2a3236] hover:dark:bg-blue-500 cursor-pointer rounded"
+        className="dark:bg-[#2a3236] hover:dark:bg-blue-500 cursor-pointer rounded hover:outline hover:outline-gray-200"
       >
         <Flex className="flex items-center">
           <Flex className="flex items-center">

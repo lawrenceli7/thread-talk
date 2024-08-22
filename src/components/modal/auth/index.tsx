@@ -36,17 +36,14 @@ const AuthModal: React.FC = () => {
     <Modal isOpen={modalState.open} onClose={handleClose}>
       <ModalOverlay />
       <ModalContent className="dark:bg-[#181c1f]">
-        <ModalHeader textAlign="center" className="dark:text-white">
+        <ModalHeader className="dark:text-white text-center">
           {modalState.view === "login" && "Login"}
           {modalState.view === "signup" && "Sign Up"}
           {modalState.view === "resetPassword" && "Reset Password"}
         </ModalHeader>
         <ModalCloseButton />
-        <ModalBody pb={6} className="flex flex-col justify-center items-center">
-          <Flex
-            width="70%"
-            className="flex flex-col items-center justify-center"
-          >
+        <ModalBody className="flex flex-col justify-center items-center pb-6">
+          <Flex className="flex flex-col items-center justify-center w-70%">
             {modalState.view === "login" || modalState.view === "signup" ? (
               <>
                 <OAuthButtons />

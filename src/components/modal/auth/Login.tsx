@@ -50,18 +50,7 @@ const Login: React.FC = () => {
           type="email"
           onChange={onChange}
           fontSize="10pt"
-          _placeholder={{ color: "gray.500" }}
-          _hover={{
-            bg: "white",
-            border: "1px solid",
-            borderColor: "blue.500",
-          }}
-          _focus={{
-            outline: "none",
-            border: "1px solid",
-            borderColor: "blue.500",
-          }}
-          className="dark:bg-[#2a3236] dark:hover:bg-[#2a3236] mb-2 bg-gray-50"
+          className="dark:bg-[#2a3236] dark:hover:bg-[#2a3236] mb-2 bg-gray-50 hover:bg-white hover:border hover:border-blue-500 placeholder:text-gray-500 focus:outline-none focus:border focus:border-blue-500"
         />
       </InputGroup>
       <InputGroup>
@@ -75,33 +64,21 @@ const Login: React.FC = () => {
           placeholder="Password"
           type="password"
           fontSize="10pt"
-          _placeholder={{ color: "gray.500" }}
-          _hover={{
-            bg: "white",
-            border: "1px solid",
-            borderColor: "blue.500",
-          }}
-          _focus={{
-            outline: "none",
-            border: "1px solid",
-            borderColor: "blue.500",
-          }}
-          className="dark:bg-[#2a3236] dark:hover:bg-[#2a3236] mb-2 bg-gray-50"
+          className="dark:bg-[#2a3236] dark:hover:bg-[#2a3236] mb-2 bg-gray-50 hover:bg-white hover:border hover:border-blue-500 placeholder:text-gray-500 focus:outline-none focus:border focus:border-blue-500"
         />
       </InputGroup>
       <Text fontSize="10pt" className="text-center text-red-500">
         {FIREBASE_ERRORS[error?.message as keyof typeof FIREBASE_ERRORS]}
       </Text>
       <Button
-        height="36px"
         type="submit"
         isLoading={loading}
         leftIcon={<FaSignInAlt />}
-        className="w-full mt-2 mb-2"
+        className="w-full mt-2 mb-2 h-9"
       >
         Log In
       </Button>
-      <Flex justifyContent="center" mb={2}>
+      <Flex className="flex justify-center mb-2">
         <Text fontSize="9pt" className="dark:text-white mr-1">
           Forgot your password?
         </Text>
