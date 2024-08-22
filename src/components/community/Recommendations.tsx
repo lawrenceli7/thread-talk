@@ -57,9 +57,7 @@ const Recommendations: React.FC = () => {
     <Flex className="dark:bg-black flex flex-col bg-white rounded border border-gray-300">
       <Flex
         p="6px 10px"
-        height="70px"
-        borderRadius="4px 4px 0px 0px"
-        className="dark:bg-[#2a3236] dark:border flex items-end text-white font-semibold bg-blue-500"
+        className="dark:bg-[#2a3236] dark:border flex items-end text-white font-semibold bg-blue-500 rounded-sm h-70"
       >
         Top Communities
       </Flex>
@@ -68,15 +66,15 @@ const Recommendations: React.FC = () => {
           <Stack className="mt-2 p-3">
             <Flex className="flex justify-between items-center">
               <SkeletonCircle size="10" />
-              <Skeleton height="10px" width="70%" />
+              <Skeleton className="h-2.5 w-70%" />
             </Flex>
             <Flex className="flex justify-between items-center">
               <SkeletonCircle size="10" />
-              <Skeleton height="10px" width="70%" />
+              <Skeleton className="h-2.5 w-70%" />
             </Flex>
             <Flex className="flex justify-between items-center">
               <SkeletonCircle size="10" />
-              <Skeleton height="10px" width="70%" />
+              <Skeleton className="h-2.5 w-70%" />
             </Flex>
           </Stack>
         ) : (
@@ -92,11 +90,11 @@ const Recommendations: React.FC = () => {
                     p="10px 12px"
                     className="flex relative items-center border-b border-gray-200"
                   >
-                    <Flex width="80%" className="flex items-center">
-                      <Flex width="15%">
+                    <Flex className="flex items-center w-4/5">
+                      <Flex className="w-15%">
                         <Text className="dark:text-white">{index + 1}</Text>
                       </Flex>
-                      <Flex width="80%" className="flex items-center">
+                      <Flex className="flex items-center w-4/5">
                         {item.imageURL ? (
                           <Image
                             src={item.imageURL}
@@ -118,13 +116,13 @@ const Recommendations: React.FC = () => {
                     </Flex>
                     <Box className="absolute right-2.5">
                       <Button
-                        height="22px"
                         fontSize="8pt"
                         variant={isJoined ? "outline" : "solid"}
                         onClick={(event) => {
                           event.stopPropagation();
                           onJoinOrLeaveCommunity(item, isJoined);
                         }}
+                        className="h-22"
                       >
                         {isJoined ? "Joined" : "Join"}
                       </Button>

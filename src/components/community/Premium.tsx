@@ -12,24 +12,20 @@ const Premium: React.FC = () => {
     <Flex className="dark:bg-black flex flex-col bg-white rounded cursor-pointer border border-gray-300">
       <Flex
         p="6px 10px"
-        height="34px"
-        borderRadius="4px 4px 0px 0px"
-        className="dark:bg-[#2a3236] flex items-end text-white bg-blue-500 font-semibold"
+        className="dark:bg-[#2a3236] flex items-end text-white bg-blue-500 font-semibold rounded-sm h-34"
       ></Flex>
       <Flex className="flex flex-col p-6">
-        <Flex mb={2}>
+        <Flex className="mb-2">
           <Icon as={FaCrown} fontSize={26} color="gold" className="mt-2" />
           <Stack spacing={1} fontSize="9pt" className="pl-2">
-            <Text fontWeight={600} className="dark:text-white">
-              ThreadTalk
-            </Text>
+            <Text className="dark:text-white font-semibold">ThreadTalk</Text>
             <Text className="dark:text-white">The best thread experience.</Text>
           </Stack>
         </Flex>
         <Button
-          height="30px"
           onClick={() => setAuthModalState({ open: true, view: "login" })}
           leftIcon={<GiAchievement />}
+          className="h-30"
         >
           Try Now!
         </Button>

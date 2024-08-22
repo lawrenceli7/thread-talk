@@ -39,12 +39,7 @@ const OAuthButtons: React.FC = () => {
         onClick={() => signInWithGoogle()}
         className="dark:bg-white mb-2"
       >
-        <Image
-          src="/images/google.png"
-          height="20px"
-          alt="Image"
-          className="mr-4"
-        />
+        <Image src="/images/google.png" alt="Image" className="mr-4 h-5" />
         Continue with Google
       </Button>
       <Button
@@ -53,12 +48,7 @@ const OAuthButtons: React.FC = () => {
         onClick={() => signInWithGithub()}
         className="dark:bg-white"
       >
-        <Image
-          src="/images/github.png"
-          height="20px"
-          alt="Image"
-          className="mr-4"
-        />
+        <Image src="/images/github.png" alt="Image" className="mr-4 h-5" />
         Continue with Github
       </Button>
       {error && <Text>{error.message}</Text>}

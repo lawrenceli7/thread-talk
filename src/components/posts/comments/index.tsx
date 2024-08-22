@@ -158,7 +158,7 @@ const Comments: React.FC<CommentsProps> = ({
   }, [selectedPost]);
 
   return (
-    <Box borderRadius="0px 0px 4px 4px" className="dark:bg-black bg-white p-2">
+    <Box className="dark:bg-black bg-white p-2 rounded-b">
       <Flex fontSize="10pt" className="flex flex-col pl-10 pr-4 mb-6 w-full">
         {!fetchLoading && (
           <CommentInput

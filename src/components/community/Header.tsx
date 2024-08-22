@@ -16,26 +16,24 @@ const Header: React.FC<HeaderProps> = ({ communityData }) => {
   );
 
   return (
-    <Flex height="146px" className="w-full flex flex-col">
-      <Box height="50%" className="bg-blue-400" />
+    <Flex className="w-full flex flex-col h-146">
+      <Box className="bg-blue-400 h-3/6" />
       <Flex className="dark:bg-[#0f1113] dark:border-b flex justify-center bg-white flex-grow">
-        <Flex width="95%" maxWidth="860px">
+        <Flex className="max-w-860 w-95%">
           {communityStateValue.currentCommunity?.imageURL ? (
             <Image
               boxSize="66px"
               src={communityStateValue.currentCommunity.imageURL}
               alt="Image"
-              top={-3}
               color="blue.500"
-              className="border-4 rounded-full relative"
+              className="border-4 rounded-full relative -top-[3px]"
             />
           ) : (
             <Icon
               as={FaSquareThreads}
               fontSize={64}
-              top={-3}
               color="blue.500"
-              className="rounded-full relative border-4"
+              className="rounded-full relative border-4 -top-[3px]"
             />
           )}
           <Flex padding="10px 16px">
@@ -49,10 +47,9 @@ const Header: React.FC<HeaderProps> = ({ communityData }) => {
             </Flex>
             <Button
               variant={isJoined ? "outline" : "solid"}
-              height="30px"
               isLoading={loading}
               onClick={() => onJoinOrLeaveCommunity(communityData, isJoined)}
-              className="pl-6 pr-6"
+              className="pl-6 pr-6 h-30"
             >
               {isJoined ? "Joined" : "Join"}
             </Button>

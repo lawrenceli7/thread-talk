@@ -87,9 +87,8 @@ const PostItem: React.FC<PostItemProps> = ({
     >
       <Flex
         bg={singlePostPage ? "none" : "gray.100"}
-        width="40px"
         borderRadius={singlePostPage ? "0" : "3px 0px 0px 3px"}
-        className="dark:bg-[#2a3236] flex flex-col items-center p-2"
+        className="dark:bg-[#2a3236] flex flex-col items-center p-2 w-10"
       >
         <Icon
           as={userVoteValue === 1 ? BiSolidLike : BiLike}
@@ -169,10 +168,10 @@ const PostItem: React.FC<PostItemProps> = ({
               )}
               <Image
                 src={post.imageURL}
-                maxHeight="460px"
                 alt="Post Image"
                 display={loadingImage ? "none" : "unset"}
                 onLoad={() => setLoadingImage(false)}
+                className="max-h-460"
               />
             </Flex>
           )}

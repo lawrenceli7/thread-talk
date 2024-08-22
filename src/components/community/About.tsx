@@ -134,7 +134,6 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
                   <Flex className="flex items-center">
                     <Text
                       onClick={() => selectedFileRef.current?.click()}
-                      mr={1}
                       className="mr-1 hover:underline cursor-pointer text-blue-500"
                     >
                       Change Image

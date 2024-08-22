@@ -20,14 +20,7 @@ const SearchInput: React.FC<SearchInputProps> = ({ user }) => {
         <Input
           placeholder="Search Threads..."
           fontSize="10pt"
-          _placeholder={{ color: "gray.400" }}
-          _focus={{
-            outline: "none",
-            border: "1px solid",
-            borderColor: "blue.500",
-          }}
-          height="34px"
-          className="dark:bg-[#2a3236] dark:hover:bg-gray-700 dark:text-white bg-gray-50 hover:bg-white hover:border hover:border-blue-500"
+          className="dark:bg-[#2a3236] dark:hover:bg-gray-700 dark:text-white bg-gray-50 hover:bg-white hover:border hover:border-blue-500 h-34 placeholder:text-gray-400 focus:outline-none focus:border focus:border-blue-500"
         />
       </InputGroup>
     </Flex>

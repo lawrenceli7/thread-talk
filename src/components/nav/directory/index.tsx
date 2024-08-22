@@ -20,9 +20,8 @@ const Directory: React.FC = () => {
       <MenuButton
         padding="0px 6px"
         ml={{ base: 0, md: 2 }}
-        _hover={{ outline: "1px solid", outlineColor: "gray.200" }}
         onClick={toggleMenuOpen}
-        className="dark:bg-[#2a3236] dark:hover:bg-blue-500 cursor-pointer rounded mr-2"
+        className="dark:bg-[#2a3236] dark:hover:bg-blue-500 cursor-pointer rounded mr-2 hover:outline hover:outline-gray-200"
       >
         <Flex
           width={{ base: "auto", lg: "200px" }}

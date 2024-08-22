@@ -37,25 +37,19 @@ const CommentInput: React.FC<CommentInputProps> = ({
               placeholder="What are your thoughts?"
               fontSize="10pt"
               minHeight="160px"
-              _placeholder={{ color: "gray.500" }}
-              _focus={{
-                outline: "none",
-                border: "1px solid black",
-              }}
-              className="dark:bg-[#2a3236] dark:hover:bg-[#2a3236] dark:text-white rounded pb-10"
+              className="dark:bg-[#2a3236] dark:hover:bg-[#2a3236] dark:text-white rounded pb-10 placeholder:text-gray-500 focus:outline-none focus:border focus:border-black"
             />
             <Flex
               right={0.1}
               p="6px 8px"
-              borderRadius="0px 0px 4px 4px"
-              className="dark:bg-gray-600 absolute flex justify-end bg-gray-100 left-px bottom-px"
+              className="dark:bg-gray-600 absolute flex justify-end bg-gray-100 left-px bottom-px rounded-b"
             >
               <Button
-                height="26px"
                 disabled={!commentText.length}
                 isLoading={createLoading}
                 onClick={() => onCreateComment(commentText)}
                 rightIcon={<HiOutlinePaperAirplane />}
+                className="h-26"
               >
                 Comment
               </Button>

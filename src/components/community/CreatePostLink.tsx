@@ -32,28 +32,17 @@ const CreatePostLink: React.FC = () => {
   };
 
   return (
-    <Flex
-      height="56px"
-      className="dark:bg-black flex items-center justify-evenly bg-white p-2 mb-4 rounded border border-gray-300"
-    >
-      <Icon as={FaRegPenToSquare} color="gray.300" className="mr-4 text-4xl" />
+    <Flex className="dark:bg-black flex items-center justify-evenly bg-white p-2 mb-4 rounded border border-gray-300 h-14">
+      <Icon
+        as={FaRegPenToSquare}
+        color="gray.300"
+        className="mr-4 text-4xl text-gray-300"
+      />
       <Input
         placeholder="Create Post..."
         fontSize="10pt"
-        _placeholder={{ color: "gray.500" }}
-        _hover={{
-          bg: "white",
-          border: "1px solid",
-          borderColor: "blue.500",
-        }}
-        _focus={{
-          outline: "none",
-          border: "1px solid",
-          borderColor: "blue.500",
-        }}
-        height="36px"
         onClick={onClick}
-        className="dark:bg-[#2a3236] dark:hover:bg-[#2a3236] mr-4 bg-gray-50 rounded border-gray-200"
+        className="dark:bg-[#2a3236] dark:hover:bg-[#2a3236] mr-4 bg-gray-50 rounded border-gray-200 hover:bg-white hover:border hover:border-blue-500 focus:outline-none focus:border focus:border-blue-500 h-9 placeholder:text-gray-500"
       />
       <Icon
         as={IoImageOutline}
