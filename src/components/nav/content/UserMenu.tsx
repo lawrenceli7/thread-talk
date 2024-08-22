@@ -42,7 +42,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
           <Flex className="flex items-center">
             {user ? (
               <div className="flex">
-                <Avatar size="xs" className="mr-1 text-gray-300 text-2xl" />
+                <Avatar size="sm" className="mr-1 text-gray-300 text-2xl" />
                 <Flex
                   display={{ base: "none", lg: "flex" }}
                   fontSize="8pt"
@@ -57,7 +57,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
                 </Flex>
               </div>
             ) : (
-              <Avatar size="xs" className="mr-1 text-gray-400 text-2xl" />
+              <Avatar size="sm" className="mr-1 text-gray-400 text-2xl" />
             )}
           </Flex>
           <ChevronDownIcon />
