@@ -22,12 +22,12 @@ const CommentInput: React.FC<CommentInputProps> = ({
   return (
     <div>
       <Divider className="mb-2" />
-      <Flex direction="column" position="relative">
+      <Flex className="flex flex-col relative">
         {user ? (
           <div>
-            <Text mb={1} className="dark:text-white">
+            <Text className="dark:text-white mb-1">
               Commenting as{" "}
-              <span style={{ color: "#3182CE" }}>
+              <span className="text-[#3182ce]">
                 {user?.email?.split("@")[0]}
               </span>
             </Text>
@@ -36,26 +36,19 @@ const CommentInput: React.FC<CommentInputProps> = ({
               onChange={(event) => setCommentText(event.target.value)}
               placeholder="What are your thoughts?"
               fontSize="10pt"
-              borderRadius={4}
               minHeight="160px"
-              pb={10}
               _placeholder={{ color: "gray.500" }}
               _focus={{
                 outline: "none",
                 border: "1px solid black",
               }}
-              className="dark:bg-[#2a3236] dark:hover:bg-[#2a3236] dark:text-white"
+              className="dark:bg-[#2a3236] dark:hover:bg-[#2a3236] dark:text-white rounded pb-10"
             />
             <Flex
-              position="absolute"
-              left="1px"
               right={0.1}
-              bottom="1px"
-              justify="flex-end"
-              bg="gray.100"
               p="6px 8px"
               borderRadius="0px 0px 4px 4px"
-              className="dark:bg-gray-600"
+              className="dark:bg-gray-600 absolute flex justify-end bg-gray-100 left-px bottom-px"
             >
               <Button
                 height="26px"
@@ -69,15 +62,8 @@ const CommentInput: React.FC<CommentInputProps> = ({
             </Flex>
           </div>
         ) : (
-          <Flex
-            align="center"
-            justify="space-between"
-            borderRadius={2}
-            border="1px solid"
-            borderColor="gray.100"
-            p={4}
-          >
-            <Text fontWeight={600} className="dark:text-white">
+          <Flex className="flex items-center justify-between rounded-md border border-gray-100 p-4 mt-4">
+            <Text className="dark:text-white font-semibold">
               Log in or sign up to leave a comment
             </Text>
             <AuthButtons />

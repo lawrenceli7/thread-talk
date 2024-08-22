@@ -18,44 +18,34 @@ const Directory: React.FC = () => {
   return (
     <Menu isOpen={directoryState.isOpen}>
       <MenuButton
-        cursor="pointer"
         padding="0px 6px"
-        borderRadius={4}
-        mr={2}
         ml={{ base: 0, md: 2 }}
         _hover={{ outline: "1px solid", outlineColor: "gray.200" }}
         onClick={toggleMenuOpen}
-        className="dark:bg-[#2a3236] dark:hover:bg-blue-500"
+        className="dark:bg-[#2a3236] dark:hover:bg-blue-500 cursor-pointer rounded mr-2"
       >
         <Flex
-          align="center"
-          justify="space-between"
           width={{ base: "auto", lg: "200px" }}
+          className="flex items-center justify-between"
         >
-          <Flex align="center">
+          <Flex className="flex items-center">
             {directoryState.selectedMenuItem.imageURL ? (
               <Image
                 src={directoryState.selectedMenuItem.imageURL}
-                borderRadius="full"
                 boxSize="24px"
-                mr={2}
                 alt="Image"
+                className="rounded-full mr-2"
               />
             ) : (
               <Icon
-                fontSize={24}
                 mr={{ base: 1, md: 2 }}
                 as={directoryState.selectedMenuItem.icon}
                 color={directoryState.selectedMenuItem.iconColor}
-                className="dark:text-white"
+                className="dark:text-white text-2xl"
               />
             )}
             <Flex display={{ base: "none", lg: "flex" }}>
-              <Text
-                fontWeight={600}
-                fontSize="10pt"
-                className="dark:text-white"
-              >
+              <Text fontSize="10pt" className="dark:text-white font-semibold">
                 {directoryState.selectedMenuItem.displayText}
               </Text>
             </Flex>

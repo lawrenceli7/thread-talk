@@ -35,36 +35,30 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
   return (
     <Menu>
       <MenuButton
-        cursor="pointer"
         padding="2px 6px"
-        borderRadius={4}
         _hover={{ outline: "1px solid", outlineColor: "gray.200" }}
-        className="dark:bg-[#2a3236] hover:dark:bg-blue-500"
+        className="dark:bg-[#2a3236] hover:dark:bg-blue-500 cursor-pointer rounded"
       >
-        <Flex align="center">
-          <Flex align="center">
+        <Flex className="flex items-center">
+          <Flex className="flex items-center">
             {user ? (
               <div className="flex">
-                <Avatar fontSize={24} mr={1} color="gray.300" size="xs" />
+                <Avatar size="xs" className="mr-1 text-gray-300 text-2xl" />
                 <Flex
-                  direction="column"
                   display={{ base: "none", lg: "flex" }}
                   fontSize="8pt"
-                  align="flex-start"
-                  mr={8}
+                  className="flex flex-col items-start mr-8"
                 >
-                  <Text fontWeight={700} className="dark:text-white">
+                  <Text className="dark:text-white font-bold">
                     {user?.displayName || user.email?.split("@")[0]}
                   </Text>
                   <Flex>
-                    <Text color="gray.400" className="dark:text-white">
-                      user
-                    </Text>
+                    <Text className="dark:text-white text-gray-400">user</Text>
                   </Flex>
                 </Flex>
               </div>
             ) : (
-              <Avatar fontSize={24} color="gray.400" mr={1} size="xs" />
+              <Avatar size="xs" className="mr-1 text-gray-400 text-2xl" />
             )}
           </Flex>
           <ChevronDownIcon />
@@ -75,28 +69,23 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
           <div>
             <MenuItem
               fontSize="10pt"
-              fontWeight={700}
-              _hover={{ bg: "blue.500", color: "white" }}
-              className="dark:bg-[#181c1f]"
+              className="dark:bg-[#181c1f] font-bold hover:bg-blue-500 hover:text-white dark:hover:bg-blue-500"
             >
-              <Flex align="center" className="dark:text-white">
-                <Icon fontSize={20} mr={2} as={FaRegUserCircle} />
+              <Flex className="dark:text-white flex items-center">
+                <Icon as={FaRegUserCircle} className="mr-2 text-xl" />
                 Profile
               </Flex>
             </MenuItem>
             <MenuDivider />
             <MenuItem
               fontSize="10pt"
-              fontWeight={700}
-              _hover={{ bg: "blue.500", color: "white" }}
-              className="dark:bg-[#181c1f]"
               onClick={handleThemeSwitch}
+              className="dark:bg-[#181c1f] font-bold hover:bg-blue-500 hover:text-white dark:hover:bg-blue-500"
             >
-              <Flex align="center" className="dark:text-white">
+              <Flex className="dark:text-white flex items-center">
                 <Icon
-                  fontSize={20}
-                  mr={2}
                   as={theme === "dark" ? LuMoon : LuSun}
+                  className="text-xl mr-2"
                 />
                 {theme === "dark" ? (
                   <Text>Dark Mode: On</Text>
@@ -108,13 +97,11 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
             <MenuDivider />
             <MenuItem
               fontSize="10pt"
-              fontWeight={700}
-              _hover={{ bg: "blue.500", color: "white" }}
-              className="dark:bg-[#181c1f]"
               onClick={logout}
+              className="dark:bg-[#181c1f] font-bold hover:bg-blue-500 hover:text-white dark:hover:bg-blue-500"
             >
-              <Flex align="center" className="dark:text-white">
-                <Icon fontSize={20} mr={2} as={MdOutlineLogin} />
+              <Flex className="dark:text-white flex items-center">
+                <Icon as={MdOutlineLogin} className="text-xl mr-2" />
                 Log Out
               </Flex>
             </MenuItem>
@@ -123,16 +110,13 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
           <div>
             <MenuItem
               fontSize="10pt"
-              fontWeight={700}
-              _hover={{ bg: "blue.500", color: "white" }}
-              className="dark:bg-[#181c1f]"
+              className="dark:bg-[#181c1f] font-bold hover:bg-blue-500 hover:text-white dark:hover:bg-blue-500"
               onClick={handleThemeSwitch}
             >
-              <Flex align="center" className="dark:text-white">
+              <Flex className="dark:text-white flex items-center">
                 <Icon
-                  fontSize={20}
-                  mr={2}
                   as={theme === "dark" ? LuMoon : LuSun}
+                  className="mr-2 text-xl"
                 />
                 {theme === "dark" ? (
                   <Text>Dark Mode: On</Text>
@@ -144,13 +128,11 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
             <MenuDivider />
             <MenuItem
               fontSize="10pt"
-              fontWeight={700}
-              _hover={{ bg: "blue.500", color: "white" }}
-              className="dark:bg-[#181c1f]"
+              className="dark:bg-[#181c1f] font-bold hover:bg-blue-500 hover:text-white dark:hover:bg-blue-500"
               onClick={() => setAuthModalState({ open: true, view: "login" })}
             >
-              <Flex align="center" className="dark:text-white">
-                <Icon fontSize={20} mr={2} as={MdOutlineLogin} />
+              <Flex className="dark:text-white flex items-center">
+                <Icon as={MdOutlineLogin} className="text-xl mr-2" />
                 Log In / Sign Up
               </Flex>
             </MenuItem>

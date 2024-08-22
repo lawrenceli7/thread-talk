@@ -15,21 +15,15 @@ const TabItems: React.FC<TabItemProps> = ({
 }) => {
   return (
     <Flex
-      justify="center"
-      align="center"
-      flexGrow={1}
       p="14px 0px"
-      cursor="pointer"
-      fontWeight={700}
-      _hover={{ bg: "gray.50" }}
       color={selected ? "blue.500" : "gray.500"}
       borderWidth={selected ? "0px 1px 2px 0px" : "0px 1px 1px 0px"}
       borderBottomColor={selected ? "blue.500" : "gray.200"}
       borderRightColor="gray.200"
       onClick={() => setSelectedTab(item.title)}
-      className="dark:hover:bg-[#2a3236] dark:text-white"
+      className="dark:hover:bg-[#2a3236] dark:text-white flex justify-center items-center flex-grow cursor-pointer font-bold hover:bg-gray-50"
     >
-      <Flex align="center" height="20px" mr={2}>
+      <Flex height="20px" className="flex items-center mr-2">
         <Icon as={item.icon} />
       </Flex>
       <Text fontSize="10pt">{item.title}</Text>

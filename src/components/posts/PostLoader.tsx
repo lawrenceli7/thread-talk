@@ -7,24 +7,20 @@ const PostLoader: React.FC = () => {
       <Box
         padding="10px 10px"
         boxShadow="lg"
-        bg="white"
-        borderRadius={4}
-        className="dark:bg-black"
+        className="dark:bg-black bg-white rounded"
       >
-        <SkeletonText mt="4" noOfLines={1} width="40%" spacing="4" />
-        <SkeletonText mt="4" noOfLines={4} spacing="4" />
-        <Skeleton mt="4" height="200px" />
+        <SkeletonText noOfLines={1} width="40%" spacing="4" className="mt-4" />
+        <SkeletonText noOfLines={4} spacing="4" className="mt-4" />
+        <Skeleton height="200px" className="mt-4" />
       </Box>
       <Box
         padding="10px 10px"
         boxShadow="lg"
-        bg="white"
-        borderRadius={4}
-        className="dark:bg-black"
+        className="dark:bg-black bg-white rounded"
       >
-        <SkeletonText mt="4" noOfLines={1} width="40%" spacing="4" />
-        <SkeletonText mt="4" noOfLines={4} spacing="4" />
-        <Skeleton mt="4" height="200px" />
+        <SkeletonText noOfLines={1} width="40%" spacing="4" className="mt-4" />
+        <SkeletonText noOfLines={4} spacing="4" className="mt-4" />
+        <Skeleton height="200px" className="mt-4" />
       </Box>
     </Stack>
   );

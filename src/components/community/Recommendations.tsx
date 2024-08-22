@@ -107,9 +107,8 @@ const Recommendations: React.FC = () => {
                         ) : (
                           <Icon
                             as={FaUserFriends}
-                            fontSize={30}
                             color="blue.500"
-                            className="mr-2"
+                            className="mr-2 text-3xl"
                           />
                         )}
                         <span className="dark:text-white whitespace-nowrap overflow-hidden text-ellipsis">
